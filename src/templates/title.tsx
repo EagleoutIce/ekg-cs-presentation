@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, FlexBox, FullScreen, Heading, Progress, Slide, Text } from "spectacle";
 import { ekgTheme } from "../settings";
-import { CenterOnSlide, WaveText } from "./styles";
+import { CenterOnSlide, LargeWaveText, WaveText } from "./styles";
 
 interface TitleSlideInputs {
   title: string
@@ -10,7 +10,7 @@ interface TitleSlideInputs {
 const TitleSlide: React.FC<TitleSlideInputs> = ({ title }) => (
   <Slide>
     <CenterOnSlide>
-      <WaveText text={title} color={ekgTheme.colors.primary} size={ekgTheme.fontSizes.h1} weight='bold' family={ekgTheme.fonts.header} />
+      <LargeWaveText text={title} />
     </CenterOnSlide>
   </Slide>
 );
