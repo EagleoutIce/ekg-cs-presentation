@@ -1,10 +1,11 @@
 import React from "react";
 import { Deck } from "spectacle";
-import { customTheme } from "../settings";
+import { ekgTheme } from "../settings";
 import { BaseSlide, Title } from "../templates";
 import deckSettings from "./deck.settings";
 import Diagram, { createSchema, useSchema } from "beautiful-react-diagrams";
 import { template } from "../templates/template";
+import { transition } from "../templates/transition";
 
 const DiagramNode = () => (
   <div className="bg-white w-64 p-2 b-1 text-center rounded-xl">
@@ -33,21 +34,11 @@ const diagramSchema = createSchema({
 });
 
 const Presentation = () => {
-  // create diagrams schema
-  const [schema, { onChange }] = useSchema(diagramSchema);
   return (
-    <Deck theme={customTheme} template={template}>
+    <Deck theme={ekgTheme} template={template} transition={transition}>
       <Title title={deckSettings.deckTitle} />
       <BaseSlide>
-        {/* <div className="flex justify-between  ">
-          <div>hello 1</div>
-          <div>hello 2</div>
-          <div>hello 3</div>
-          <div>hello 4</div>
-        </div>
-        <div className="h-96">
-          <Diagram schema={schema} onChange={onChange} />
-        </div> */}
+
       </BaseSlide>
     </Deck>
   );
