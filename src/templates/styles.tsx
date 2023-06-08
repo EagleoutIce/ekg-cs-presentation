@@ -1,25 +1,37 @@
 import { ReactNode } from "react";
+import { createPortal } from "react-dom";
 import Wave from "react-wavify";
-import { FlexBox } from "spectacle";
+import { FlexBox, Slide, Text } from "spectacle";
+import { ekgTheme } from "../settings";
 
 interface WaveTextInputs {
    text: string
-   color: string
+   color?: string
    size?: string
    weight?: string
    family?: string
+   paused?: boolean
    opacity?: string
+   height?: number
+   amplitude?: number
+   speed?: number
+   points?: number
 }
 
+export const LargeWaveText: React.FC<WaveTextInputs> = (config: WaveTextInputs) => (
+   <WaveText text={config.text} color={config.color ?? ekgTheme.colors.primary} size={config.size ?? ekgTheme.fontSizes.h1} weight={config.weight ?? 'bold'} family={config.family ?? ekgTheme.fonts.header} height={config.height} amplitude={config.amplitude} speed={config.speed} points={config.points} paused={config.paused} />
+);
+
 export const WaveText: React.FC<WaveTextInputs> = (config: WaveTextInputs) => {
+   const randomMaskId = `mask-${Math.random()}`;
    return (
-      <Wave fill={config.color} paused={false} mask="url(#mask)" options={{ points: 40, speed: 0.1, amplitude: 30, height: 20 }}>
+      <Wave fill={config.color} paused={config.paused} mask={`url(#${randomMaskId})`} options={{ points: config.points ?? 40, speed: config.speed ?? 0.1, amplitude: config.amplitude ?? 30, height: config.height ?? 20 }} >
          <defs>
-         <mask id="mask" >
-            <text x="50%" y="50%" fontSize={config.size} fontWeight={config.weight} fontFamily={config.family} textAnchor="middle" fill="white">{config.text}</text>
+         <mask id={randomMaskId} >
+            <text x="50%" y="50%" fontSize={config.size} fontWeight={config.weight} fontFamily={config.family} textAnchor="middle" fill="white" >{config.text}</text>
          </mask>
          </defs>
-         <text x="50%" y="50%"  fontSize={config.size} fontWeight={config.weight} fontFamily={config.family} textAnchor="middle" fill={config.color} opacity={config.opacity ?? '0.2'}>{config.text}</text>
+         <text x="50%" y="50%"  fontSize={config.size} fontWeight={config.weight} fontFamily={config.family} textAnchor="middle" fill={config.color} opacity={config.opacity ?? '0.2'} >{config.text}</text>
       </Wave>
       );
 }
@@ -29,3 +41,31 @@ export const CenterOnSlide: React.FC<React.PropsWithChildren> = ({ children }) =
       {children}
    </FlexBox>
 );
+
+
+interface RawTextInputs {
+   fontSize?: string
+   fontWeight?: string
+   fontFamily?: string
+}
+
+export const RawText: React.FC<React.PropsWithChildren<RawTextInputs>> = ({ children, fontSize, fontWeight, fontFamily }) => (
+   <Text fontSize={fontSize} fontWeight={fontWeight} fontFamily={fontFamily} margin="0em" padding="0em">
+      {children}
+   </Text>
+);
+
+
+export const References: React.FC<React.PropsWithChildren> = ({ children }) => (
+   <FlexBox
+      justifyContent="space-between"
+      position="absolute"
+      bottom={0}
+      width={1}
+   >
+      <div className="references">
+      {children}
+      </div>
+   </FlexBox>
+);
+
