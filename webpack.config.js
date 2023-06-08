@@ -10,8 +10,9 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: 'Von Physik, Informatik und der Welt',
-			favicon: 'public/favicon.ico'
+			title:   'Von Physik, Informatik und der Welt',
+			favicon: 'public/favicon.ico',
+			template: 'public/index.html'
 		}),
 	],
 	module: {
@@ -45,7 +46,7 @@ module.exports = {
 		extensions: [ '.ts', '.tsx', '.js']
 	},
 	performance: {
-		hints: "warning"
+		hints: false
 	},
 	output: {
 		filename: 'app.js',
