@@ -18,4 +18,4 @@ jobs:
            with:
               node-version: 20.x
          - run: npm ci
-         - run: npm run reploy
+         - run: npm run deploy
