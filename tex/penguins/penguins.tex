@@ -3,17 +3,14 @@
 \usepackage{pgfplots}
 \usepackage{tikzpingus}
 
-\definecolor{@back}{RGB}{252, 252, 252}
-\pagecolor{@back}
-
 \usetikzlibrary{external}
 \tikzexternalize
 
 \tikzsetexternalprefix{./}
 
 \tikzset{
-png export/.style={% maybe we want to remove the background in the future
-   external/system call/.add={}{; pdftoppm -r 300 "\image.pdf" "\image" -png -singlefile; },
+png export/.style={% maybe improve transparency
+   external/system call/.add={}{; pdftoppm -r 300 "\image.pdf" "\image" -png -singlefile; convert -transparent white -density 300 "\image.png" "\image-1.png"; mv "\image-1.png" "\image.png"},
    %
    /pgf/images/external info,
    /pgf/images/include external/.code={%
