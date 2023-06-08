@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Wave from "react-wavify";
+import { FlexBox } from "spectacle";
 
 interface WaveTextInputs {
    text: string
@@ -22,3 +23,9 @@ export const WaveText: React.FC<WaveTextInputs> = (config: WaveTextInputs) => {
       </Wave>
       );
 }
+
+export const CenterOnSlide: React.FC<React.PropsWithChildren> = ({ children }) => (
+   <FlexBox flexDirection="column" justifyContent="center" height="100%">
+      {children}
+   </FlexBox>
+);
