@@ -1,9 +1,10 @@
-export const ekgTheme: Record<string, any> = {
+import { SpectacleThemeOverrides } from "spectacle";
+
+export const ekgTheme = {
   colors: {
     primary: "#323232",
     secondary: "#2C97AD",
-    lightWhite: "#FCFCFC",
-    bottomBar: "#F2F2F2",
+    tertiary: "#FCFCFC" // the background color
   },
   fonts: {
     header: '"Nova Round", Helvetica, Arial, sans-serif',
@@ -12,5 +13,5 @@ export const ekgTheme: Record<string, any> = {
     h1: "72px",
     h2: "64px",
   },
-};
+} as const;
 
