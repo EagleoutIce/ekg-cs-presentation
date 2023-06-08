@@ -10,7 +10,7 @@ interface TitleSlideInputs {
 const TitleSlide: React.FC<TitleSlideInputs> = ({ title }) => (
   <Slide>
     <CenterOnSlide>
-      <LargeWaveText text={title} />
+      <LargeWaveText text={title} svgHeight="150px" amplitude={40} points={15}/>
     </CenterOnSlide>
   </Slide>
 );

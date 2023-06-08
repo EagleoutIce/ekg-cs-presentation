@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{tikzpingus}
+
+\definecolor{@back}{RGB}{252, 252, 252}
+\pagecolor{@back}
+
+\usetikzlibrary{external}
+\tikzexternalize
+
+\tikzsetexternalprefix{./}
+
+\tikzset{
+png export/.style={% maybe we want to remove the background in the future
+   external/system call/.add={}{; pdftoppm -r 300 "\image.pdf" "\image" -png -singlefile; },
+   %
+   /pgf/images/external info,
+   /pgf/images/include external/.code={%
+   \includegraphics
+   [width=\pgfexternalwidth,height=\pgfexternalheight]
+   {##1.png}%
+   },
+},
+png export
+}
+
+\pingudefaults{body=pingu@black}
+
+\begin{document}
+\tikzsetnextfilename{Pingu-A}
+\begin{tikzpicture}
+   \pingu[eyes wink,conical hat, right wing wave]
+\end{tikzpicture}
+
+\tikzsetnextfilename{Pingu-B}
+\begin{tikzpicture}
+   \pingu[body type=legacy, feet=sit,right eye wink]
+\end{tikzpicture}
+\end{document}
