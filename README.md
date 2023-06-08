@@ -5,4 +5,4 @@
 The page is deployed at <https://eagleoutice.github.io/ekg-cs-presentation> ([presenter](https://eagleoutice.github.io/ekg-cs-presentation?presenterMode=true),[^1] [export](https://eagleoutice.github.io/ekg-cs-presentation?exportMode=true), [export print](https://eagleoutice.github.io/ekg-cs-presentation?exportMode=true&printMode=true)).
 
 
-[^1]: The presenter will not be synced by github, you have to start the presentation on your machine to use it properly.
+[^1]: The presenter may be detached. If so, you have to start the presentation on your machine to use it properly.
