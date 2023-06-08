@@ -1,5 +1,5 @@
 const deckSettings = {
-  deckTitle: "Example Deck",
+  deckTitle: "Von Physik, Informatik und der Welt",
 };
 
 export default deckSettings;

@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexBox, Heading, Slide, Text } from "spectacle";
-import { customTheme } from "../organization.settings";
+import { customTheme } from "../settings";
 
 interface SectionTitleSlideInputs {
   sectionNumber?: number;

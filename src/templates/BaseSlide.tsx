@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
-import { Box, FlexBox, Heading, Slide, Text } from "spectacle";
-import { organizationSettings } from "../organization.settings";
+import { Box, FlexBox, Heading, Progress, Slide, Text } from "spectacle";
+
 interface BaseSlideProps {
   title?: string;
   hideBottomBar?: boolean;
@@ -8,8 +8,7 @@ interface BaseSlideProps {
 
 const BaseSlide: React.FC<PropsWithChildren<BaseSlideProps>> = ({
   title,
-  hideBottomBar,
-  children,
+  children
 }) => (
   <Slide backgroundColor="lightWhite" padding="0px">
     {title && (
@@ -25,26 +24,6 @@ const BaseSlide: React.FC<PropsWithChildren<BaseSlideProps>> = ({
       </Heading>
     )}
     <Box padding="24px">{children}</Box>
-    {!hideBottomBar && (
-      <Box
-        width="100%"
-        position="absolute"
-        bottom="0px"
-        padding="0px"
-        backgroundColor="bottomBar"
-      >
-        <FlexBox
-          flexDirection="row"
-          justifyContent="space-between"
-          padding="4px 24px"
-        >
-          <img src={organizationSettings.logoUrl} width="120px" />
-          <Text margin="0px" padding="0px" fontSize="16px" color="primary">
-            {organizationSettings.slideFooterText}
-          </Text>
-        </FlexBox>
-      </Box>
-    )}
   </Slide>
 );
 
