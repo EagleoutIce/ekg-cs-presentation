@@ -8,6 +8,8 @@ on:
 jobs:
    build:
       runs-on: ubuntu-latest
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       steps:
          - uses: actions/checkout@v3
@@ -16,21 +18,4 @@ jobs:
            with:
               node-version: 20.x
          - run: npm ci
-         - run: npm run build
-
-   deploy:
-      needs: build
-
-      permissions:
-         pages: write
-         id-token: write
-
-      environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-
-      runs-on: ubuntu-latest
-      steps:
-         - name: Deploy to GitHub Pages
-           id: deployment
-           uses: actions/deploy-pages@v2
+         - run: npm run reploy
