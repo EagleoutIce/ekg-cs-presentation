@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexBox, Heading, Slide, Text } from "spectacle";
-import { customTheme } from "../settings";
+import { ekgTheme } from "../settings";
 
 interface SectionTitleSlideInputs {
   sectionNumber?: number;
@@ -25,7 +25,7 @@ const TitleSlide: React.FC<SectionTitleSlideInputs> = ({
               margin: "20px",
               height: "4px",
               width: "120px",
-              backgroundColor: customTheme.colors.primary,
+              backgroundColor: ekgTheme.colors.primary,
               borderRadius: "20px",
             }}
           />
