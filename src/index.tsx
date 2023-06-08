@@ -8,7 +8,7 @@ function App() {
   return (<CurrentDeck />);
 }
 
-const root = createRoot(document.getElementById("root")!);
+const root = createRoot(document.body);
 
 root.render(
   <React.StrictMode>
