@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Box, FlexBox, FullScreen, Progress } from "spectacle";
+import { AnimatedProgress, Box, FlexBox, FullScreen, Progress } from "spectacle";
 
 export function template(options: {slideNumber: number; numberOfSlides: number;}): ReactNode {
    return (
@@ -10,9 +10,9 @@ export function template(options: {slideNumber: number; numberOfSlides: number;}
       width={1}
     >
       <Box padding="0em 1em">
-        { options.slideNumber === 1 ? <FullScreen color="primary"/> : <></>}
+        { options.slideNumber === 1 ? <FullScreen color="primary" size={15} /> : <></>}
       </Box>
-      <Box padding="1em">
+      <Box padding="0em 1em">
         <Progress color="gray"/>
       </Box>
     </FlexBox>

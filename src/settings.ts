@@ -1,4 +1,4 @@
-export const customTheme: Record<string, any> = {
+export const ekgTheme: Record<string, any> = {
   colors: {
     primary: "#323232",
     secondary: "#2C97AD",
