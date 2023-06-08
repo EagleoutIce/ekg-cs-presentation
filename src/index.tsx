@@ -2,7 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import "beautiful-react-diagrams/styles.css";
-import reportWebVitals from "./reportWebVitals";
 import CurrentDeck from "./presentation";
 
 function App() {
@@ -16,5 +15,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
-reportWebVitals();
