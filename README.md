@@ -1,3 +1,5 @@
-# Spectacle Js Organization Template
+# Presentation on 23rd of june at the EKG (de)
 
-This is a Typescript template for [Spectacle Js](https://formidable.com/open-source/spectacle/), a React presentation framework. It is
+[![Deploy Presentation](https://github.com/EagleoutIce/ekg-cs-presentation/actions/workflows/deploy.yaml/badge.svg)](https://github.com/EagleoutIce/ekg-cs-presentation/actions/workflows/deploy.yaml)
+
+TODO
