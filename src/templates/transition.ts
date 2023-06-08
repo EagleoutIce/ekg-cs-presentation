@@ -6,6 +6,6 @@ export const transition = {
     opacity: 1
   },
   leave: {
-    opacity: 0
+    opacity: 1
   }
 };

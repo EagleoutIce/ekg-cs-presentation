@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { AnimatedProgress, Box, FlexBox, FullScreen, Progress } from "spectacle";
+import { Box, FlexBox, FullScreen, Progress } from "spectacle";
 
 export function template(options: {slideNumber: number; numberOfSlides: number;}): ReactNode {
    return (
