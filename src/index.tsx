@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "beautiful-react-diagrams/styles.css";
+import "./templates/main.css"
 import PresentationDeck from "./presentation";
 
 

@@ -1,0 +1,16 @@
+::selection {
+   color: black;
+   background: lightgray;
+ }
+
+.references a:link,
+.references a:visited {
+  transition: 800ms;
+  color: gray;
+}
+
+.references a:hover,
+.references a:active {
+  transition: 800ms;
+  color: black;
+}
