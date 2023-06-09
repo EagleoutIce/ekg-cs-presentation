@@ -48,12 +48,12 @@
    background-color: lightgray;
 }
 
-.react-flow img {
+.react-flow img, .scale-on-hover {
    scale: 1;
    transition: 500ms;
 }
 
-.react-flow img:hover {
+.react-flow img:hover, .scale-on-hover:hover {
    transition: 500ms;
    scale: 1.1
 }
