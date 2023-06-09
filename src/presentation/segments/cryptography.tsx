@@ -8,6 +8,7 @@ import ReactFlow, {
    Panel,
    Controls,
  } from 'reactflow';
+import { isMobile } from "react-device-detect";
 
 import 'reactflow/dist/style.css';
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -120,6 +121,9 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
    const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
    const [interactable, setInteractable ] = useState(props.interactable)
+   if(isMobile) {
+      setInteractable(false)
+   }
 
    const nodeTypes = useMemo(() => ({ image: MainImageNode }), []);
    const [eveAdded, setEveAdded] = useState(false)
