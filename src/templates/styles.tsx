@@ -60,7 +60,7 @@ export const RawText: React.FC<React.PropsWithChildren<RawTextInputs>> = ({ chil
 
 
 export const LowerLeft: React.FC<React.PropsWithChildren> = ({children}) => (
-   <FlexBox justifyContent="space-between" position="absolute" bottom={0} width={1}>
+   <FlexBox style={{ display: 'flex', flexDirection: 'row', gap: '1em', position:"absolute" }} left={0} bottom={0}>
       {children}
    </FlexBox>
 )

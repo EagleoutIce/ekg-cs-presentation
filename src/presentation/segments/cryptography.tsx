@@ -2,9 +2,16 @@ import { Text, Slide, Notes } from "spectacle";
 import { CenterOnSlide,  LargeWaveText,  RawText } from "../../templates/styles";
 import { PenguinsCommunicate } from "../elements/penguins-commmunicate";
 import { UserBulletPoints } from "../elements/updateable-bulletpoints";
+import { StepAnimations } from "../elements/step-animations";
 
 
 const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/
+
+const symmetricEncryptionSteps = (step: number, maxStep: number): React.JSX.Element => (
+   <CenterOnSlide>
+      <Text>{step}</Text>
+   </CenterOnSlide>
+)
 
 export const Cryptography: React.FC = () => {
 
@@ -47,7 +54,7 @@ return(<>
 
 <Slide>
 <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
-
+<StepAnimations maxStep={3} onStep={symmetricEncryptionSteps} />
 </Slide>
 </>)
 }
