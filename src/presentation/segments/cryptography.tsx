@@ -82,7 +82,7 @@ const eveNode = {
                      .attr('y', 18)
                      .style('font-family', ekgTheme.fonts.header)
                      .style('font-size', '11px')
-                     .text('Intercepting...')
+                     .text('Abfangen...')
                   const pulse = ringContainer
                      .append('circle')
                         .attr('fill', 'none')
