@@ -59,16 +59,24 @@ export const RawText: React.FC<React.PropsWithChildren<RawTextInputs>> = ({ chil
 );
 
 
+export const LowerLeft: React.FC<React.PropsWithChildren> = ({children}) => (
+   <FlexBox justifyContent="space-between" position="absolute" bottom={0} width={1}>
+      {children}
+   </FlexBox>
+)
+
+export const TopRight: React.FC<React.PropsWithChildren> = ({children}) => (
+   <FlexBox justifyContent="flex-end" position="absolute" top={0} right={0} width={1} alignItems='flex-end' padding={"0em"}>
+      {children}
+   </FlexBox>
+)
+
+
 export const References: React.FC<React.PropsWithChildren> = ({ children }) => (
-   <FlexBox
-      justifyContent="space-between"
-      position="absolute"
-      bottom={0}
-      width={1}
-   >
+   <LowerLeft>
       <div className="references">
       {children}
       </div>
-   </FlexBox>
+   </LowerLeft>
 );
 
