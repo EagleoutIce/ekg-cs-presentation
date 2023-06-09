@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { LowerLeft } from "../../templates/styles";
+import { LowerLeft, LowerMid } from "../../templates/styles";
 
 export interface StepAnimationProps {
    maxStep: number
@@ -16,10 +16,10 @@ export const StepAnimations: React.FC<StepAnimationProps> = (props: StepAnimatio
    }
 
    return(<>
-   <LowerLeft>
+   <LowerMid>
       { step < props.maxStep && <button className="basic-control" onClick={() => {updateStep(s => s + 1)}}>⮞</button> }
       <button className="basic-control" onClick={() => updateStep(() => 0)}>↺</button>
-   </LowerLeft>
+   </LowerMid>
    {content}
    </>)
 }
