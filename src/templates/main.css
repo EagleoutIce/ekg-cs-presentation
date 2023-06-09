@@ -73,3 +73,12 @@
    color: black;
    opacity: 1;
 }
+
+.huge-controls .react-flow__controls-button {
+   width:42px;
+   height:42px;
+}
+
+.huge-controls svg {
+   scale: 1.5;
+}
