@@ -26,3 +26,50 @@
    stroke: none !important;
    border: none !important;
 }
+
+.basic-control {
+   cursor: pointer;
+   outline: 0;
+   display: inline-block;
+   font-weight: 400;
+   line-height: 1.5;
+   text-align: center;
+   background-color: transparent;
+   border: 1px solid transparent;
+   padding: 6px 12px;
+   font-size: 1rem;
+   border-radius: .25rem;
+   transition: 200ms;
+   color: darkgray;
+   border-color: lightgray;
+}
+
+.basic-control:hover {
+   background-color: lightgray;
+}
+
+.react-flow img {
+   scale: 1;
+   transition: 500ms;
+}
+
+.react-flow img:hover {
+   transition: 500ms;
+   scale: 1.1
+}
+
+.seamless-input,.seamless-input-new {
+   border: none;
+   outline: none;
+   background: none;
+   color: black;
+   font-size: 27pt;
+   width: 100%;
+   padding: 0;
+   margin: 0;
+}
+
+.seamless-input::placeholder {
+   color: black;
+   opacity: 1;
+}
