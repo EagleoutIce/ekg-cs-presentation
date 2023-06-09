@@ -40,7 +40,7 @@
    font-size: 1rem;
    border-radius: .25rem;
    transition: 200ms;
-   color: darkgray;
+   color: #555;
    border-color: lightgray;
 }
 
