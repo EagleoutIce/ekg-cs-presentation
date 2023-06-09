@@ -1,16 +1,12 @@
 import { Appear, Text, Slide, Notes, Image, Stepper, ListItem, UnorderedList, Heading } from "spectacle";
 import { CenterOnSlide,  LargeWaveText,  RawText,  References, WaveText } from "../../templates/styles";
 import ReactFlow, {
-   MiniMap,
-   Controls,
-   Background,
    useNodesState,
    useEdgesState,
-   addEdge,
    Handle,
    Position,
    Panel,
-   ReactFlowInstance,
+   Controls,
  } from 'reactflow';
 
 import 'reactflow/dist/style.css';
@@ -123,6 +119,7 @@ interface PenguinData {
 const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
    const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
+   const [interactable, setInteractable ] = useState(props.interactable)
 
    const nodeTypes = useMemo(() => ({ image: MainImageNode }), []);
    const [eveAdded, setEveAdded] = useState(false)
@@ -150,18 +147,18 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
        snapToGrid={false}
        fitView={true}
        /** if it is not interactable set fixed*/
-       minZoom={props.interactable ? 0.5 : undefined}
-       maxZoom={props.interactable ? 1.5 : undefined}
+       minZoom={interactable ? 0.5 : undefined}
+       maxZoom={interactable ? 1.5 : undefined}
        edgesUpdatable={false}
        nodesConnectable={false}
-       nodesDraggable={props.interactable}
-       zoomOnScroll={props.interactable}
-       zoomOnPinch={props.interactable}
-       panOnDrag={props.interactable}
+       nodesDraggable={interactable}
+       zoomOnScroll={interactable}
+       zoomOnPinch={interactable}
+       panOnDrag={interactable}
        panOnScroll={false}
        autoPanOnNodeDrag={false}
        autoPanOnConnect={false}
-       disableKeyboardA11y={!props.interactable}
+       disableKeyboardA11y={!interactable}
        edgesFocusable={false}
        proOptions={{ hideAttribution: true }}
        style={{
@@ -174,7 +171,9 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
         Add Eve
       </button>}
     </Panel>
-
+       { props.interactable &&
+         <Controls showZoom={false} showInteractive={true} showFitView={true} onInteractiveChange={status => setInteractable(status)} />
+       }
      </ReactFlow>
    );
 }
