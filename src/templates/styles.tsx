@@ -65,6 +65,12 @@ export const LowerLeft: React.FC<React.PropsWithChildren> = ({children}) => (
    </FlexBox>
 )
 
+export const LowerMid: React.FC<React.PropsWithChildren> = ({children}) => (
+   <FlexBox style={{ display: 'flex', flexDirection: 'row', gap: '1em', position:"absolute" }} left={0} bottom={0} right={0}>
+      {children}
+   </FlexBox>
+)
+
 export const TopRight: React.FC<React.PropsWithChildren> = ({children}) => (
    <FlexBox justifyContent="flex-end" position="absolute" top={0} right={0} width={1} alignItems='flex-end' padding={"0em"}>
       {children}
