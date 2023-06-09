@@ -147,8 +147,8 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
        snapToGrid={false}
        fitView={true}
        /** if it is not interactable set fixed*/
-       minZoom={interactable ? 0.5 : undefined}
-       maxZoom={interactable ? 1.5 : undefined}
+       minZoom={interactable ? 0.65 : undefined}
+       maxZoom={interactable ? 2 : undefined}
        edgesUpdatable={false}
        nodesConnectable={false}
        nodesDraggable={interactable}
