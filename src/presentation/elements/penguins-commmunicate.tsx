@@ -6,7 +6,6 @@ import ReactFlow, {
    Panel,
    Controls,
  } from 'reactflow';
-import { isMobile } from "react-device-detect";
 
 import 'reactflow/dist/style.css';
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -71,10 +70,17 @@ interface PenguinData {
    interactable: boolean
 }
 
+const isMobileScreen = () => {
+   // TODO:
+   return window.innerWidth <= 768;
+}
+
 export const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
    const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
    const [interactable, setInteractable ] = useState(props.interactable)
+   const isMobile = isMobileScreen()
+
    if(isMobile) {
       setInteractable(false)
    }
