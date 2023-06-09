@@ -215,12 +215,8 @@ const triggerOnCorrect = (text: string, elem: React.JSX.Element) => {
 return(<>
 <Slide padding={'0px'} >
       <CenterOnSlide>
-      <div style={{ width: "100vw", height: "100vh" }}>
-         <Appear>
-               <div style={{ width: "100vw", height: "100vh" }} className="penguins-communcation">
-                  <PenguinsCommunicate eve={false} interactable={true}/>
-               </div>
-         </Appear>
+      <div style={{ width: "100%", height: "100%" }} className="penguins-communcation">
+         <PenguinsCommunicate eve={false} interactable={true}/>
       </div>
       </CenterOnSlide>
     <Notes>

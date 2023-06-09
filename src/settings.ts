@@ -1,5 +1,3 @@
-import { SpectacleThemeOverrides } from "spectacle";
-
 export const ekgTheme = {
   colors: {
     primary: "#323232",
