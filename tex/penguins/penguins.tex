@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage{tikz}
 \usepackage{pgfplots}
-\usepackage{tikzpingus}
+\usepackage[glows]{tikzpingus}
 
 \usetikzlibrary{external}
 \tikzexternalize
@@ -32,6 +32,11 @@ png export
 
 \tikzsetnextfilename{Pingu-B}
 \begin{tikzpicture}
-   \pingu[body type=legacy, feet=sit,right eye wink]
+   \pingu[body type=legacy, feet=sit, heart, eyes shiny, wings grab, cup=pingu@purple]
+\end{tikzpicture}
+
+\tikzsetnextfilename{Pingu-E}
+\begin{tikzpicture}
+   \pingu[body type=legacy, sunglasses,tie=pingu@black,eyes angry, eye patch right,cloak=pingu@black,cloak cap=!hide, devil horns=pingu@black]
 \end{tikzpicture}
 \end{document}
