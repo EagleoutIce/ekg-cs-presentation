@@ -17,7 +17,7 @@ export const StepAnimations: React.FC<StepAnimationProps> = (props: StepAnimatio
 
    return(<>
    <LowerMid>
-      { step < props.maxStep && <button className="basic-control" onClick={() => {updateStep(s => s + 1)}}>▶</button> }
+      { step < props.maxStep && <button className="basic-control" onClick={() => {updateStep(s => s + 1)}}>▸</button> }
       <button className="basic-control" onClick={() => updateStep(() => 0)}>↺</button>
    </LowerMid>
    {content}
