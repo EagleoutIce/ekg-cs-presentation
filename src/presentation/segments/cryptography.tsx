@@ -180,14 +180,26 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
 
 const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/
 
+
+function getBulletsState(): string[] {
+   const got = sessionStorage.getItem('retrieved-info-bullets');
+   return got === null ? [] : JSON.parse(got);
+}
+
+function setBulletsState(bullets: string[]): void {
+   sessionStorage.setItem('retrieved-info-bullets', JSON.stringify(bullets));
+}
+
 export const Cryptography: React.FC = () => {
-const [bullets, setBullets] = useState([] as string[])
+const [bullets, setBullets] = useState(getBulletsState())
 
 const addNewElement =(e: React.FormEvent<HTMLFormElement>): void => {
    e.preventDefault()
    const input = document.getElementById('new-idea-input') as HTMLInputElement
    if(input.value.trim() === '') return
-   setBullets([input.value, ...bullets])
+   const newBullets = [input.value, ...bullets]
+   setBullets(newBullets)
+   setBulletsState(newBullets)
    input.value = ''
    input.focus()
 }
@@ -202,6 +214,7 @@ const updateElement = (index: number, e: React.FormEvent<HTMLFormElement>): void
       newBullets[index] = input.value
    }
    setBullets(newBullets)
+   setBulletsState(newBullets)
    input.value = ''
 }
 const triggerOnCorrect = (text: string, elem: React.JSX.Element) => {
@@ -255,3 +268,4 @@ return(<>
 </Slide>
 </>)
 }
+
