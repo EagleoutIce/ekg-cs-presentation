@@ -46,8 +46,8 @@ function MainImageNode(input: { data: ImageNodeData }) {
  }
 
  const initialNodes = [
-   { id: '1', type: 'image', position: { x: 0, y: 0 }, data: { source: penguinA, type: 'out', label: "Alice" } },
-   { id: '2', type: 'image', position: { x: 400, y: 0 }, data: { source: penguinB, type: 'in', label: "Bob" } },
+   { id: '1', type: 'image', position: { x: 0, y: 20 }, data: { source: penguinA, type: 'out', label: "Alice" } },
+   { id: '2', type: 'image', position: { x: 400, y: -20 }, data: { source: penguinB, type: 'in', label: "Bob" } },
  ];
 
  const initialEdges = [{ id: 'e1-2', source: '1', target: '2', label: ' ' }];
