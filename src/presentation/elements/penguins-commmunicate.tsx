@@ -57,7 +57,7 @@ function MainImageNode(input: { data: ImageNodeData }) {
 const eveNode = {
    id: '3',
    type: 'image',
-   position: { x: 200, y: 150 },
+   position: { x: 200, y: 100 },
    data: {
       source: penguinE,
       type: 'both',
