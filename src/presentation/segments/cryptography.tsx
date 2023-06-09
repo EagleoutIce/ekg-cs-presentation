@@ -26,14 +26,15 @@ interface ImageNodeData {
    addon?: (img: HTMLImageElement | null) => void
 }
 
-let refs: (() => void)[] = []
-
 // TODO: collision detection
 function MainImageNode(input: { data: ImageNodeData }) {
    const ref = useRef<HTMLImageElement>(null);
-   const update = () => { input.data.addon?.(ref.current) }
-   refs.push(update)
-   useEffect(() => { input.data.addon?.(ref.current) }, []);
+   if(input.data.addon) {
+      const update = () => { input.data.addon!(ref.current) }
+      setInterval(update, 100)
+   }
+
+   useEffect(() => input.data.addon?.(ref.current), []);
    return (
      <>
        { input.data.type !== 'out' && <Handle type="target" position={Position.Left} isConnectableStart={false} isConnectableEnd={false} isConnectable={false} style={{ marginRight: '10px' }} />}
@@ -136,11 +137,6 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
    if(props.eve && !eveAdded) {
          addEve()
    }
-   useEffect(() => {
-      for(const value of refs.values()) {
-         value()
-      }
-   })
 
    return (
      <ReactFlow
@@ -150,10 +146,6 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
        onNodesChange={onNodesChange}
        onEdgesChange={onEdgesChange}
        defaultEdgeOptions={defaultEdgeOptions}
-       onNodeDrag={() => {
-         for(const value of refs.values()) {
-            value()
-       }}}
        defaultViewport={defaultViewport}
        snapToGrid={false}
        fitView={true}
@@ -167,6 +159,8 @@ const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
        zoomOnPinch={props.interactable}
        panOnDrag={props.interactable}
        panOnScroll={false}
+       autoPanOnNodeDrag={false}
+       autoPanOnConnect={false}
        disableKeyboardA11y={!props.interactable}
        edgesFocusable={false}
        proOptions={{ hideAttribution: true }}
@@ -221,9 +215,9 @@ const triggerOnCorrect = (text: string, elem: React.JSX.Element) => {
 return(<>
 <Slide padding={'0px'} >
       <CenterOnSlide>
-      <div style={{ width: "100%", height: "100%" }}>
+      <div style={{ width: "100vw", height: "100vh" }}>
          <Appear>
-               <div style={{ width: "100%", height: "100%" }} className="penguins-communcation">
+               <div style={{ width: "100vw", height: "100vh" }} className="penguins-communcation">
                   <PenguinsCommunicate eve={false} interactable={true}/>
                </div>
          </Appear>
