@@ -50,13 +50,13 @@ export const UserBulletPoints: React.FC<UserBulletPointsProps> = (props: UserBul
    return (
       <>
    <UnorderedList>
-   <Appear><ListItem key='current'>
+   <ListItem key='current'>
       <form onSubmit={e => addNewElement(e)}>
       <input placeholder="Ideen?" type="text" id='new-idea-input' autoFocus={true} autoComplete="off" className="seamless-input-new"></input>
       </form>
-   </ListItem></Appear>
+   </ListItem>
 </UnorderedList>
-<div style={{overflowY: 'auto', maxHeight: "60%"}}><UnorderedList>
+<div style={{overflowY: 'auto', maxHeight: props.maxHeight}}><UnorderedList>
    {bullets.map((bullet, i) => <ListItem key={bullet}>
       {props.specialTrigger(bullet, (<form onSubmit={e => updateElement(i, e)} style={{margin:'0px', padding: '0px'}}>
          <input placeholder={bullet} type="text" id={`old-idea-${i}`} className="seamless-input" autoComplete="off"></input>
