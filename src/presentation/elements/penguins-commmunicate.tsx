@@ -10,7 +10,7 @@ import { isMobile } from "react-device-detect";
 
 import 'reactflow/dist/style.css';
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { penguinA, penguinB, penguinE } from "../../penguins";
+import { penguinA, penguinB, penguinE } from "../../images";
 import { ekgTheme } from "../../settings";
 import * as d3 from 'd3';
 
