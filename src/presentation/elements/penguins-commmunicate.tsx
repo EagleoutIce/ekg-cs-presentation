@@ -130,7 +130,7 @@ export const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) =
       </button>}
     </Panel>
        { props.interactable &&
-         <Controls showZoom={false} showInteractive={true} showFitView={true} onInteractiveChange={status => setInteractable(status)} className="huge-controls"/>
+         <Controls showZoom={false} showInteractive={true} showFitView={true} onInteractiveChange={status => setInteractable(status)} className={isMobile ? "huge-controls" : undefined}/>
        }
      </ReactFlow>
    );
