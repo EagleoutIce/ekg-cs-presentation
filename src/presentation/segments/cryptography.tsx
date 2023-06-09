@@ -186,6 +186,7 @@ const [bullets, setBullets] = useState([] as string[])
 const addNewElement =(e: React.FormEvent<HTMLFormElement>): void => {
    e.preventDefault()
    const input = document.getElementById('new-idea-input') as HTMLInputElement
+   if(input.value.trim() === '') return
    setBullets([input.value, ...bullets])
    input.value = ''
    input.focus()
