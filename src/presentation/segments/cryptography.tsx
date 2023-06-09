@@ -3,15 +3,47 @@ import { CenterOnSlide,  LargeWaveText,  RawText } from "../../templates/styles"
 import { PenguinsCommunicate } from "../elements/penguins-commmunicate";
 import { UserBulletPoints } from "../elements/updateable-bulletpoints";
 import { StepAnimations } from "../elements/step-animations";
-
+import * as d3 from 'd3'
+import { useCallback } from "react";
 
 const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/
 
-const symmetricEncryptionSteps = (step: number, maxStep: number): React.JSX.Element => (
-   <CenterOnSlide>
-      <Text>{step}</Text>
-   </CenterOnSlide>
-)
+function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void {
+   const svg = d3.select(node);
+   if(step === 0) {
+      svg.selectAll("*").remove(); // in case of reset
+      svg.append('circle')
+         .attr('id', 'magic-circle')
+         .attr('cx', '50')
+         .attr('cy', '50')
+         .attr('r', 20)
+         .attr('fill', 'green')
+         .style('transition', '500ms')
+   } else if(step === 1) {
+      svg.select('#magic-circle')
+         .attr('fill', 'orange')
+   } else if(step === 2) {
+      svg.select('#magic-circle')
+         .attr('cx', '100')
+   }
+}
+
+function useSymmetricEncryptionSteps(): (step: number, maxStep: number) => React.JSX.Element {
+let svg: SVGSVGElement | null = null;
+const svgRefCallback = useCallback((node: SVGSVGElement) => {
+   symmetricEncryptionStep(0, node);
+   svg = node;
+}, []);
+
+return (step: number, maxStep: number) => {
+   symmetricEncryptionStep(step, svg);
+   return (<CenterOnSlide>
+      <div className="full-svg">
+         <svg id="symmetric-encryption-steps" ref={svgRefCallback} viewBox="0 0 250 250"></svg>
+      </div>
+   </CenterOnSlide>)
+}
+}
 
 export const Cryptography: React.FC = () => {
 
@@ -54,7 +86,7 @@ return(<>
 
 <Slide>
 <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
-<StepAnimations maxStep={3} onStep={symmetricEncryptionSteps} />
+<StepAnimations maxStep={3} onStep={useSymmetricEncryptionSteps()} />
 </Slide>
 </>)
 }
