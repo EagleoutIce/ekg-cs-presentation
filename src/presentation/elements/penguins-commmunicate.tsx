@@ -106,7 +106,7 @@ export const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) =
        fitView={true}
        /** if it is not interactable set fixed*/
        minZoom={interactable ? 0.65 : undefined}
-       maxZoom={interactable ? 2 : undefined}
+       maxZoom={interactable ? 1.75 : undefined}
        edgesUpdatable={false}
        nodesConnectable={false}
        nodesDraggable={interactable}
