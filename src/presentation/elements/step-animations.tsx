@@ -17,8 +17,8 @@ export const StepAnimations: React.FC<StepAnimationProps> = (props: StepAnimatio
 
    return(<>
    <LowerMid>
-      { step < props.maxStep && <button className="basic-control" onClick={() => {updateStep(s => s + 1)}}>▸</button> }
-      <button className="basic-control" onClick={() => updateStep(() => 0)}>↺</button>
+      { step < props.maxStep && <button className="basic-control" style={{ width: "1.5cm", height: "1.5cm", fontSize: '16pt' }} onClick={() => {updateStep(s => s + 1)}}>▸</button> }
+      <button className="basic-control" style={{ width: "1.5cm", height: "1.5cm", fontSize: '16pt' }} onClick={() => updateStep(() => 0)}>⟲</button>
    </LowerMid>
    {content}
    </>)

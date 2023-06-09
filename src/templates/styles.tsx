@@ -66,7 +66,7 @@ export const LowerLeft: React.FC<React.PropsWithChildren> = ({children}) => (
 )
 
 export const LowerMid: React.FC<React.PropsWithChildren> = ({children}) => (
-   <FlexBox style={{ display: 'flex', flexDirection: 'row', gap: '1em', position:"absolute" }} left={0} bottom={0} right={0}>
+   <FlexBox style={{ display: 'flex', flexDirection: 'row', gap: '2em', position:"absolute" }} left={0} bottom={0} right={0}>
       {children}
    </FlexBox>
 )
