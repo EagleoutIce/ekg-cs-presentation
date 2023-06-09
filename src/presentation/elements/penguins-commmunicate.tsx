@@ -62,51 +62,7 @@ const eveNode = {
       source: penguinE,
       type: 'both',
       label: "Eve",
-      addon: (img : HTMLImageElement | null) => {
-                  if (!img) return;
-
-                  const svg: d3.Selection<SVGSVGElement, unknown, null, any> = d3.select(img.parentElement?.parentElement?.parentElement ?? null).select('svg.react-flow__edges.react-flow__container')
-                  const middle: d3.Selection<SVGElement, unknown, null, any> = svg.select('.react-flow__edge-textwrapper')
-
-                  middle.attr('visibility', 'visible')
-                  middle.select('#eve-mark').remove()
-                  const ringContainer = middle.append('g')
-                     .attr('id', 'eve-mark')
-                  ringContainer.append('text')
-                     .attr('pointer-events', 'none')
-                     .attr('x', 13)
-                     .attr('y', 18)
-                     .style('font-family', ekgTheme.fonts.header)
-                     .style('font-size', '11px')
-                     .text('Abfangen...')
-                  const pulse = ringContainer
-                     .append('circle')
-                        .attr('fill', 'none')
-                        .attr('r', '0')
-                        .attr('opacity', '.7')
-                        .attr('stroke', 'darkred')
-                        .attr('stroke-width', '2')
-                  // based on https://codepen.io/shaneparsons/pen/MpgEma
-                  pulse.append('animate')
-                     .attr('attributeName', 'r')
-                     .attr('from', '6')
-                     .attr('to', '15')
-                     .attr('dur', '1.5s')
-                     .attr('repeatCount', 'indefinite')
-                     .attr('begin', '0s')
-                  pulse.append('animate')
-                     .attr('attributeName', 'opacity')
-                     .attr('from', '.7')
-                     .attr('to', '0')
-                     .attr('dur', '1.5s')
-                     .attr('repeatCount', 'indefinite')
-                     .attr('begin', '0s')
-
-                  ringContainer.append('circle')
-                     .attr('r', 6)
-                     .attr('opacity', '.7')
-                     .attr('fill', 'darkred')
-      }
+      addon: addonForEve
    }
 }
 
@@ -178,4 +134,50 @@ export const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) =
        }
      </ReactFlow>
    );
+}
+
+function addonForEve(img: HTMLImageElement | null) {
+   if(!img) return;
+
+   const svg: d3.Selection<SVGSVGElement, unknown, null, any> = d3.select(img.parentElement?.parentElement?.parentElement ?? null).select('svg.react-flow__edges.react-flow__container');
+   const middle: d3.Selection<SVGElement, unknown, null, any> = svg.select('.react-flow__edge-textwrapper');
+
+   middle.attr('visibility', 'visible');
+   middle.select('#eve-mark').remove();
+   const ringContainer = middle.append('g')
+      .attr('id', 'eve-mark');
+   ringContainer.append('text')
+      .attr('pointer-events', 'none')
+      .attr('x', 13)
+      .attr('y', 18)
+      .style('font-family', ekgTheme.fonts.header)
+      .style('font-size', '11px')
+      .text('Abfangen...');
+   const pulse = ringContainer
+      .append('circle')
+      .attr('fill', 'none')
+      .attr('r', '0')
+      .attr('opacity', '.7')
+      .attr('stroke', 'darkred')
+      .attr('stroke-width', '2');
+   // based on https://codepen.io/shaneparsons/pen/MpgEma
+   pulse.append('animate')
+      .attr('attributeName', 'r')
+      .attr('from', '6')
+      .attr('to', '15')
+      .attr('dur', '1.5s')
+      .attr('repeatCount', 'indefinite')
+      .attr('begin', '0s');
+   pulse.append('animate')
+      .attr('attributeName', 'opacity')
+      .attr('from', '.7')
+      .attr('to', '0')
+      .attr('dur', '1.5s')
+      .attr('repeatCount', 'indefinite')
+      .attr('begin', '0s');
+
+   ringContainer.append('circle')
+      .attr('r', 6)
+      .attr('opacity', '.7')
+      .attr('fill', 'darkred');
 }
