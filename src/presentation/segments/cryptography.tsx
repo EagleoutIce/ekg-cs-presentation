@@ -25,6 +25,9 @@ function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void
    } else if(step === 2) {
       svg.select('#magic-circle')
          .attr('cx', '100')
+   }  else if(step === 3) {
+      svg.select('#magic-circle')
+         .attr('r', '40')
    }
 }
 
