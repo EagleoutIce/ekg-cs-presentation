@@ -44,6 +44,11 @@ return(<>
       <LargeWaveText text={"Klassische Verschlüsselung"}  svgHeight="150px" amplitude={40} points={15} />
    </CenterOnSlide>
 </Slide>
+
+<Slide>
+<Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
+
+</Slide>
 </>)
 }
 
