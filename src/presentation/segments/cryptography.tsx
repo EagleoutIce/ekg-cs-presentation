@@ -91,25 +91,24 @@ function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void
          svg.select(`#cypher-text-${i}-decode-line`).remove();
          svg.append('line')
             .attr('id', `cypher-text-${i}-decode-line`)
-            .attr("x1", 90+6+15)
+            .attr("x1", 90+6+80)
             .attr("y1", i * 15 + 50)
-            .attr("x2", 90+6+15)
+            .attr("x2", 90+6+80)
             .attr("y2", i * 15 + 50)
             .attr("stroke-width", .1)
             .attr('transition', '1s')
             .attr("stroke", "gray");
          svg.append('circle')
             .attr('id', `cypher-text-${i}-decode-out`)
-            .attr('cx', 163+100)
+            .attr('cx', 163+78)
             .attr('opacity', 0)
             .attr('cy', i * 15 + 50)
             .attr('r', '6')
             .style('fill', colors[i])
-            .style('filter', 'brightness(50%)')
             .style('transition', '1s');
          svg.append('text')
             .attr('id', `cypher-text-${i}-out-decode-text`)
-            .attr('x', 163+100)
+            .attr('x', 163+78)
             .attr('y', i * 15 + 50)
             .attr('opacity', 0)
             .style('transition', '1s')
@@ -117,7 +116,7 @@ function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void
             .attr('text-anchor', 'middle')
             .attr('dominant-baseline', 'middle')
             .classed('cypher-table-text', true)
-            .text(cypher[i]);
+            .text(code[i]);
       }
    }
    if(step >= 1) {
@@ -146,28 +145,28 @@ function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void
             svg.select(`#cypher-text-${i}-line`)
                .attr("x2", 150)
                .attr("marker-end", "url(#triangle)")
-         }, i * 100 + 500)
+         }, i * 100)
          setTimeout(() => {
             svg.select(`#cypher-text-${i}-out`)
                .attr('opacity', 1)
             svg.select(`#cypher-text-${i}-out-text`)
                .attr('opacity', 1)
-         }, i * 100 + 1000)
+         }, i * 100 + 500)
       }
    }
    if(step >= 3) {
       for(let i = 0; i < 4; i++) {
          setTimeout(() => {
             svg.select(`#cypher-text-${i}-decode-line`)
-               .attr("x2", 150)
+               .attr("x2", 227)
                .attr("marker-end", "url(#triangle)")
-         }, i * 100 + 500)
+         }, i * 100 + 200)
          setTimeout(() => {
             svg.select(`#cypher-text-${i}-decode-out`)
                .attr('opacity', 1)
             svg.select(`#cypher-text-${i}-out-decode-text`)
                .attr('opacity', 1)
-         }, i * 100 + 1000)
+         }, i * 100 + 700)
       }
    }
 }
@@ -233,10 +232,11 @@ export const Cryptography: React.FC = () => {
             <StepAnimations maxStep={4} onStep={useSymmetricEncryptionSteps()} />
          </CenterOnSlide>
          </div>
-         <div style={{ position: "absolute", marginTop: '11cm' }}>
+         <div style={{ position: "absolute", marginTop: '12cm' }}>
          <UnorderedList>
-            <Appear><ListItem>Ein Schlüssel für Ver- und Entschlüsselung</ListItem></Appear>
+            <Appear><ListItem>Ein Schlüssel zur Ver- und Entschlüsselung</ListItem></Appear>
             <Appear><ListItem>Beide müssen den Schlüssel kennen</ListItem></Appear>
+            <Appear><ListItem><b>Wie kann man den Schlüssel austauschen?</b></ListItem></Appear>
          </UnorderedList>
          </div>
       </Slide>
