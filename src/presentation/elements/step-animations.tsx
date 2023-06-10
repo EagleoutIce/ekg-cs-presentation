@@ -15,7 +15,7 @@ export const StepAnimations: React.FC<StepAnimationProps> = (props: StepAnimatio
       { step < props.maxStep && <button className="basic-control" style={{ width: "1.5cm", height: "1.5cm", fontSize: '16pt' }} onClick={() => {updateStep(s => s + 1)}}>▸</button> }
       <button className="basic-control" style={{ width: "1.5cm", height: "1.5cm", fontSize: '16pt' }} onClick={() => updateStep(() => 0)}>⟲</button>
    </LowerMid> */}
-   <Stepper values={new Array(props.maxStep + 1)} alwaysVisible>
+   <Stepper values={new Array(props.maxStep)} alwaysVisible>
    { (v, step, active) => {
       if(active) {
          return updateStep(step)
