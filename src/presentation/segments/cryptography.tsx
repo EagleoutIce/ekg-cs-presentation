@@ -1,10 +1,12 @@
-import { Text, Slide, Notes, UnorderedList, ListItem, Appear } from "spectacle";
+import { Text, Slide, Notes, UnorderedList, ListItem, Appear, Stepper } from "spectacle";
 import { CenterOnSlide, LargeWaveText, RawText } from "../../templates/styles";
 import { PenguinsCommunicate } from "../elements/penguins-commmunicate";
 import { UserBulletPoints } from "../elements/updateable-bulletpoints";
 import { StepAnimations } from "../elements/step-animations";
 import * as d3 from 'd3';
 import { useCallback } from "react";
+import { penguinB } from "../../images";
+import { Node } from "reactflow";
 
 
 const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/;
@@ -186,6 +188,22 @@ function useSymmetricEncryptionSteps(): (step: number, maxStep: number) => React
    };
 }
 
+const encryptLabel = () => (
+   <div>Hallo Welt<br /><center><b>↓ 3 ↓</b></center>Unyyb Jryg</div>
+)
+const decryptLabel = () => (
+   <div>Unyyb Jryg<br /><center><b>↓ 3 ↓</b></center>Hallo Welt</div>
+)
+
+const eveLabel = () => (
+   <div>Unyyb Jryg<br /><center><b>?</b></center></div>
+)
+
+const extraNodes = [
+   { id: 'alice-in', type: 'simple', position: { x: 70, y: -30 }, data: { label: encryptLabel} },
+   { id: 'bob-in', type: 'simple', position: { x: 450, y: -50 }, data: { label: decryptLabel} },
+   { id: 'eve-in', type: 'simple', position: { x: 260, y: 75 }, data: { label: eveLabel} } // Unyyb Jryg
+]
 export const Cryptography: React.FC = () => {
 
    const triggerOnCorrect = (text: string, elem: React.JSX.Element) => {
@@ -227,18 +245,23 @@ export const Cryptography: React.FC = () => {
 
       <Slide>
          <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
-         <div style={{ position: "absolute" }}>
          <CenterOnSlide>
-            <StepAnimations maxStep={4} onStep={useSymmetricEncryptionSteps()} />
+         <div style={{ width: "80%", height: "10cm" }} className="penguins-communcation">
+         <Stepper values={[extraNodes]} alwaysVisible>
+            {(v, _s, _a) =>
+               (<PenguinsCommunicate
+                  eve={true}
+                  interactable={false}
+                  extraNodes={v as Node<any>[]}
+               />)
+         }
+         </Stepper>
+         </div>
+         <Appear><Text textAlign="center">Ein Schlüssel zur Ver- und Entschlüsselung</Text></Appear>
          </CenterOnSlide>
-         </div>
-         <div style={{ position: "absolute", marginTop: '12cm' }}>
-         <UnorderedList>
-            <Appear><ListItem>Ein Schlüssel zur Ver- und Entschlüsselung</ListItem></Appear>
-            <Appear><ListItem>Beide müssen den Schlüssel kennen</ListItem></Appear>
-            <Appear><ListItem><b>Wie kann man den Schlüssel austauschen?</b></ListItem></Appear>
-         </UnorderedList>
-         </div>
+         <Notes>
+            TODO: tafelbild
+         </Notes>
       </Slide>
 
       <Slide>

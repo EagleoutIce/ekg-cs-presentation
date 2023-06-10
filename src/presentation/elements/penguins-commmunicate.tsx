@@ -5,6 +5,8 @@ import ReactFlow, {
    Position,
    Panel,
    Controls,
+   Node,
+   Edge,
  } from 'reactflow';
 
 import 'reactflow/dist/style.css';
@@ -12,6 +14,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { penguinA, penguinB, penguinE } from "../../images";
 import { ekgTheme } from "../../settings";
 import * as d3 from 'd3';
+import { Text } from 'spectacle';
 
 interface ImageNodeData {
    type: 'in' | 'out' | 'both'
@@ -39,12 +42,29 @@ function MainImageNode(input: { data: ImageNodeData }) {
    );
  }
 
- const initialNodes = [
+ interface SimpleData {
+   label: string | (() => React.JSX.Element)
+}
+
+// TODO: collision detection
+export function SimpleNode(input: { data: SimpleData }) {
+return (
+   <>
+      <Text fontSize="10pt">{
+         typeof input.data.label === 'function' ?
+            input.data.label() :
+            input.data.label
+      }</Text>
+   </>
+);
+}
+
+ const initialNodes: Node<any>[] = [
    { id: '1', type: 'image', position: { x: 0, y: 20 }, data: { source: penguinA, type: 'out', label: "Alice" } },
-   { id: '2', type: 'image', position: { x: 400, y: -20 }, data: { source: penguinB, type: 'in', label: "Bob" } },
+   { id: '2', type: 'image', position: { x: 400, y: -20 }, data: { source: penguinB, type: 'in', label: "Bob" } }
  ];
 
- const initialEdges = [{ id: 'e1-2', source: '1', target: '2', label: ' ' }];
+ const initialEdges: Edge<any>[] = [{ id: 'e1-2', source: '1', target: '2', label: ' ' }];
 
 
 
@@ -67,6 +87,8 @@ const eveNode = {
 
 interface PenguinData {
    eve: boolean
+   extraNodes?: Node<any>[]
+   extraEdges?: Edge<any>[]
    interactable: boolean
 }
 
@@ -77,15 +99,26 @@ const isMobileScreen = () => {
 
 export const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) => {
    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-   const [edges, _setEdges, onEdgesChange] = useEdgesState(initialEdges);
+   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
    const [interactable, setInteractable ] = useState(props.interactable)
    const isMobile = isMobileScreen()
 
    if(isMobile) {
       setInteractable(false)
    }
+   // pain
+   if(props.extraNodes && !nodes.includes(props.extraNodes[0])){
+      setNodes((prevNodes) =>
+         prevNodes.concat(props.extraNodes!)
+      )
+   }
+   if(props.extraEdges&& !edges.includes(props.extraEdges[0])) {
+      setEdges((prevEdges) =>
+         prevEdges.concat(props.extraEdges!)
+      )
+   }
 
-   const nodeTypes = useMemo(() => ({ image: MainImageNode }), []);
+   const nodeTypes = useMemo(() => ({ image: MainImageNode, simple: SimpleNode }), []);
    const [eveAdded, setEveAdded] = useState(false)
 
    const addEve = () => {
