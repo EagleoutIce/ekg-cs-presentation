@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { LowerLeft, LowerMid } from "../../templates/styles";
 import { Stepper } from "spectacle";
 
 export interface StepAnimationProps {
@@ -8,7 +6,6 @@ export interface StepAnimationProps {
 }
 
 export const StepAnimations: React.FC<StepAnimationProps> = (props: StepAnimationProps) => {
-
    const updateStep = (update: number) => {
       return props.onStep(update, props.maxStep)
    }
@@ -18,7 +15,7 @@ export const StepAnimations: React.FC<StepAnimationProps> = (props: StepAnimatio
       { step < props.maxStep && <button className="basic-control" style={{ width: "1.5cm", height: "1.5cm", fontSize: '16pt' }} onClick={() => {updateStep(s => s + 1)}}>▸</button> }
       <button className="basic-control" style={{ width: "1.5cm", height: "1.5cm", fontSize: '16pt' }} onClick={() => updateStep(() => 0)}>⟲</button>
    </LowerMid> */}
-   <Stepper values={new Array(props.maxStep)} alwaysVisible>
+   <Stepper values={new Array(props.maxStep + 1)} alwaysVisible>
    { (v, step, active) => {
       if(active) {
          return updateStep(step)
