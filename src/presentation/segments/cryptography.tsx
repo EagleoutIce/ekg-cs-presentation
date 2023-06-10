@@ -1,12 +1,10 @@
 import { Text, Slide, Notes, UnorderedList, ListItem, Appear } from "spectacle";
 import { CenterOnSlide, LargeWaveText, RawText } from "../../templates/styles";
-import { MainBubbleNode, MainImageNode, PenguinsCommunicate } from "../elements/penguins-commmunicate";
+import { PenguinsCommunicate } from "../elements/penguins-commmunicate";
 import { UserBulletPoints } from "../elements/updateable-bulletpoints";
 import { StepAnimations } from "../elements/step-animations";
 import * as d3 from 'd3';
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Background, Panel, ReactFlow, useEdgesState, useNodesState } from "reactflow";
-import { penguinA, penguinB } from "../../images";
+import { useCallback } from "react";
 
 
 const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/;
@@ -14,80 +12,180 @@ const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/;
 const CypherArray = Array.from({ length: 26 }, (_, i) => ({ a: String.fromCharCode(97 + i), num: i }));
 
 const colors = ['#e59f37', '#7A9B76', '#FE5F55', '#587291']; // '#611b37'
-const initialNodes = [
-   { id: '1', type: 'image', position: { x: 0, y: 0 }, data: { source: penguinA, type: 'out', label: "Alice" } },
-   { id: '2', type: 'image', position: { x: 400, y: 0 }, data: { source: penguinB, type: 'in', label: "Bob" } },
-   { id: 'code-3', type: 'bubble', position: { x: 100, y: 0 }, data: { label: 'c', color: colors[0] } },
-   { id: 'code-4', type: 'bubble', position: { x: 140, y: 0 }, data: { label: 'o', color: colors[1] } },
-   { id: 'code-5', type: 'bubble', position: { x: 180, y: 0 }, data: { label: 'd', color: colors[2] } },
-   { id: 'code-6', type: 'bubble', position: { x: 220, y: 0 }, data: { label: 'e', color: colors[3] } },
- ];
-
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2', label: ' ' }];
-
-const defaultEdgeOptions = {
-   animated: true
- };
-const defaultViewport = { x: 0, y: 0, zoom: 1.5 };
-
+const code = [ 'c', 'o', 'd', 'e' ];
+const cypher = [ 'd', 'p', 'e', 'f' ];
 
 // TODO: maybe move to mxgraph or alternatives
-function useSymmetricEncryptionSteps(): (step: number) =>  React.JSX.Element {
-   let [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
-   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-   const nodeTypes = useMemo(() => ({ image: MainImageNode, bubble: MainBubbleNode }), []);
-
-
-   return (step: number) => {
-      if(step === 1) {
-         updateCode();
+function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void {
+   const svg = d3.select(node);
+   if(step === 0) {
+      svg.selectAll("*").remove(); // in case of reset
+      // based on https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-end
+      svg.append("defs").append("svg:marker")
+         .attr("id", "triangle")
+         .attr("refX", 1)
+         .attr("refY", 7.5)
+         .attr('viewBox', '0 0 15 15')
+         .attr("markerWidth", 15)
+         .attr("markerHeight", 15)
+         .attr("orient", "auto")
+         .append("path")
+         .attr("d", "M 0 0 L 15 7.5 L 0 15 z")
+         .style("fill", "gray");
+      for(let i = 0; i < 4; i++) {
+         svg.append('circle')
+            .attr('id', `cypher-text-${i}`)
+            .attr('cx', 125 + (i - 1.5) * 15)
+            .attr('cy', '70')
+            .attr('r', '6')
+            .on('mouseover', d => { d.target.style.fill = colors[i]; })
+            .on('mouseout', d => { d.target.style.fill = 'black'; })
+            .classed('cypher-text', true)
+            .style('transition', '1s')
+            .append('animate')
+            .attr('attributeName', 'r')
+            .attr('values', '6;7;6')
+            .attr('dur', '1s')
+            .attr('repeatCount', 'indefinite');
+         svg.append('text')
+            .attr('id', `cypher-text-${i}-text`)
+            .attr('x', 125 + (i - 1.5) * 15)
+            .attr('y', '70')
+            .style('transition', '1s')
+            .attr('pointer-events', 'none')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .classed('cypher-table-text', true)
+            .text(code[i]);
+         svg.select(`#cypher-text-${i}-line`).remove();
+         svg.append('line')
+            .attr('id', `cypher-text-${i}-line`)
+            .attr("x1", 90+6)
+            .attr("y1", i * 15 + 50)
+            .attr("x2", 90+6)
+            .attr("y2", i * 15 + 50)
+            .attr("stroke-width", .1)
+            .attr('transition', '1s')
+            .attr("stroke", "gray");
+         svg.append('circle')
+            .attr('id', `cypher-text-${i}-out`)
+            .attr('cx', 163)
+            .attr('opacity', 0)
+            .attr('cy', i * 15 + 50)
+            .attr('r', '6')
+            .style('fill', colors[i])
+            .style('filter', 'brightness(50%)')
+            .style('transition', '1s');
+         svg.append('text')
+            .attr('id', `cypher-text-${i}-out-text`)
+            .attr('x', 163)
+            .attr('y', i * 15 + 50)
+            .attr('opacity', 0)
+            .style('transition', '1s')
+            .attr('pointer-events', 'none')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .classed('cypher-table-text', true)
+            .text(cypher[i]);
+         // decode
+         svg.select(`#cypher-text-${i}-decode-line`).remove();
+         svg.append('line')
+            .attr('id', `cypher-text-${i}-decode-line`)
+            .attr("x1", 90+6+15)
+            .attr("y1", i * 15 + 50)
+            .attr("x2", 90+6+15)
+            .attr("y2", i * 15 + 50)
+            .attr("stroke-width", .1)
+            .attr('transition', '1s')
+            .attr("stroke", "gray");
+         svg.append('circle')
+            .attr('id', `cypher-text-${i}-decode-out`)
+            .attr('cx', 163+100)
+            .attr('opacity', 0)
+            .attr('cy', i * 15 + 50)
+            .attr('r', '6')
+            .style('fill', colors[i])
+            .style('filter', 'brightness(50%)')
+            .style('transition', '1s');
+         svg.append('text')
+            .attr('id', `cypher-text-${i}-out-decode-text`)
+            .attr('x', 163+100)
+            .attr('y', i * 15 + 50)
+            .attr('opacity', 0)
+            .style('transition', '1s')
+            .attr('pointer-events', 'none')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
+            .classed('cypher-table-text', true)
+            .text(cypher[i]);
       }
-   return (<ReactFlow
-   nodes={nodes}
-   edges={edges}
-   onNodesChange={onNodesChange}
-   nodeTypes={nodeTypes}
-   defaultEdgeOptions={defaultEdgeOptions}
-   defaultViewport={defaultViewport}
-   snapToGrid={false}
-   fitView={true}
-   /** if it is not interactable set fixed*/
-   minZoom={0.65}
-   maxZoom={1.75}
-   edgesUpdatable={false}
-   nodesConnectable={false}
-   nodesDraggable={false}
-   zoomOnScroll={false}
-   zoomOnPinch={false}
-   panOnDrag={false}
-   panOnScroll={false}
-   autoPanOnNodeDrag={false}
-   autoPanOnConnect={false}
-   disableKeyboardA11y={true}
-   edgesFocusable={false}
-   proOptions={{ hideAttribution: true }}
-   style={{
-     padding: 0,
-     margin: 0
-   }}
-   >
-      <Panel position="top-left">
-         <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
-      </Panel>
-    </ReactFlow>
-   )
-
-function updateCode() {
-      nodes = nodes.map(n => {
-         if(n.id.startsWith('code-')) {
-            n.hidden = false;
-         }
-         return n;
-      });
+   }
+   if(step >= 1) {
+      for(let i = 0; i < 4; i++) {
+         setTimeout(() => {// timeout-delay is to fragile
+            const circle = d3.select(`#cypher-text-${i}`);
+            circle.select('animate').remove();
+            circle
+               .style('fill', colors[i])
+               .on('mouseover', d => { d.target.setAttribute('r', '7'); })
+               .on('mouseout', d => { d.target.setAttribute('r', '6'); })
+               .style('transition', '1s')
+               .attr('cx', 85)
+               .attr('cy', i * 15 + 50);
+            const text = d3.select(`#cypher-text-${i}-text`);
+            text
+               .style('transition', '1s')
+               .attr('x', 85)
+               .attr('y', i * 15 + 50);
+            }, i * 100)
+      }
+   }
+   if(step >= 2) {
+      for(let i = 0; i < 4; i++) {
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-line`)
+               .attr("x2", 150)
+               .attr("marker-end", "url(#triangle)")
+         }, i * 100 + 500)
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-out`)
+               .attr('opacity', 1)
+            svg.select(`#cypher-text-${i}-out-text`)
+               .attr('opacity', 1)
+         }, i * 100 + 1000)
+      }
+   }
+   if(step >= 3) {
+      for(let i = 0; i < 4; i++) {
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-decode-line`)
+               .attr("x2", 150)
+               .attr("marker-end", "url(#triangle)")
+         }, i * 100 + 500)
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-decode-out`)
+               .attr('opacity', 1)
+            svg.select(`#cypher-text-${i}-out-decode-text`)
+               .attr('opacity', 1)
+         }, i * 100 + 1000)
+      }
    }
 }
-}
 
+function useSymmetricEncryptionSteps(): (step: number, maxStep: number) => React.JSX.Element {
+   let svg: SVGSVGElement | null = null;
+   const svgRefCallback = useCallback((node: SVGSVGElement) => {
+      symmetricEncryptionStep(0, node);
+      svg = node;
+   }, []);
+
+   return (step: number, maxStep: number) => {
+      symmetricEncryptionStep(step, svg);
+      return (
+            <svg id="symmetric-encryption-steps" ref={svgRefCallback} viewBox="0 0 250 150" height='15cm' width='25cm'></svg>
+         );
+   };
+}
 
 export const Cryptography: React.FC = () => {
 
@@ -128,18 +226,19 @@ export const Cryptography: React.FC = () => {
          </CenterOnSlide>
       </Slide>
 
-      <Slide  padding={'0px'} >
+      <Slide>
+         <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
+         <div style={{ position: "absolute" }}>
          <CenterOnSlide>
-            <div style={{ width: "100%", height: "100%" }} className="penguins-communcation">
             <StepAnimations maxStep={4} onStep={useSymmetricEncryptionSteps()} />
-            </div>
          </CenterOnSlide>
-         {/* <div style={{ position: "absolute", marginTop: '11cm' }}>
+         </div>
+         <div style={{ position: "absolute", marginTop: '11cm' }}>
          <UnorderedList>
             <Appear><ListItem>Ein Schlüssel für Ver- und Entschlüsselung</ListItem></Appear>
             <Appear><ListItem>Beide müssen den Schlüssel kennen</ListItem></Appear>
          </UnorderedList>
-         </div> */}
+         </div>
       </Slide>
 
       <Slide>

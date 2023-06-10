@@ -21,7 +21,7 @@ interface ImageNodeData {
 }
 
 // TODO: collision detection
-export function MainImageNode(input: { data: ImageNodeData }) {
+function MainImageNode(input: { data: ImageNodeData }) {
    const ref = useRef<HTMLImageElement>(null);
    if(input.data.addon) {
       const update = () => { input.data.addon!(ref.current) }
@@ -39,25 +39,9 @@ export function MainImageNode(input: { data: ImageNodeData }) {
    );
  }
 
-
-
-interface MainBubbleData {
-   label: string,
-   color: string
-}
-
-// TODO: collision detection
-export function MainBubbleNode(input: { data: MainBubbleData }) {
-return (
-   <>
-      <div className='cypher-circle' style={{ background: input.data.color }}>{input.data.label}</div>
-   </>
-);
-}
-
  const initialNodes = [
    { id: '1', type: 'image', position: { x: 0, y: 20 }, data: { source: penguinA, type: 'out', label: "Alice" } },
-   { id: '2', type: 'image', position: { x: 400, y: -20 }, data: { source: penguinB, type: 'in', label: "Bob" } }
+   { id: '2', type: 'image', position: { x: 400, y: -20 }, data: { source: penguinB, type: 'in', label: "Bob" } },
  ];
 
  const initialEdges = [{ id: 'e1-2', source: '1', target: '2', label: ' ' }];
