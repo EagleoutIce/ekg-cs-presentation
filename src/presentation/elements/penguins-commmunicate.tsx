@@ -118,7 +118,7 @@ export const PenguinsCommunicate: React.FC<PenguinData> = (props: PenguinData) =
        nodesDraggable={interactable}
        zoomOnScroll={interactable}
        zoomOnPinch={interactable}
-       panOnDrag={interactable}
+       panOnDrag={false}
        panOnScroll={false}
        autoPanOnNodeDrag={false}
        autoPanOnConnect={false}
