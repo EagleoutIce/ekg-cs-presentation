@@ -83,8 +83,15 @@
    scale: 1.5;
 }
 
+.cypher-text {
+   opacity: 0.9;
+   transition: 500ms;
+}
+
+
 .cypher-table-text {
    font-size: 4pt;
+   fill: white;
    font-family: "Nova Round", Helvetica, Arial, sans-serif;
    transition: 500ms;
 }

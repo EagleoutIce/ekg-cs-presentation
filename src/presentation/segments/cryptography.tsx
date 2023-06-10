@@ -1,96 +1,174 @@
-import { Text, Slide, Notes } from "spectacle";
+import { Text, Slide, Notes, UnorderedList, ListItem, Appear } from "spectacle";
 import { CenterOnSlide, LargeWaveText, RawText } from "../../templates/styles";
 import { PenguinsCommunicate } from "../elements/penguins-commmunicate";
 import { UserBulletPoints } from "../elements/updateable-bulletpoints";
 import { StepAnimations } from "../elements/step-animations";
 import * as d3 from 'd3';
 import { useCallback } from "react";
-import { ekgTheme } from "../../settings";
-import { penguinA } from "../../images";
+
 
 const EncryptionWords = /[Vv]erschlüssel(n|ung).*|[Ee]ncrypt.*/;
 
 const CypherArray = Array.from({ length: 26 }, (_, i) => ({ a: String.fromCharCode(97 + i), num: i }));
 
+const colors = ['#e59f37', '#7A9B76', '#FE5F55', '#587291']; // '#611b37'
+const code = [ 'c', 'o', 'd', 'e' ];
+const cypher = [ 'd', 'p', 'e', 'f' ];
+
+// TODO: maybe move to mxgraph or alternatives
 function symmetricEncryptionStep(step: number, node: SVGSVGElement | null): void {
    const svg = d3.select(node);
    if(step === 0) {
       svg.selectAll("*").remove(); // in case of reset
-      svg.append('text')
-         .attr('id', 'cypher-text')
-         .attr('x', '50')
-         .attr('y', '52')
-         .text('code')
-         .style('font-size', '10px')
-         .style('font-family', ekgTheme.fonts.header)
-         .style('transition', '500ms')
-         .attr('text-align', 'middle')
-         .append('animate')
-         .attr('attributeName', 'y')
-         .attr('values', '50;51;50')
-         .attr('dur', '1s')
-         .attr('repeatCount', 'indefinite');
-      svg.append('image')
-         .attr('id', 'cypher-img')
-         .attr('x', '35')
-         .attr('y', '62')
-         .attr('width', '42')
-         .attr('height', '42')
-         .classed('cypher-image', true)
-         .attr('href', penguinA)
-
-      svg.select('#cypher-table').remove();
-      // svg.data?
-      const table = svg.append('g')
-         .attr('id', 'cypher-table')
-         .attr('opacity', '0')
-         .attr('transition', '500ms')
-         .attr('transform', 'translate(130, 30)');
-      let i = 0;
-      for(let { a, num } of CypherArray) {
-         if(a == 'p') {
-            a = '⋮';
-            num = '⋮' as any;
-         }
-         const group = table.append('g')
-            .attr('transform', (_, a) => `translate(0, ${i * 7.5})`);
-         group.append('text')
-            .attr('id', `cypher-table-${a}`)
+      // based on https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/marker-end
+      svg.append("defs").append("svg:marker")
+         .attr("id", "triangle")
+         .attr("refX", 1)
+         .attr("refY", 7.5)
+         .attr('viewBox', '0 0 15 15')
+         .attr("markerWidth", 15)
+         .attr("markerHeight", 15)
+         .attr("orient", "auto")
+         .append("path")
+         .attr("d", "M 0 0 L 15 7.5 L 0 15 z")
+         .style("fill", "gray");
+      for(let i = 0; i < 4; i++) {
+         svg.append('circle')
+            .attr('id', `cypher-text-${i}`)
+            .attr('cx', 125 + (i - 1.5) * 15)
+            .attr('cy', '70')
+            .attr('r', '6')
+            .on('mouseover', d => { d.target.style.fill = colors[i]; })
+            .on('mouseout', d => { d.target.style.fill = 'black'; })
+            .classed('cypher-text', true)
+            .style('transition', '1s')
+            .append('animate')
+            .attr('attributeName', 'r')
+            .attr('values', '6;7;6')
+            .attr('dur', '1s')
+            .attr('repeatCount', 'indefinite');
+         svg.append('text')
+            .attr('id', `cypher-text-${i}-text`)
+            .attr('x', 125 + (i - 1.5) * 15)
+            .attr('y', '70')
+            .style('transition', '1s')
+            .attr('pointer-events', 'none')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
             .classed('cypher-table-text', true)
-            .style('text-anchor', 'middle')
-            .text(a);
-         group.append('text')
-            .attr('id', `cypher-table-${a}-arrow`)
+            .text(code[i]);
+         svg.select(`#cypher-text-${i}-line`).remove();
+         svg.append('line')
+            .attr('id', `cypher-text-${i}-line`)
+            .attr("x1", 90+6)
+            .attr("y1", i * 15 + 50)
+            .attr("x2", 90+6)
+            .attr("y2", i * 15 + 50)
+            .attr("stroke-width", .1)
+            .attr('transition', '1s')
+            .attr("stroke", "gray");
+         svg.append('circle')
+            .attr('id', `cypher-text-${i}-out`)
+            .attr('cx', 163)
+            .attr('opacity', 0)
+            .attr('cy', i * 15 + 50)
+            .attr('r', '6')
+            .style('fill', colors[i])
+            .style('filter', 'brightness(50%)')
+            .style('transition', '1s');
+         svg.append('text')
+            .attr('id', `cypher-text-${i}-out-text`)
+            .attr('x', 163)
+            .attr('y', i * 15 + 50)
+            .attr('opacity', 0)
+            .style('transition', '1s')
+            .attr('pointer-events', 'none')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
             .classed('cypher-table-text', true)
-            .attr('x', '6')
-            .attr('y', '-.66')
-            .attr('fill', 'darkgray')
-            .style('text-anchor', 'middle')
-            .text('→');
-         group.append('text')
-            .attr('id', `cypher-table-${a}-value`)
+            .text(cypher[i]);
+         // decode
+         svg.select(`#cypher-text-${i}-decode-line`).remove();
+         svg.append('line')
+            .attr('id', `cypher-text-${i}-decode-line`)
+            .attr("x1", 90+6+15)
+            .attr("y1", i * 15 + 50)
+            .attr("x2", 90+6+15)
+            .attr("y2", i * 15 + 50)
+            .attr("stroke-width", .1)
+            .attr('transition', '1s')
+            .attr("stroke", "gray");
+         svg.append('circle')
+            .attr('id', `cypher-text-${i}-decode-out`)
+            .attr('cx', 163+100)
+            .attr('opacity', 0)
+            .attr('cy', i * 15 + 50)
+            .attr('r', '6')
+            .style('fill', colors[i])
+            .style('filter', 'brightness(50%)')
+            .style('transition', '1s');
+         svg.append('text')
+            .attr('id', `cypher-text-${i}-out-decode-text`)
+            .attr('x', 163+100)
+            .attr('y', i * 15 + 50)
+            .attr('opacity', 0)
+            .style('transition', '1s')
+            .attr('pointer-events', 'none')
+            .attr('text-anchor', 'middle')
+            .attr('dominant-baseline', 'middle')
             .classed('cypher-table-text', true)
-            .attr('x', '16')
-            .style('text-anchor', 'end')
-            .text(num);
-         if(a >= 'p') {
-            break;
-         }
-         i++;
+            .text(cypher[i]);
       }
    }
    if(step >= 1) {
-      svg.select('#cypher-text').select('animate').remove();
-      d3.select('#cypher-table')
-         .attr('opacity', '1');
+      for(let i = 0; i < 4; i++) {
+         setTimeout(() => {// timeout-delay is to fragile
+            const circle = d3.select(`#cypher-text-${i}`);
+            circle.select('animate').remove();
+            circle
+               .style('fill', colors[i])
+               .on('mouseover', d => { d.target.setAttribute('r', '7'); })
+               .on('mouseout', d => { d.target.setAttribute('r', '6'); })
+               .style('transition', '1s')
+               .attr('cx', 85)
+               .attr('cy', i * 15 + 50);
+            const text = d3.select(`#cypher-text-${i}-text`);
+            text
+               .style('transition', '1s')
+               .attr('x', 85)
+               .attr('y', i * 15 + 50);
+            }, i * 100)
+      }
    }
-   if(step === 2) {
-      svg.select('#cypher-table-c')
-         .attr('font-weight', 'bold');
+   if(step >= 2) {
+      for(let i = 0; i < 4; i++) {
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-line`)
+               .attr("x2", 150)
+               .attr("marker-end", "url(#triangle)")
+         }, i * 100 + 500)
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-out`)
+               .attr('opacity', 1)
+            svg.select(`#cypher-text-${i}-out-text`)
+               .attr('opacity', 1)
+         }, i * 100 + 1000)
+      }
    }
-   if(step === 3) {
-      svg.select('#cypher-text')
-         .style('fill', 'cyan');
+   if(step >= 3) {
+      for(let i = 0; i < 4; i++) {
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-decode-line`)
+               .attr("x2", 150)
+               .attr("marker-end", "url(#triangle)")
+         }, i * 100 + 500)
+         setTimeout(() => {
+            svg.select(`#cypher-text-${i}-decode-out`)
+               .attr('opacity', 1)
+            svg.select(`#cypher-text-${i}-out-decode-text`)
+               .attr('opacity', 1)
+         }, i * 100 + 1000)
+      }
    }
 }
 
@@ -104,9 +182,8 @@ function useSymmetricEncryptionSteps(): (step: number, maxStep: number) => React
    return (step: number, maxStep: number) => {
       symmetricEncryptionStep(step, svg);
       return (
-         <div style={{ width: '100vw', height: '100vh' }}>
-            <svg id="symmetric-encryption-steps" ref={svgRefCallback} viewBox="0 0 250 250"></svg>
-         </div>);
+            <svg id="symmetric-encryption-steps" ref={svgRefCallback} viewBox="0 0 250 150" height='15cm' width='25cm'></svg>
+         );
    };
 }
 
@@ -151,9 +228,17 @@ export const Cryptography: React.FC = () => {
 
       <Slide>
          <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
+         <div style={{ position: "absolute" }}>
          <CenterOnSlide>
-         <StepAnimations maxStep={6} onStep={useSymmetricEncryptionSteps()} />
+            <StepAnimations maxStep={4} onStep={useSymmetricEncryptionSteps()} />
          </CenterOnSlide>
+         </div>
+         <div style={{ position: "absolute", marginTop: '11cm' }}>
+         <UnorderedList>
+            <Appear><ListItem>Ein Schlüssel für Ver- und Entschlüsselung</ListItem></Appear>
+            <Appear><ListItem>Beide müssen den Schlüssel kennen</ListItem></Appear>
+         </UnorderedList>
+         </div>
       </Slide>
 
       <Slide>
