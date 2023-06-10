@@ -82,3 +82,19 @@
 .huge-controls svg {
    scale: 1.5;
 }
+
+.cypher-table-text {
+   font-size: 4pt;
+   font-family: "Nova Round", Helvetica, Arial, sans-serif;
+   transition: 500ms;
+}
+
+.cypher-image {
+   transform-origin: center;
+   transform: scale(1);
+   transition: 500ms;
+}
+
+.cypher-image:hover {
+   transform: translate(5px,5px) rotate(4deg);
+}
