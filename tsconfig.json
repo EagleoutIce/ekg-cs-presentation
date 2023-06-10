@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "esModuleInterop": true,
-    "sourceMap": true,
+    "inlineSourceMap": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,

@@ -91,6 +91,10 @@ return(<>
 <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
 <StepAnimations maxStep={3} onStep={useSymmetricEncryptionSteps()} />
 </Slide>
+
+<Slide>
+   <Text fontWeight="bold">Asymmetrische Verschlüsselung</Text>
+</Slide>
 </>)
 }
 
