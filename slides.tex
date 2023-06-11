@@ -1,0 +1,59 @@
+% presentation
+\documentclass[aspectratio=169,usepdftitle=true,handout]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{microtype}
+
+\usepackage{etoolbox}
+\makeatletter
+\appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}}
+
+\usepackage{lib/color-palettes/color-palettes}
+\usepackage[cpalette,encoding,defaultfont,fakeminted]{lib/sopra-collection/sopra-listings/sopra-listings}
+
+\solLoadLanguage{R}
+\solsetmintedstyle{plain number}
+
+\usepackage{lib/beamer-themes/dividing-lines/beamerthemedividing-lines}
+\usepackage[backend=bibtex8,style=numeric]{biblatex}
+\usepackage{csquotes}
+\let\say\enquote
+% \addbibresource{references.bib}
+% \outro{\printBibCommand}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,backgrounds,shapes.symbols,decorations.pathreplacing}
+\usepackage{forest}
+
+% too short of a presentation
+\sectionbannerfalse
+
+\title{Why}
+% \titlenumber{1}
+\subtitle{CodeInspector --- First Interim}
+
+\date{\today}
+
+\author[F.~Sihler]{Florian Sihler}
+\email{florian.sihler@uni-ulm.de}
+\license{\ccbysa}
+
+\def\titlepage{%
+xx%
+}
+
+\errorcontextlines9999
+\lstset{add to literate=
+   {<-}{{{\!\(\leftarrow\)\!}}}2
+}
+
+\begin{document}
+
+\section{What}
+\begin{frame}[fragile]{The Goal}
+xx
+\end{frame}
+
+\end{document}
