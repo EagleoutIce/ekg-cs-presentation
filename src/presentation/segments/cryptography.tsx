@@ -218,7 +218,11 @@ export const Cryptography: React.FC = () => {
       <Slide padding={'0px'} >
          <CenterOnSlide>
             <div style={{ width: "100%", height: "100%" }} className="penguins-communcation">
-               <PenguinsCommunicate eve={false} interactable={true} />
+               <Stepper alwaysVisible values={[true]}>
+                  {v => (
+                     <PenguinsCommunicate eve={v as boolean} interactable={true} />
+                  )}
+               </Stepper>
             </div>
          </CenterOnSlide>
          <Notes>
@@ -240,9 +244,20 @@ export const Cryptography: React.FC = () => {
       <Slide>
          <CenterOnSlide>
             <LargeWaveText text={"Klassische Verschlüsselung"} svgHeight="150px" amplitude={40} points={15} />
+            {/* <Appear>
+            <Text> Schlüsselaustausch </Text>
+            </Appear> */}
          </CenterOnSlide>
+         <Notes>
+            Symmetrisch + Asymmetrisch
+            TODO: tafelbild für g to b to a
+         </Notes>
       </Slide>
 
+      <Slide>
+         <Text fontWeight="bold">Diffie-Hellman-Schlüsselaustausch</Text>
+      </Slide>
+{/*
       <Slide>
          <Text fontWeight="bold">Symmetrische Verschlüsselung</Text>
          <CenterOnSlide>
@@ -266,7 +281,7 @@ export const Cryptography: React.FC = () => {
 
       <Slide>
          <Text fontWeight="bold">Asymmetrische Verschlüsselung</Text>
-      </Slide>
+      </Slide> */}
    </>);
 }
 
