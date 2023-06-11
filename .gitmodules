@@ -1,9 +1,9 @@
-[submodule "lib/beamer-themes"]
-	path = lib/beamer-themes
-	url = https://github.com/EagleoutIce/beamer-themes.git
-[submodule "lib/color-palettes"]
-	path = lib/color-palettes
-	url = https://github.com/EagleoutIce/color-palettes
 [submodule "lib/sopra-collection"]
 	path = lib/sopra-collection
 	url = https://github.com/EagleoutIce/sopra-collection.git
+[submodule "lib/color-palettes"]
+	path = lib/color-palettes
+	url = https://github.com/EagleoutIce/color-palettes.git
+[submodule "lib/beamer-themes"]
+	path = lib/beamer-themes
+	url = https://github.com/EagleoutIce/beamer-themes.git
