@@ -33,9 +33,9 @@
 % too short of a presentation
 \sectionbannerfalse
 
-\title{Why}
+\title{Von Physik, Informatik und der Welt}
 % \titlenumber{1}
-\subtitle{CodeInspector --- First Interim}
+% \subtitle{CodeInspector --- First Interim}
 
 \date{\today}
 
@@ -43,8 +43,13 @@
 \email{florian.sihler@uni-ulm.de}
 \license{\ccbysa}
 
+\def\TitlepageSlideAlign{c}
 \def\titlepage{%
-xx%
+\begin{center}
+   \usebeamerfont{title}%
+   \usebeamercolor{title}%
+   \MakeUppercase{\inserttitle}%
+\end{center}
 }
 
 \errorcontextlines9999
