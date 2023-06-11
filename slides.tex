@@ -33,25 +33,34 @@
 % too short of a presentation
 \sectionbannerfalse
 
-\title{Von Physik, Informatik und der Welt}
-% \titlenumber{1}
-% \subtitle{CodeInspector --- First Interim}
+\def\nl{\texorpdfstring{\\}{\space}}
+\def\nlq{\texorpdfstring{\\\strut\quad}{\space}}
+\def\nlqq{\texorpdfstring{\\\strut\qquad}{\space}}
+\def\Off#1{\texorpdfstring{\textit{\textcolor{gray}{#1}}}{#1}}
+\robustify\Off
+\title{\Off{Von}\nlq Physik,\nlq Informatik\nlqq\Off{und dem ganzen Rest}}
 
 \date{\today}
 
 \author[F.~Sihler]{Florian Sihler}
 \email{florian.sihler@uni-ulm.de}
 \license{\ccbysa}
+\usepackage{fontawesome}
 
+\def\PlaceFramenumberUpperLeft{}
 \def\TitlepageSlideAlign{c}
 \def\titlepage{%
-\begin{center}
-   \usebeamerfont{title}%
-   \usebeamercolor{title}%
-   \MakeUppercase{\inserttitle}%
-\end{center}
+\begin{tikzpicture}[overlay,remember picture]
+   \node[align=left,font=\usebeamerfont{title}\usebeamercolor{title}] at (current page.center) {%
+      \MakeUppercase{\inserttitle}\endgraf
+   };
+   \node[below left] at(current page.north east) {\color{gray}\href{https://github.com/EagleoutIce/ekg-cs-presentation}{\faGithub}};
+\end{tikzpicture}
 }
 
+\tikzset{
+   T/.style={text=gray,font=\scriptsize\sffamily}
+}
 \errorcontextlines9999
 \lstset{add to literate=
    {<-}{{{\!\(\leftarrow\)\!}}}2
@@ -59,9 +68,15 @@
 
 \begin{document}
 
-\section{What}
-\begin{frame}[fragile]{The Goal}
-xx
+% TODO: remove footer compleely
+% \section{Cryptography}
+\begin{frame}[c]{~}
+   \begin{tikzpicture}[overlay,remember picture]
+      \onslide<2->{\node (@) at(current page.center) {\usebeamerfont{title}204.715};}
+      % TODO: join fonts
+      \onslide<3->{\node[below] at(@.south) {\sbfamily19.973};}
+      \onslide<2->{\node[above right,T] at(current page.south west) {\href{https://web.archive.org/web/20230607125232/https://www.cvedetails.com/}{https://www.cvedetails.com/}};}
+   \end{tikzpicture}
 \end{frame}
 
 \end{document}
