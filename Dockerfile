@@ -5,7 +5,8 @@ FROM docker.io/eagleoutice/lithie-tx-full:latest
 USER root
 RUN apk add bash python3 make openjdk11
 RUN ln -sf python3 /usr/bin/python
-
+# remove existing
+RUN tlmgr remove --force tikzpingus
 # sloppy rename for alpine; no perl-rename :C
 COPY data/rename-fb /bin/rename-fb
 RUN chmod +x /bin/rename-fb

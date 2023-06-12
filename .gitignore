@@ -1,4 +1,6 @@
 build/
+slides.tex
+noanim_*
 
 # Created by https://www.gitignore.io/api/latex
 
