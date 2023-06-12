@@ -7,3 +7,9 @@
 [submodule "lib/beamer-themes"]
 	path = lib/beamer-themes
 	url = https://github.com/EagleoutIce/beamer-themes.git
+[submodule "lib/fancyqr"]
+	path = lib/fancyqr
+	url = https://github.com/EagleoutIce/fancyqr.git
+[submodule "lib/tikzpingus"]
+	path = lib/tikzpingus
+	url = https://github.com/EagleoutIce/tikzpingus.git
