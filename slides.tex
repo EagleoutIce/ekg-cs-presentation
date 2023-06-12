@@ -8,7 +8,7 @@
 
 \usepackage{etoolbox}
 \makeatletter
-\appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}}
+\appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}{lib/tikzpingus/tex/}{lib/fancyqr/}}
 
 \usepackage{lib/color-palettes/color-palettes}
 \usepackage[cpalette,encoding,defaultfont,fakeminted]{lib/sopra-collection/sopra-listings/sopra-listings}
@@ -29,6 +29,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,backgrounds,shapes.symbols,decorations.pathreplacing}
 \usepackage{forest}
+\usepackage{lib/tikzpingus/tex/tikzpingus}
 
 % too short of a presentation
 \sectionbannerfalse
@@ -77,6 +78,44 @@
       \onslide<3->{\node[below] at(@.south) {\sbfamily19.973};}
       \onslide<2->{\node[above right,T] at(current page.south west) {\href{https://web.archive.org/web/20230607125232/https://www.cvedetails.com/}{https://www.cvedetails.com/}};}
    \end{tikzpicture}
+\end{frame}
+
+\newsavebox\pinguA
+\newsavebox\pinguB
+\newsavebox\pinguE
+
+\savebox\pinguA{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart]}}
+\savebox\pinguB{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=pingu@purple]}}
+
+\savebox\pinguE{\tikz{\pingu[body=btdl@color@primary,eyes angry, sunglasses, cloak=btdl@color@primary, cloak cap=!hide, devil horns=btdl@color@primary,tie=btdl@color@primary, eye patch right]}}
+
+\begin{frame}[c]{}
+\begin{tikzpicture}[
+   overlay,remember picture,
+   every path/.append style={line cap=round}
+]
+   \coordinate (c) at (current page.center);
+
+   \onslide<2->{\node[scale=.75] (a) at ([xshift=-4.5cm,yshift=1cm]c) {\usebox\pinguA};
+   \node[below] at(a.south) {Alice};}
+
+   \onslide<3->{\node[scale=.75] (b) at ([xshift=4.5cm,yshift=1cm]c) {\usebox\pinguB};
+   \node[below] at(b.south) {Bob};}
+
+   \onslide<4->{
+      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hello!} coordinate[pos=.5] (m);
+   }
+
+   \onslide<5->{
+      \node[scale=.75] (e) at ([yshift=-2cm]c) {\usebox\pinguE};
+      \node[below] at(e.south) {Eve};
+   }
+
+   \onslide<6->{
+      \fill (m) circle[radius=2pt];
+      \draw (e.70) to[out=85,in=300] (m);
+   }
+\end{tikzpicture}
 \end{frame}
 
 \end{document}
