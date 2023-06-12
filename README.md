@@ -1,10 +1,10 @@
 # Presentation on 23rd of june at the EKG (de)
 
-[![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/)
+[![made-with-latex](https://img.shields.io/badge/Made%20with-LaTeX-1f425f.svg)](https://www.latex-project.org/) [![Build the slides](https://github.com/EagleoutIce/ekg-cs-presentation/actions/workflows/compile.yaml/badge.svg)](https://github.com/EagleoutIce/ekg-cs-presentation/actions/workflows/compile.yaml)
 
 ----
 
-<b>This is currently work in progress!</b>
+**This is currently work in progress!**
 
 ----
 
