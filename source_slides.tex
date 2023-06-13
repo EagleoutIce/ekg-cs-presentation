@@ -85,9 +85,9 @@
 \newsavebox\pinguE
 
 \savebox\pinguA{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart]}}
-\savebox\pinguB{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=pingu@purple]}}
+\savebox\pinguB{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=pingu@purple!40!btdl@color@primary]}}
 
-\savebox\pinguE{\tikz{\pingu[body=btdl@color@primary,eyes angry, sunglasses, cloak=btdl@color@primary, cloak cap=!hide, devil horns=btdl@color@primary,tie=btdl@color@primary, eye patch right]}}
+\savebox\pinguE{\tikz{\pingu[body=btdl@color@primary,eyes angry, sunglasses, cloak=black!92!gray, cloak cap=!hide, devil horns=btdl@color@primary,tie=black!92!gray, eye patch right]}}
 
 \begin{frame}[c]{}
 \begin{tikzpicture}[
@@ -97,13 +97,13 @@
    \coordinate (c) at (current page.center);
 
    \onslide<2->{\node[scale=.75] (a) at ([xshift=-4.5cm,yshift=1cm]c) {\usebox\pinguA};
-   \node[below] at(a.south) {Alice};}
+   \node[below] (ad) at(a.south) {Alice};}
 
    \onslide<3->{\node[scale=.75] (b) at ([xshift=4.5cm,yshift=1cm]c) {\usebox\pinguB};
-   \node[below] at(b.south) {Bob};}
+   \node (bd) at(b.south|-ad.east) {Bob};}
 
    \onslide<4->{
-      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hello!} coordinate[pos=.5] (m);
+      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hallo} coordinate[pos=.5] (m);
    }
 
    \onslide<5->{
@@ -117,5 +117,83 @@
    }
 \end{tikzpicture}
 \end{frame}
+
+\newsavebox\pinguAGray
+\newsavebox\pinguBGray
+
+\def\MixinOnGray{28!btdl@color@background}
+
+\savebox\pinguAGray{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart,:mix-all=\MixinOnGray]}}
+\savebox\pinguBGray{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=pingu@purple!40!btdl@color@primary,:mix-all=\MixinOnGray]}}
+
+\colorlet{@highlight}{btdl@color@primary}
+\newcommand<>\HighlightOn{%
+   \only#1{\colorlet{black}{black!\MixinOnGray}\colorlet{gray}{gray!\MixinOnGray}\color{black}}%
+}
+\begin{frame}[c]{}
+\begin{tikzpicture}[
+   overlay,remember picture,
+   every path/.append style={line cap=round},
+   font=\sbfamily\large
+]
+   \def\ShiftUp{0cm}
+   \only<8->{\def\ShiftUp{2.25cm}}
+   \coordinate[yshift=\ShiftUp] (c) at (current page.center);
+   \node[scale=.75] (a) at ([xshift=-4.5cm]c) {\only<-5|handout:0>{\usebox\pinguA}\only<6->{\usebox\pinguAGray}};
+   \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
+
+   \node[scale=.75] (b) at ([xshift=4.5cm]c) {\only<-5|handout:0>{\usebox\pinguB}\only<6->{\usebox\pinguBGray}};
+   \node[font=\sffamily] (bd) at(b.south|-ad.east) {\HighlightOn<6->Bob};
+
+   \onslide<2->{
+      {\HighlightOn<6->
+      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary] {} coordinate[pos=.5] (m);}
+
+      \node[above right,yshift=-1.5mm,xshift=-2.5cm] (encrypt) at(a.north east) {%
+         \HighlightOn<6->%
+         \only<2|handout:0>{\phantom{encrypt(}Hallo}%
+         \only<3->{encrypt(\textcolor{gray}{Hallo}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)}%
+      };
+   }
+   \onslide<4->{
+      \node[above] at (m.north) {\HighlightOn<6->Ohssv};% \faLongArrowRight\space
+   }
+
+   \onslide<5->{
+      \node[above left,yshift=-1.5mm,xshift=.5cm] (decrypt) at(b.north east|-a.north east) {%
+         \HighlightOn<6->%
+         decrypt(\textcolor{gray}{Ohssv}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)%
+      };
+   }
+   \onslide<7->{
+      \node[yshift=-.66cm] at (m.south) {Symmetrisch};
+   }
+
+   \begin{onlyenv}<9->
+   \coordinate[yshift=-\ShiftUp] (c2) at (current page.center);
+   \node[scale=.75] (a) at ([xshift=-4.5cm]c2) {\usebox\pinguAGray};
+   \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
+
+   \node[scale=.75] (b) at ([xshift=4.5cm]c2) {\usebox\pinguBGray};
+   \node[font=\sffamily] (bd) at(b.south|-ad.east) {\HighlightOn<6->Bob};
+
+      {\HighlightOn<6->
+      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary] {} coordinate[pos=.5] (m);}
+
+      \node[above right,yshift=-1.5mm,xshift=-2.5cm] (encrypt) at(a.north east) {%
+         \HighlightOn<6->encrypt(\textcolor{gray}{Hallo}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)%
+      };
+      \node[above] at (m.north) {\HighlightOn<6->Ohssv};% \faLongArrowRight\space
+
+      \node[above left,yshift=-1.5mm,xshift=.5cm] (decrypt) at(b.north east|-a.north east) {%
+         \HighlightOn<6->%
+         decrypt(\textcolor{gray}{Ohssv}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}4}\kern.5\wd0)%
+      };
+      \node[yshift=-.66cm] at (m.south) {Asymmetrisch};
+   \end{onlyenv}
+
+\end{tikzpicture}
+\end{frame}
+
 
 \end{document}
