@@ -138,7 +138,7 @@
 ]
    \def\ShiftUp{0cm}
    \only<8->{\def\ShiftUp{2.25cm}}
-   \coordinate[yshift=\ShiftUp] (c) at (current page.center);
+   \coordinate[yshift=\ShiftUp-1.25mm] (c) at (current page.center);
    \node[scale=.75] (a) at ([xshift=-4.5cm]c) {\only<-5|handout:0>{\usebox\pinguA}\only<6->{\usebox\pinguAGray}};
    \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
 
@@ -170,7 +170,7 @@
    }
 
    \begin{onlyenv}<9->
-   \coordinate[yshift=-\ShiftUp] (c2) at (current page.center);
+   \coordinate[yshift=-\ShiftUp-1.25mm] (c2) at (current page.center);
    \node[scale=.75] (a) at ([xshift=-4.5cm]c2) {\usebox\pinguAGray};
    \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
 
@@ -192,6 +192,21 @@
       \node[yshift=-.66cm] at (m.south) {Asymmetrisch};
    \end{onlyenv}
 
+\end{tikzpicture}
+\end{frame}
+
+
+% TODO: viele variationen und andere Optionen wie das RSA Verfahren
+\begin{frame}[c]{}
+\begin{tikzpicture}[overlay, remember picture]
+   \coordinate (c) at (current page.center);
+   \node[scale=.66] (a) at ([xshift=-5cm]c) {\usebox\pinguA};
+   \node[scale=.66] (b) at ([xshift=5cm]c) {\usebox\pinguB};
+
+   \draw[line cap=round, thick]  ([yshift=3cm,xshift=8mm]a.east) -- ++(0,-6cm);
+   \draw[line cap=round, thick]  ([yshift=3cm,xshift=-8mm]b.west) -- ++(0,-6cm);
+
+   \node[below=5mm] at(current page.north) {\(p = 7\) \quad \(g = 3\)};
 \end{tikzpicture}
 \end{frame}
 
