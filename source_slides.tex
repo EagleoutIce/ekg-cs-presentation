@@ -7,6 +7,7 @@
 \usepackage{microtype}
 
 \usepackage{etoolbox}
+
 \makeatletter
 \appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}{lib/tikzpingus/tex/}{lib/fancyqr/}}
 
@@ -198,16 +199,79 @@
 
 % TODO: viele variationen und andere Optionen wie das RSA Verfahren
 \begin{frame}[c]{}
-\begin{tikzpicture}[overlay, remember picture]
-   \coordinate (c) at (current page.center);
-   \node[scale=.66] (a) at ([xshift=-5cm]c) {\usebox\pinguA};
-   \node[scale=.66] (b) at ([xshift=5cm]c) {\usebox\pinguB};
+% Alice wählt zwei zufällige unabhängige Primzahlen ungefähr der gleichen Größenordnung:
+\begin{tikzpicture}[overlay,remember picture]
+\begin{onlyenv}<2-5|handout:1>
+\node[text width=.9\paperwidth] at(current page.center) {%
+\begin{center}
+   \onslide<2->{\(\mathbf{p} = 7\) \qquad \(\mathbf{g} = 3\)}\vspace*{1.5em}
+\end{center}
+\begin{center}
+   \onslide<3->{\(\mathbf{N} = p \cdot q = 21\)}\\
+   \onslide<3->{{\normalsize\textcolor{gray}{RSA-Modul}}}
+\end{center}
+\begin{center}
+   \onslide<4->{\(\boldsymbol\varphi\mathbf{(N)} = (p - 1) \cdot (q - 1) = 12\)}\\
+   \onslide<4->{{\normalsize\textcolor{gray}{Eulersche \(\varphi\)-Funktion}}}\vspace*{1.5em}
+\end{center}
+\begin{center}
+   \onslide<5->{\(\mathbf{e} = 5\) \qquad \(\mathbf{d} = 17\)}\\
+   \onslide<5->{{\normalsize\textcolor{gray}{\textbf{e}ncrypt und \textbf{d}ecrypt}}}
+   % teilerfremd zu \(\varphi(N)\), und 1 < e < \(\varphi(N) - 1\)}\\
+\end{center}
+};
+\end{onlyenv}
 
-   \draw[line cap=round, thick]  ([yshift=3cm,xshift=8mm]a.east) -- ++(0,-6cm);
-   \draw[line cap=round, thick]  ([yshift=3cm,xshift=-8mm]b.west) -- ++(0,-6cm);
-
-   \node[below=5mm] at(current page.north) {\(p = 7\) \quad \(g = 3\)};
+\begin{onlyenv}<6-|handout:2>
+   \node[below left=5mm] at(current page.north east) {\(N = 21\), \(e = 5\), \(d = 17\)};
+\node[text width=.9\paperwidth] at(current page.center) {%
+\begin{center}
+   \onslide<7->{\(\mathbf{m} = 4\)}\\
+   \onslide<7->{{\normalsize\textcolor{gray}{Nachricht}}}\vspace*{1.5em}
+\end{center}
+\begin{center}
+   \onslide<8->{\(\mathbf{c} = m^e \bmod N = 4^5 \bmod 21 = 16\)}\\
+   \onslide<8->{{\normalsize\textcolor{gray}{Verschlüsselte Nachricht}}}\vspace*{1em}
+\end{center}
+\begin{center}
+   \onslide<9->{\(\mathbf{m} = c^d \bmod N = 16^{17} \bmod 21 = 4\)}\\
+   \onslide<9->{{\normalsize\textcolor{gray}{Entschlüsselte Nachricht}}}
+\end{center}
+};
+\end{onlyenv}
+% von e& N  auf D zu schließen ist *sehr schwer* das "Faktorisierungsproblem"
 \end{tikzpicture}
+% Berechnen des Moduls \(N = p \cdot q\) und Eulersche Phi-Funktion \(\varphi(N) = (p-1) \cdot (q-1)\)
+% whle zu phi(N) teilerfremde Zahl e mit 1 < e < phi(N)
+% berechne d mit e*d = 1 mod phi(N)
+% \begin{tikzpicture}[overlay, remember picture]
+%    \coordinate (c) at (current page.center);
+%    \node[scale=.66] (a) at ([xshift=-5cm]c) {\usebox\pinguA};
+%    \node[scale=.66] (b) at ([xshift=5cm]c) {\usebox\pinguB};
+
+%    \draw[line cap=round, thick]  ([yshift=3cm,xshift=8mm]a.east) -- ++(0,-6cm);
+%    \draw[line cap=round, thick]  ([yshift=3cm,xshift=-8mm]b.west) -- ++(0,-6cm);
+
+%    \node[below=5mm] at(current page.north) {\(p = 7\) \qquad \(g = 3\)};
+% \end{tikzpicture}
+\end{frame}
+
+
+\newsavebox\pinguShock
+\savebox\pinguShock{\tikz{\pingu[wings shock, eyes shock,heart=gray!30]}}
+\begin{frame}[c]{}
+\begin{tikzpicture}[overlay,remember picture]
+   \onslide<2->{\node at (current page.center) {\usebeamerfont{title}Faktorisierungsproblem};}
+   \onslide<3->{\node[above left=-1.25cm] at(current page.south east) {\rotatebox{30}{\usebox\pinguShock}};}
+\end{tikzpicture}
+\end{frame}
+
+% Überleitung Quantum Computing
+\begin{frame}[c]{}
+   \begin{tikzpicture}[overlay,remember picture]
+      \onslide<2->{\node at (current page.center) {\usebeamerfont{title}0\quad\textcolor{gray}{/}\quad 1};}
+   \end{tikzpicture}
+   % TODO: qbits
 \end{frame}
 
 
