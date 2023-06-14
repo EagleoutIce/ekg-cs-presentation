@@ -12,6 +12,7 @@
 \appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}{lib/tikzpingus/tex/}{lib/fancyqr/}}
 
 \usepackage{lib/color-palettes/color-palettes}
+\usepackage{lib/fancyqr/fancyqr}
 \usepackage[cpalette,encoding,defaultfont,fakeminted]{lib/sopra-collection/sopra-listings/sopra-listings}
 
 \solLoadLanguage{R}
@@ -27,10 +28,12 @@
 % \addbibresource{references.bib}
 % \outro{\printBibCommand}
 
+
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,backgrounds,shapes.symbols,decorations.pathreplacing}
+\usetikzlibrary{arrows.meta,backgrounds,shapes.symbols,decorations.pathreplacing,3d}
 \usepackage{forest}
 \usepackage{lib/tikzpingus/tex/tikzpingus}
+\setbeamerfont{subtitle}{size=\fontsize{19}{19},series=\sbfamily}
 
 % too short of a presentation
 \sectionbannerfalse
@@ -52,7 +55,7 @@
 \def\PlaceFramenumberUpperLeft{}
 \def\TitlepageSlideAlign{c}
 \def\titlepage{%
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
    \node[align=left,font=\usebeamerfont{title}\usebeamercolor{title}] at (current page.center) {%
       \MakeUppercase{\inserttitle}\endgraf
    };
@@ -61,7 +64,8 @@
 }
 
 \tikzset{
-   T/.style={text=gray,font=\scriptsize\sffamily}
+   T/.style={text=gray,font=\scriptsize\sffamily},
+   @O/.style={overlay,remember picture}
 }
 \errorcontextlines9999
 \lstset{add to literate=
@@ -73,7 +77,7 @@
 % TODO: remove footer compleely
 % \section{Cryptography}
 \begin{frame}[c]{~}
-   \begin{tikzpicture}[overlay,remember picture]
+   \begin{tikzpicture}[@O]
       \onslide<2->{\node (@) at(current page.center) {\usebeamerfont{title}204.715};}
       % TODO: join fonts
       \onslide<3->{\node[below] at(@.south) {\color{gray}\sbfamily19.973};}
@@ -85,14 +89,16 @@
 \newsavebox\pinguB
 \newsavebox\pinguE
 
-\savebox\pinguA{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart]}}
-\savebox\pinguB{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=pingu@purple!40!btdl@color@primary]}}
+\def\PinguACode{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart,mask]}
+\def\PinguBCode{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=black]}
+\savebox\pinguA{\tikz{\PinguACode}}
+\savebox\pinguB{\tikz{\PinguBCode}}
 
 \savebox\pinguE{\tikz{\pingu[body=btdl@color@primary,eyes angry, sunglasses, cloak=black!92!gray, cloak cap=!hide, devil horns=btdl@color@primary,tie=black!92!gray, eye patch right]}}
 
 \begin{frame}[c]{}
 \begin{tikzpicture}[
-   overlay,remember picture,
+   @O,
    every path/.append style={line cap=round}
 ]
    \coordinate (c) at (current page.center);
@@ -124,8 +130,8 @@
 
 \def\MixinOnGray{28!btdl@color@background}
 
-\savebox\pinguAGray{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart,:mix-all=\MixinOnGray]}}
-\savebox\pinguBGray{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=pingu@purple!40!btdl@color@primary,:mix-all=\MixinOnGray]}}
+\savebox\pinguAGray{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart,mask,:mix-all=\MixinOnGray]}}
+\savebox\pinguBGray{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=black,:mix-all=\MixinOnGray]}}
 
 \colorlet{@highlight}{btdl@color@primary}
 \newcommand<>\HighlightOn{%
@@ -133,7 +139,7 @@
 }
 \begin{frame}[c]{}
 \begin{tikzpicture}[
-   overlay,remember picture,
+   @O,
    every path/.append style={line cap=round},
    font=\sbfamily\large
 ]
@@ -200,11 +206,11 @@
 % TODO: viele variationen und andere Optionen wie das RSA Verfahren
 \begin{frame}[c]{}
 % Alice wählt zwei zufällige unabhängige Primzahlen ungefähr der gleichen Größenordnung:
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
 \begin{onlyenv}<2-5|handout:1>
 \node[text width=.9\paperwidth] at(current page.center) {%
 \begin{center}
-   \onslide<2->{\(\mathbf{p} = 7\) \qquad \(\mathbf{g} = 3\)}\vspace*{1.5em}
+   \onslide<2->{\(\mathbf{p} = 7\) \qquad \(\mathbf{q} = 3\)}\vspace*{1.5em}
 \end{center}
 \begin{center}
    \onslide<3->{\(\mathbf{N} = p \cdot q = 21\)}\\
@@ -244,7 +250,7 @@
 % Berechnen des Moduls \(N = p \cdot q\) und Eulersche Phi-Funktion \(\varphi(N) = (p-1) \cdot (q-1)\)
 % whle zu phi(N) teilerfremde Zahl e mit 1 < e < phi(N)
 % berechne d mit e*d = 1 mod phi(N)
-% \begin{tikzpicture}[overlay, remember picture]
+% \begin{tikzpicture}[overlay,remember picture]
 %    \coordinate (c) at (current page.center);
 %    \node[scale=.66] (a) at ([xshift=-5cm]c) {\usebox\pinguA};
 %    \node[scale=.66] (b) at ([xshift=5cm]c) {\usebox\pinguB};
@@ -260,18 +266,207 @@
 \newsavebox\pinguShock
 \savebox\pinguShock{\tikz{\pingu[wings shock, eyes shock,heart=gray!30]}}
 \begin{frame}[c]{}
-\begin{tikzpicture}[overlay,remember picture]
+\begin{tikzpicture}[@O]
    \onslide<2->{\node at (current page.center) {\usebeamerfont{title}Faktorisierungsproblem};}
    \onslide<3->{\node[above left=-1.25cm] at(current page.south east) {\rotatebox{30}{\usebox\pinguShock}};}
 \end{tikzpicture}
 \end{frame}
 
 % Überleitung Quantum Computing
+\def\q#1{\ensuremath{\raisebox{1.5pt}{$\boldsymbol|$}\text{\sbfamily#1}\raisebox{1.5pt}{$\boldsymbol\rangle$}}}
 \begin{frame}[c]{}
-   \begin{tikzpicture}[overlay,remember picture]
-      \onslide<2->{\node at (current page.center) {\usebeamerfont{title}0\quad\textcolor{lightgray}{/}\quad 1};}
+   \begin{tikzpicture}[@O]
+      \def\MoveUp{0cm}
+      \only<3->{\def\MoveUp{.25\paperheight}}
+      \onslide<2->{\node at ([yshift=\MoveUp]current page.center) {\usebeamerfont{title}0\quad\textcolor{lightgray!80}{/}\quad 1};}
+
+      \onslide<3->{
+         \node[below right=2mm] at(current page.north west) {\sbfamily Bit};
+         \draw[lightgray] (current page.east)--(current page.west);
+      }
+
+      % \raisebox{-3pt}{\clap{\(c_0 \cdot \q0 + c_1 \cdot \q1\)}}
+      \onslide<4->{
+         \node[below right=2mm] at(current page.west) {\sbfamily Qubit};
+         \node at ([yshift=-\MoveUp]current page.center) {\usebeamerfont{title}\q0\quad\textcolor{lightgray!80}{/}\only<5->{\quad\q{{\(\underset{\clap{\color{gray}\footnotesize Superposition}}{\Psi}\)}}\quad\textcolor{lightgray!80}{/}}\quad \q1};
+      }
    \end{tikzpicture}
-   % TODO: qbits
+\end{frame}
+
+% bisher sind Qubits aber noch nicht besser, weil wir bei der Messung immer nur einen der beiden Zustände (0/1) erhalten
+
+\begin{frame}[c]{}
+\begin{tikzpicture}[@O]
+   \onslide<2->{
+      \node[align=center,text width=.9\paperwidth] at(current page.center) {%
+\begin{align*}
+   \q{$\Psi$} &= a \cdot \q0 + b \cdot \q1\\[5mm]
+   \onslide<3->{\q{$\Psi$}} &\only<3|handout:0>{= a \cdot \q{00} + b \cdot \q{11}}\only<4-|handout:1>{= a \cdot \q{10} + b \cdot \q{01}}
+\end{align*}
+      };
+   }
+   \onslide<4->{
+      \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}Verschränkung};
+      \node[below=-2mm] at(x.south) {\color{gray}entanglement};
+   }
+\end{tikzpicture}
+\end{frame}
+% https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm
+
+% https://quantum-computing.ibm.com/composer/docs/iqx/first-circuit
+
+\def\Meter#1{\scope[black,line cap=round,line width=.35mm]
+\fill (#1.south) circle[radius=.5mm];
+\draw ([xshift=3mm]#1.south) arc(0:180:3mm);
+\draw (#1.south) -- ++(55:4mm);
+\endscope}
+\begin{frame}{}
+% we could use quantikz but for one circuit that should be potentially animated, i am just recreating a circuit based on the ibm style
+% \newsavebox\tryItOutBox
+% \setbox\tryItOutBox=\hbox{\fancyqr{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBCMA2qAEBlALhHcANCAI4QDOUCIA8gAoCiAcgIoCCWAshgEwB0ABgDcAHTABLMAGNUAVwAmMDCNJpxAIwCMfSVJWiwYkgCcYAcwwkA2jwC6BqaYtSrAFntiAFpasCP0gA8fP0IfTX9YCllTYNsMAFoAPgwXPwNI8mila3CE5JdwoRBiRXJHcQAHHHEAezBqEABfIA}}
+\colorlet{@col}{gray!15}%
+\Large\sbfamily
+\setbox0=\hbox{\begin{tikzpicture}[@col,text=black,k/.style={fill,rectangle,minimum size=8mm,rounded corners=2pt}]
+   \node (a) at (0,0)  {\small\llap{$q_0$}};
+   \node (b) at (0,-1) {\small\llap{$q_1$}};
+   \node (c) at (0,-2) {\small\llap{$c$}};
+   \draw[lightgray] ([yshift=.25mm]a.east) coordinate (as) -- ++(.35\paperwidth,0);
+   \draw[lightgray] ([yshift=.25mm]b.east) coordinate (bs) -- ++(.35\paperwidth,0);
+   \draw[lightgray,double,double distance=.66mm] ([yshift=.25mm]c.east) coordinate (cs) -- ++(.35\paperwidth,0);
+   \node[k] at([xshift=5mm]as) {H};
+   \node[fill,circle,minimum size=8mm,outer sep=-2mm] (p) at([xshift=2cm]bs) {};
+   \draw[black,line cap=round,line width=.65mm] (p.north) -- (p.south);
+   \draw[black,line cap=round,line width=.65mm] (p.east) -- (p.west);
+   \coordinate (pt) at([xshift=2cm]as);
+   \draw[line width=1.25mm] ([yshift=2mm]p.north) -- (pt) coordinate (cnot-t);
+   \fill (cnot-t) circle[radius=2mm];
+
+   \node[k,outer sep=-2mm] (s1) at([xshift=32.5mm]as) {};
+   \node[k,outer sep=-2mm] (s2) at([xshift=45mm]bs) {};
+   \Meter{s1}
+   \Meter{s2}
+   \coordinate (c1) at([xshift=32.5mm]cs);
+   \coordinate (c2) at([xshift=45mm]cs);
+   \draw[-Kite,black] ([yshift=-2mm]s1.south) -- (c1);
+   \draw[-Kite,black] ([yshift=-2mm]s2.south) -- (c2);
+\end{tikzpicture}}%
+\begin{tikzpicture}[@O]
+   \onslide<2->{\node (b) at (current page.center) {\usebox0};}
+   \onslide<3->{
+      \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}\href{https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm}{Shor-Algorithmus}};
+      \path (b) -- (x) node[pos=.5,gray!15] (c) at(b.south) {\Large\faCaretDown};
+   }
+   \onslide<2->{
+      \node[above right,T,scale=.7] at (current page.south west) {\mdseries\href{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBCMA2qAEBlALhHcANCAI4QDOUCIA8gAoCiAcgIoCCWAshgEwB0ABgDcAHTABLMAGNUAVwAmMDCNJpxAIwCMfSVJWiwYkgCcYAcwwkA2jwC6BqaYtSrAFntiAFpasCP0gA8fP0IfTX9YCllTYNsMAFoAPgwXPwNI8mila3CE5JdwoRBiRXJHcQAHHHEAezBqEABfIA}{\underline{\faLink\space Probiere es selbst!}}};
+   }
+\end{tikzpicture}
+\end{frame}
+
+{%
+\def\Sin#1{0.5*sin(deg(pi*#1))}
+\def\Cos#1{0.5*cos(deg(pi*#1))}
+\def\XShift{0}
+\def\DrawUp#1#2{(\XShift,#1,#2)}
+\def\DrawLeft#1#2{(\XShift+#1,0,#2)}
+% \def\DrawT#1#2{(\XShift,#2,#1)}
+\def\HelpLinesIf#1{
+   \foreach \i in {-.5,-.4,...,5} {
+      \pgfmathsetmacro\target{\Sin{\i}}
+      \ifdim\target pt#10pt
+         \draw[help] (\XShift,0,\i) -- \DrawT{\target}{\i};
+      \fi
+   }
+}
+\def\GridBack{
+   \scope[canvas is xz plane at y=0]
+      \draw[help,opacity=.65,step=.5] (-.5+\XShift-.001,-.75) grid (\XShift,5.25);
+   \endscope
+}
+\def\GridFront{
+   \scope[canvas is xz plane at y=0]
+      \draw[help,opacity=.65,step=.5] (0.001+\XShift,-.75) grid (.5+\XShift,5.25);
+   \endscope
+}
+\def\Pre#1{
+   \def\XShift{#1}
+   \HelpLinesIf<
+   \GridBack
+   \HelpLinesIf>
+}
+\newsavebox\Waves
+\begin{frame}[c]
+\begin{lrbox}\Waves
+   \begin{tikzpicture}[z={(10:10mm)},x={(-60:6.5mm)},y=6.5mm,help/.style={gray!30,line cap=round},Arr/.style={{Kite[scale=.6]}-{Kite[scale=.6]}}]
+      \onslide<2->{\draw[help] (-.5,0,6) -- ++(1,0,0);
+      \draw[line cap=round,thick,Arr] (0,-.5,6)  -- ++(0,1,0);
+      \let\DrawT\DrawUp
+      \Pre0
+      \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot (0,{\Sin\x},\x);
+      \GridFront}
+
+      \onslide<3->{\draw[help] (3,-.5,6)  -- ++(0,1,0);
+      \draw[line cap=round,thick,Arr] (2.5,0,6)  -- ++(1,0,0);
+      \let\DrawT\DrawLeft
+      \Pre3
+      \GridFront
+      \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot ({\Sin\x+3},0,\x);}
+
+      % \draw[line cap=round,thick,Arr] (-.5,0,6)  -- ++(1,0,0);
+
+      \onslide<4->{\scope[canvas is xy plane at z=6]
+         \draw[help] (-.5+6,0) -- ++(1,0);
+         \draw[help] (6,-.5) -- ++(0,1);
+         \draw[thick,{Kite[scale=.6]}-] (6.5,0) arc(0:360:.5);
+      \endscope
+      \let\DrawT\DrawUp
+      \def\XShift{6}
+      \GridBack
+      \foreach \i in {-.5,-.4,...,5} {
+         \draw[help] (\XShift,0,\i) -- ({\Sin\i+6},{\Cos\i},\i);
+      }
+      \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot ({\Sin\x+6},{\Cos\x},\x);
+      \GridFront}
+   \end{tikzpicture}%
+\end{lrbox}
+\begin{tikzpicture}[@O]
+   \node[scale=.9] at (current page.center) {\usebox\Waves};
+\end{tikzpicture}
+\end{frame}
+}
+
+
+% Binär <-> Polarisationen
+\begin{frame}[c]{}
+\begin{tikzpicture}[@O]
+   \coordinate(c) at (current page.center);
+   \def\Shift{0cm}
+   \only<3->{\def\Shift{-4cm}}
+   \onslide<2->{
+      \draw[very thick,Kite-Kite]      ([xshift=\Shift-2cm]c) -- ++(2,0);
+      \draw[gray] ([xshift=\Shift-1cm,yshift=-1cm]c) -- ++(0,2);
+
+      \draw[gray]      ([xshift=\Shift+1cm]c) -- ++(2,0);
+      \draw[very thick, Kite-Kite] ([xshift=\Shift+2cm,yshift=-1cm]c) -- ++(0,2);
+   }
+
+   \onslide<3->{
+      \draw[lightgray] (current page.south) -- (current page.north);
+   }
+
+   \onslide<4->{%
+   \draw[gray] ([xshift=5cm]c)++(45:1cm) -- ++(45:-2cm);
+   \draw[very thick, Kite-Kite] ([xshift=5cm]c)++(-45:1cm) -- ++(-45:-2cm);
+
+   \draw[very thick, Kite-Kite] ([xshift=2cm]c)++(45:1cm) -- ++(45:-2cm);
+   \draw[gray] ([xshift=2cm]c)++(-45:1cm) -- ++(-45:-2cm);
+   }
+   \onslide<4->{
+      \node[below=5mm] at ([xshift=-5cm,yshift=-1cm]c) {\usebeamerfont{subtitle}0};
+      \node[below=5mm] at ([xshift=-2cm,yshift=-1cm]c) {\usebeamerfont{subtitle}1};
+      \node[below=5mm] at ([xshift=2cm,yshift=-1cm]c) {\usebeamerfont{subtitle}0};
+      \node[below=5mm] at ([xshift=5cm,yshift=-1cm]c) {\usebeamerfont{subtitle}1};
+   }
+\end{tikzpicture}
 \end{frame}
 
 
