@@ -14,8 +14,17 @@
 }
 
 % TODO: frage von wo nach wo kommen wir wie einwerfen
+{
+% \On<3>{a}{fill=gray}
+\newcommand<>\On[2]{\only#3{{%
+   \globaldefs=1\relax%
+   \tikzset{#1/.style={#2}}
+}}}
 \begin{frame}
-\begin{tikzpicture}[@O,a/.style={},b/.style={},c/.style={},d/.style={},e/.style={},f/.style={},g/.style={},h/.style={},i/.style={},j/.style={}%
+\begin{tikzpicture}[@O,base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base},%
+current/.style={fill=btdl@color@background,draw=black,text=black},%
+queue/.style={fill=gray},
+visited/.style={fill=btdl@color@background,draw=gray,text=gray}
 ]
 \begin{onlyenv}<-6|handout:1>
    \only<-5>{
@@ -55,17 +64,69 @@
 \begin{onlyenv}<7-|handout:2>
    \tikzset{dot/.style={minimum size=3mm,circle,fill=black,text=white,font=\tiny\sbfamily}}
    \scope[shift={([xshift=-3cm,yshift=1cm]current page.center)},k/.style={font=\scriptsize,midway}]
-   \node[dot] (a) at (0,0) {a};
-   \node[dot] (b) at (0,-2) {b};
-   \node[dot] (c) at (2,1) {c};
-   \node[dot] (e) at (2,-1) {e};
-   \node[dot] (d) at (2,-3) {d};
-   \node[dot] (h) at (4,1) {h};
-   \node[dot] (g) at (6,-2) {g};
-   \node[dot] (i) at (4,-3) {i};
-   \node[dot] (j) at (4,-1) {j};
-   \node[dot] (f) at (6,0) {f};
-   \draw (a) -- (e) node[above,k] {10};
+   \only<8->{
+      \tikzset{
+         base/.style={fill=lightgray},
+         b/.style={},
+         j/.style={},
+      }
+   }
+   \foreach[count=\i from 11] \n in {e,d,,a,c,h,,i,,,,j,,g}{
+      \ifx!\n!\else
+         \On<\i->{\n}{queue}
+      \fi
+   }
+   \On<10-12>{b}{current}\On<13->{b}{visited}
+   \On<13-16>{e}{current}\On<17->{e}{visited}
+   \On<17-18>{d}{current}\On<19->{d}{visited}
+   \On<19>{a}{current}\On<20->{a}{visited}
+   \On<20>{c}{current}\On<21->{c}{visited}
+   \On<21-22>{h}{current}\On<23->{h}{visited}
+   \On<23-24>{i}{current}\On<25->{i}{visited}
+   \On<25->{j}{current}
+
+   % queue up there
+   \scope[every node/.append style={outer xsep=4pt}]
+   \only<9->{
+      \node[dot,b,xshift=-3cm,below=3mm] (q1) at (current page.north) {b};
+   }
+   \only<11->{
+      \node[dot,e,right] (q2) at (q1.east) {e};
+   }
+   \only<12->{
+      \node[dot,d,right] (q3) at (q2.east) {d};
+   }
+   \only<14->{
+      \node[dot,a,right] (q4) at (q3.east) {a};
+   }
+   \only<15->{
+      \node[dot,c,right] (q5) at (q4.east) {c};
+   }
+   \only<16->{
+      \node[dot,h,right] (q6) at (q5.east) {h};
+   }
+   \only<18->{
+      \node[dot,i,right] (q7) at (q6.east) {i};
+   }
+   \only<22->{
+      \node[dot,j,right] (q8) at (q7.east) {j};
+   }
+   \only<24->{
+      \node[dot,g,right] (q9) at (q8.east) {g};
+   }
+   \endscope
+
+   \node[dot,a] (a) at (0,0) {a};
+   \node[dot,b] (b) at (0,-2) {b};
+   \node[dot,c] (c) at (2,1) {c};
+   \node[dot,e] (e) at (2,-1) {e};
+   \node[dot,d] (d) at (2,-3) {d};
+   \node[dot,h] (h) at (4,1) {h};
+   \node[dot,g] (g) at (6,-2) {g};
+   \node[dot,i] (i) at (4,-3) {i};
+   \node[dot,j] (j) at (4,-1) {j};
+   \node[dot,f] (f) at (6,0) {f};
+   \draw (a) -- (e) node[above,sloped,k] {10};
    \draw (a) -- (h) node[above,sloped,k,pos=.75] {4};
    \draw (b) -- (e) node[above,sloped,k] {7.5};
    \draw (b) -- (d) node[below,k] {6};
@@ -88,6 +149,15 @@
    \draw (i) -- (j) node[right,k] {6};
 
    \endscope
+   \only<9->{
+      \node[above=8mm] (@title) at(current page.south) {\usebeamerfont{subtitle}Breitensuche};
+      \node[below=-2mm] at(@title.south) {\color{gray}\textbf{b}readth-\textbf{f}irst \textbf{s}earch};
+   }
 \end{onlyenv}
 \end{tikzpicture}
 \end{frame}
+% Optionen:
+%    - Alle Routen | Aber: Schleifen
+%    - alle Routen ohne schleifen | immer noch sehr viel
+%    - abbrechen sobald wir wissen, dass es keine kürzere geben kann
+}
