@@ -79,18 +79,8 @@
    {<-}{{{\!\(\leftarrow\)\!}}}2
 }
 
-\begin{document}
-
-% TODO: remove footer compleely
-% \section{Cryptography}
-\begin{frame}[c]{~}
-   \begin{tikzpicture}[@O]
-      \onslide<2->{\node (@) at(current page.center) {\usebeamerfont{title}204.715};}
-      % TODO: join fonts
-      \onslide<3->{\node[below] at(@.south) {\color{gray}\sbfamily19.973};}
-      \onslide<2->{\node[above right,T] at(current page.south west) {\href{https://web.archive.org/web/20230607125232/https://www.cvedetails.com/}{https://www.cvedetails.com/}};}
-   \end{tikzpicture}
-\end{frame}
+% license infos
+\usepackage{CJKutf8}
 
 \newsavebox\pinguA
 \newsavebox\pinguB
@@ -104,36 +94,6 @@
 \savebox\pinguE{\tikz{\pingu[body=btdl@color@primary,eyes angry, sunglasses, cloak=black!92!gray, cloak cap=!hide, devil horns=btdl@color@primary,tie=black!92!gray, eye patch right]}}
 
 
-\newsavebox\FinalCryptIntroSlide
-\begin{frame}[c]{}
-\hypertarget{@FinalCrypt}{}%
-\begin{lrbox}\FinalCryptIntroSlide
-\begin{tikzpicture}[every path/.append style={line cap=round}]
-   \coordinate (c) at (0,0);
-
-   \onslide<2->{\node[scale=.75] (a) at ([xshift=-4.5cm,yshift=1cm]c) {\usebox\pinguA};
-   \node[below] (ad) at(a.south) {Alice};}
-
-   \onslide<3->{
-      \node[scale=.75] (b) at ([xshift=4.5cm,yshift=1cm]c) {\usebox\pinguB};
-      \node (bd) at(b.south|-ad.east) {Bob};
-      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hallo} coordinate[pos=.5] (m);
-   }
-
-   \onslide<4->{
-      \node[scale=.75] (e) at ([yshift=-2cm]c) {\usebox\pinguE};
-      \node[below] at(e.south) {Eve};
-      \fill (m) circle[radius=2pt];
-      \draw (e.70) to[out=85,in=300] (m);
-   }
-\end{tikzpicture}%
-\end{lrbox}
-\begin{tikzpicture}[@O]
-   \node at (current page.center) {\usebox\FinalCryptIntroSlide};
-\end{tikzpicture}
-\global\setbox\FinalCryptIntroSlide=\hbox{\usebox\FinalCryptIntroSlide}%
-\end{frame}
-
 \newsavebox\pinguAGray
 \newsavebox\pinguBGray
 
@@ -142,482 +102,685 @@
 \savebox\pinguAGray{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat, eyes wink,heart,mask,:mix-all=\MixinOnGray]}}
 \savebox\pinguBGray{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=darkgray,:mix-all=\MixinOnGray]}}
 
-\colorlet{@highlight}{btdl@color@primary}
-\newcommand<>\HighlightOn{%
-   \only#1{\colorlet{black}{black!\MixinOnGray}\colorlet{gray}{gray!\MixinOnGray}\color{black}}%
-}
+\begin{document}
+
 \begin{frame}[c]{}
-\begin{tikzpicture}[
-   @O,
-   every path/.append style={line cap=round},
-   font=\sbfamily\large
-]
-   \def\ShiftUp{0cm}
-   \only<8->{\def\ShiftUp{2.25cm}}
-   \coordinate[yshift=\ShiftUp-1.25mm] (c) at (current page.center);
-   \node[scale=.75] (a) at ([xshift=-4.5cm]c) {\only<-5|handout:0>{\usebox\pinguA}\only<6->{\usebox\pinguAGray}};
-   \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
+\begin{tikzpicture}[@O,every path/.append style={line cap=round}]
+   \coordinate (c) at (current page.center);
 
-   \node[scale=.75] (b) at ([xshift=4.5cm]c) {\only<-5|handout:0>{\usebox\pinguB}\only<6->{\usebox\pinguBGray}};
-   \node[font=\sffamily] (bd) at(b.south|-ad.east) {\HighlightOn<6->Bob};
+   \onslide<2->{\node[scale=.75] (a) at ([xshift=-4.5cm]c) {\usebox\pinguA};
+   \node[below] (ad) at(a.south) {Alice};}
 
-   \onslide<2->{
-      {\HighlightOn<6->
-      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary] {} coordinate[pos=.5] (m);}
-
-      \node[above right,yshift=-1.5mm,xshift=-2.5cm] (encrypt) at(a.north east) {%
-         \HighlightOn<6->%
-         \only<2|handout:0>{\phantom{encrypt(}Hallo}%
-         \only<3->{encrypt(\textcolor{gray}{Hallo}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)}%
-      };
+   \onslide<3->{
+      \node[scale=.75] (b) at ([xshift=4.5cm]c) {\usebox\pinguB};
+      \node (bd) at(b.south|-ad.east) {Bob};
+      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hallo} coordinate[pos=.5] (m);
    }
-   \onslide<4->{
-      \node[above] at (m.north) {\HighlightOn<6->Ohssv};% \faLongArrowRight\space
-   }
+\end{tikzpicture}%
+\end{frame}
 
-   \onslide<5->{
-      \node[above left,yshift=-1.5mm,xshift=.5cm] (decrypt) at(b.north east|-a.north east) {%
-         \HighlightOn<6->%
-         decrypt(\textcolor{gray}{Ohssv}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)%
-      };
+\input{data/network.tex}
+
+\input{data/world.tex}
+\newsavebox\World
+\newsavebox\Germany
+\savebox\Germany{\input{data/germany.tex}}
+\newsavebox\Home
+\savebox\Home{\colorlet{black}{darkgray}\begin{tikzpicture}[shift={(-2cm,2cm)}, router size/.style={scale=.2}, tiny router size/.style={scale=.1},link/.style={},gray]
+   \draw[rounded corners=2pt] (-3.55,-.25) -| ++ (-2,1.5) -- ++(-.25,0) -- ++(1.25,.5) -- ++(1.25,-.5) -| (-3.55,-.25) -- cycle;
+
+   % ignore for old reasons :P
+   \node[tiny router size] (homenet1) at (-4,0) {\router{}};
+   \node[server,scale=.75] (homepc1) at ($(homenet1)+(0,.75)$) {};
+   % \node[server,scale=.75] (homepc2) at ($(homepc1)+(-.85,.125)$) {};
+
+   \node[rack switch,scale=.5] (homeroute1) at ($(homenet1)+(-.85,0)$) {};
+   \node[above=2mm,xshift=-1.5mm,scale=.3,xscale=-1] at (homeroute1.north) {\usebox\pinguA};
+   % "wifi":
+   % \node at([yshift=.3cm,xshift=-.075cm]homeroute1) {\faWifi};
+   % \node[below=.25cm] at ([xshift=-.5cm]homenet1) {home network};
+   % connect the home to the web :P
+   \draw[link] (homepc1) -- (homenet1) -- (homeroute1);
+\end{tikzpicture}}
+\begin{frame}
+\only<1|handout:0>{\savebox\World{\tikz{\WORLD}}}
+\only<2->{%
+   \savebox\World{%
+      \tikz{%
+         \WORLD[hl/.style={fill=lightgray},WORLD map/state/.style={fill=lightgray!20},WORLD map/Germany/.style={hl},WORLD map/UnitedStatesOfAmerica/.style={hl},WORLD map/China/.style={hl}]%
+         \onslide<3->{
+            \colorlet{@col}{black}
+            \only<4->{\colorlet{@col}{gray}}
+            \draw[-Kite,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend right=25] ([xshift=1cm,yshift=-4mm]UnitedStatesOfAmerica.center);
+            \draw[-Kite,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend left=25] (China.center);
+         }
+         \only<6|handout:0>{
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) coordinate (@t); % -- (Netherlands.center);
+         }
+         % traceroute -e -I www.google.com
+         % traceroute to www.google.com (142.250.181.228), 30 hops max, 60 byte packets
+         %  1  _gateway (192.168.0.1)  0.938 ms  1.009 ms  1.191 ms
+         %  2  ip-081-210-178-001.um21.pools.vodafone-ip.de (81.210.178.1)  15.015 ms  24.059 ms  25.599 ms
+         %  3  ip-081-210-178-000.um21.pools.vodafone-ip.de (81.210.178.0)  25.673 ms de-fra01b-rc2-ae-36-0.aorta.net (84.116.197.181) <MPLS:L=960499,E=0,S=1,T=1>  33.986 ms  33.977 ms
+         %  4  de-bfe18a-rt01-lag-1.aorta.net (84.116.190.34)  29.920 ms  31.491 ms  33.834 ms
+         %  5  74.125.48.122 (74.125.48.122)  39.709 ms  41.292 ms  41.357 ms
+         %  6  142.251.65.75 (142.251.65.75)  41.344 ms * *
+         %  7  142.250.237.177 (142.250.237.177)  34.864 ms * *
+         %  8  * * *
+         %  9  * * *
+         % 10  * * *
+         % 11  * * fra16s56-in-f4.1e100.net (142.250.181.228)  20.571 ms
+
+         \only<7|handout:0> {
+            % address:        Liberty Global B.V.
+            % address:        Boeing Avenue 53
+            % address:        1119PE Schiphol-Rijk
+            % address:        Netherlands
+            % https://www.whois.com/whois/84.116.190.34
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center)  coordinate (@t);
+         }
+         \only<8|handout:0> {
+            % Newbury
+            % address:        Vodafone House, The Connection
+            % address:        RG14 2FN
+            % address:        Newbury
+            % address:        UNITED KINGDOM
+            % https://www.whois.com/whois/195.2.26.93
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) coordinate (@t);
+         }
+         \only<9-> {
+            % Address:        1600 Amphitheatre Parkway
+            % City:           Mountain View
+            % StateProv:      CA
+            % PostalCode:     94043
+            % Country:        US
+            % https://www.whois.com/whois/142.251.65.75
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([yshift=-5mm,xshift=-.25mm]UnitedStatesOfAmerica.center) coordinate (@t);
+            \node[left=3.5mm] at(@t) {\url{www.google.com}};
+         }
+         % traceroute -e -I gaj.sh.gov.cn
+         % traceroute to gaj.sh.gov.cn (175.6.201.209), 30 hops max, 60 byte packets
+         %  1  _gateway (192.168.0.1)  1.388 ms  1.466 ms  2.973 ms
+         %  2  ip-081-210-178-001.um21.pools.vodafone-ip.de (81.210.178.1)  13.688 ms  21.656 ms  23.198 ms
+         %  3  ip-081-210-178-000.um21.pools.vodafone-ip.de (81.210.178.0)  23.186 ms de-fra01b-rc2-ae-36-0.aorta.net (84.116.197.181) <MPLS:L=960499,E=0,S=1,T=1>  31.326 ms  31.224 ms
+         %  4  de-bfe18a-rt01-lag-1.aorta.net (84.116.190.34)  31.149 ms  31.140 ms  31.194 ms
+         %  5  ae8-100-tcr1.fnt.cw.net (195.2.26.93)  27.553 ms  29.138 ms  30.963 ms
+         %  6  ae34-pcr1.fnt.cw.net (195.2.31.38) <MPLS:L=90982,E=0,S=1,T=1>  111.836 ms *  111.540 ms
+         %  7  ae36-xcr1.ltw.cw.net (195.2.2.73) <MPLS:L=66670,E=0,S=1,T=1>  39.553 ms * *
+         %  8  * * *
+         %  9  * * *
+         % 10  * * *
+         % 11  * * *
+         % 12  * * *
+         % 13  * 202.97.65.90 (202.97.65.90)  312.495 ms *
+         % 14  202.97.24.94 (202.97.24.94)  327.133 ms  328.850 ms  328.962 ms
+         % 15  61.137.11.50 (61.137.11.50)  321.145 ms  322.674 ms *
+         % 16  175.6.255.82 (175.6.255.82)  330.275 ms  326.986 ms  328.462 ms
+         % 17  * * *
+         % 18  * * *
+         % 19  * * *
+         % 20  * * *
+         % 21  175.6.201.209 (175.6.201.209)  329.045 ms  332.555 ms  338.253 ms
+         \only<10->{
+            % https://www.whois.com/whois/84.116.190.34 Netherlands
+            % https://www.whois.com/whois/195.2.26.93 UK (multiple)
+            % https://www.whois.com/whois/202.97.65.90 China Telecom Beijing/Peking
+            % https://www.whois.com/whois/61.137.11.50 Chinanet hunan Hunan
+            % ...
+            % https://www.whois.com/whois/175.6.201.209 Chinanet Bejing
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([xshift=8.5mm,yshift=3mm]China.center) coordinate (@c) -- ([xshift=4.5mm,yshift=-4mm]China.center);
+            \fill[circle] (@c) circle[radius=.75mm];
+            \node[right=3.5mm] at(@c) {\url{gaj.sh.gov.cn}};
+         }
+         \onslide<6->{%
+            \fill[circle] (@t) circle[radius=.75mm];
+         }
+      }%
+   }%
+}%
+\begin{tikzpicture}[@O]
+   \node[below left,gray,opacity=.33] at (current page.north east) {\scriptsize\sbfamily Vereinfacht};
+   \node at (current page.center) {\resizebox{.8\paperwidth}!{\usebox\World}};
+   \node[above left,T] at (current page.south east) {\fontsize{3.5pt}{3.5pt}\selectfont\href{https://tex.stackexchange.com/a/430463}{Weltkarte basiert auf Code von Hendrik Seliger}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
+
+   \only<4->{
+      \node[above right=3mm] (germany) at (current page.south west) {\scalebox{.6}{\usebox\Germany}};
+   \onslide<5->{\fill ([xshift=2.15cm*.6,yshift=1.3cm*.6]germany.south west) circle[radius=.75mm] coordinate (home-on-map);}
+   \node[above right,T] at(current page.south west) {\fontsize{3.5pt}{3.5pt}\selectfont
+\href{https://commons.wikimedia.org/wiki/File:German_state_government_compositions.svg}{Deutschland basiert auf \textit{german states} von \begin{CJK*}{UTF8}{gbsn}
+沁水湾
+\end{CJK*},}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
+   }
+   \only<5->{
+      \node[above=3mm,xscale=-1] (home) at (current page.south) {\usebox\Home};
+      % TODO: skipping verteiler
+      \draw[densely dashed] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south east);
+   }
+   \onslide<6->{
+      \fill ([xshift=1.8cm*.6,yshift=2.81cm*.6]germany.south west) circle[radius=.75mm] coordinate (frankfurt-on-map) node[right=1mm,align=left,scale=.5] {\textbf{Frankfurt}\\[-1mm]am Main};
+      \draw[rounded corners=1pt,densely dotted] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
+      \foreach \i in {1,2,3} {
+         \fill [gray] (c\i) circle[radius=.5mm];
+      }
    }
    \onslide<7->{
-      \node[yshift=-.66cm] at (m.south) {Symmetrisch};
+      \draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
    }
-
-   \begin{onlyenv}<9->
-   \coordinate[yshift=-\ShiftUp-1.25mm] (c2) at (current page.center);
-   \node[scale=.75] (a) at ([xshift=-4.5cm]c2) {\usebox\pinguAGray};
-   \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
-
-   \node[scale=.75] (b) at ([xshift=4.5cm]c2) {\usebox\pinguBGray};
-   \node[font=\sffamily] (bd) at(b.south|-ad.east) {\HighlightOn<6->Bob};
-
-      {\HighlightOn<6->
-      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary] {} coordinate[pos=.5] (m);}
-
-      \node[above right,yshift=-1.5mm,xshift=-2.5cm] (encrypt) at(a.north east) {%
-         \HighlightOn<6->encrypt(\textcolor{gray}{Hallo}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)%
-      };
-      \node[above] at (m.north) {\HighlightOn<6->Ohssv};% \faLongArrowRight\space
-
-      \node[above left,yshift=-1.5mm,xshift=.5cm] (decrypt) at(b.north east|-a.north east) {%
-         \HighlightOn<6->%
-         decrypt(\textcolor{gray}{Ohssv}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}4}\kern.5\wd0)%
-      };
-      \node[yshift=-.66cm] at (m.south) {Asymmetrisch};
-   \end{onlyenv}
 
 \end{tikzpicture}
 \end{frame}
+% und tatsächlich müssten wir eig erstmal wissen wo die server tatsächlich liegen.
+
+% % TODO: remove footer compleely
+% % \section{Cryptography}
+% \begin{frame}[c]{~}
+%    \begin{tikzpicture}[@O]
+%       \onslide<2->{\node (@) at(current page.center) {\usebeamerfont{title}204.715};}
+%       % TODO: join fonts
+%       \onslide<3->{\node[below] at(@.south) {\color{gray}\sbfamily19.973};}
+%       \onslide<2->{\node[above right,T] at(current page.south west) {\href{https://web.archive.org/web/20230607125232/https://www.cvedetails.com/}{https://www.cvedetails.com/}};}
+%    \end{tikzpicture}
+% \end{frame}
 
 
-% TODO: viele variationen und andere Optionen wie das RSA Verfahren
-% Mathematik interessiert uns erstmal gar nicht so
-\begin{frame}[c]{}
-% Alice wählt zwei zufällige unabhängige Primzahlen ungefähr der gleichen Größenordnung:
-\begin{tikzpicture}[@O]
-\begin{onlyenv}<2-5|handout:1>
-\node[text width=.9\paperwidth] at(current page.center) {%
-\begin{center}
-   \onslide<2->{\(\mathbf{p} = 7\) \qquad \(\mathbf{q} = 3\)}\vspace*{1.5em}
-\end{center}
-\begin{center}
-   \onslide<3->{\(\mathbf{N} = p \cdot q = 21\)}\\
-   \onslide<3->{{\normalsize\textcolor{gray}{RSA-Modul}}}
-\end{center}
-\begin{center}
-   \onslide<4->{\(\boldsymbol\Phi\mathbf{(N)} = (p - 1) \cdot (q - 1) = 12\)}\\
-   \onslide<4->{{\normalsize\textcolor{gray}{Eulersche \(\Phi\)-Funktion}}}\vspace*{1.5em}
-\end{center}
-\begin{center}
-   \onslide<5->{\(\mathbf{e} = 5\) \qquad \(\mathbf{d} = 17\)}\\
-   \onslide<5->{{\normalsize\textcolor{gray}{\textbf{e}ncrypt und \textbf{d}ecrypt}}}
-   % teilerfremd zu \(\varphi(N)\), und 1 < e < \(\varphi(N) - 1\)}\\
-\end{center}
-};
-\end{onlyenv}
+% \newsavebox\FinalCryptIntroSlide
+% \begin{frame}[c]{}
+% \hypertarget{@FinalCrypt}{}%
+% \begin{lrbox}\FinalCryptIntroSlide
+% \begin{tikzpicture}[every path/.append style={line cap=round}]
+%    \coordinate (c) at (0,0);
 
-\begin{onlyenv}<6-|handout:2>
-   \node[below left=5mm] at(current page.north east) {\(N = 21\), \(e = 5\), \(d = 17\)};
-\node[text width=.9\paperwidth] at(current page.center) {%
-\begin{center}
-   \onslide<7->{\(\mathbf{m} = 4\)}\\
-   \onslide<7->{{\normalsize\textcolor{gray}{Nachricht}}}\vspace*{1.5em}
-\end{center}
-\begin{center}
-   \onslide<8->{\(\mathbf{c} = m^e \bmod N = 4^5 \bmod 21 = 16\)}\\
-   \onslide<8->{{\normalsize\textcolor{gray}{Verschlüsselte Nachricht}}}\vspace*{1em}
-\end{center}
-\begin{center}
-   \onslide<9->{\(\mathbf{m} = c^d \bmod N = 16^{17} \bmod 21 = 4\)}\\
-   \onslide<9->{{\normalsize\textcolor{gray}{Entschlüsselte Nachricht}}}
-\end{center}
-};
-\end{onlyenv}
-% von e& N  auf D zu schließen ist *sehr schwer* das "Faktorisierungsproblem"
-\end{tikzpicture}
-% Berechnen des Moduls \(N = p \cdot q\) und Eulersche Phi-Funktion \(\varphi(N) = (p-1) \cdot (q-1)\)
-% whle zu phi(N) teilerfremde Zahl e mit 1 < e < phi(N)
-% berechne d mit e*d = 1 mod phi(N)
-% \begin{tikzpicture}[overlay,remember picture]
-%    \coordinate (c) at (current page.center);
-%    \node[scale=.66] (a) at ([xshift=-5cm]c) {\usebox\pinguA};
-%    \node[scale=.66] (b) at ([xshift=5cm]c) {\usebox\pinguB};
+%    \onslide<2->{\node[scale=.75] (a) at ([xshift=-4.5cm,yshift=1cm]c) {\usebox\pinguA};
+%    \node[below] (ad) at(a.south) {Alice};}
 
-%    \draw[line cap=round, thick]  ([yshift=3cm,xshift=8mm]a.east) -- ++(0,-6cm);
-%    \draw[line cap=round, thick]  ([yshift=3cm,xshift=-8mm]b.west) -- ++(0,-6cm);
+%    \onslide<3->{
+%       \node[scale=.75] (b) at ([xshift=4.5cm,yshift=1cm]c) {\usebox\pinguB};
+%       \node (bd) at(b.south|-ad.east) {Bob};
+%       \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hallo} coordinate[pos=.5] (m);
+%    }
 
-%    \node[below=5mm] at(current page.north) {\(p = 7\) \qquad \(g = 3\)};
+%    \onslide<4->{
+%       \node[scale=.75] (e) at ([yshift=-2cm]c) {\usebox\pinguE};
+%       \node[below] at(e.south) {Eve};
+%       \fill (m) circle[radius=2pt];
+%       \draw (e.70) to[out=85,in=300] (m);
+%    }
+% \end{tikzpicture}%
+% \end{lrbox}
+% \begin{tikzpicture}[@O]
+%    \node at (current page.center) {\usebox\FinalCryptIntroSlide};
 % \end{tikzpicture}
-\end{frame}
+% \global\setbox\FinalCryptIntroSlide=\hbox{\usebox\FinalCryptIntroSlide}%
+% \end{frame}
+
+% \colorlet{@highlight}{btdl@color@primary}
+% \newcommand<>\HighlightOn{%
+%    \only#1{\colorlet{black}{black!\MixinOnGray}\colorlet{gray}{gray!\MixinOnGray}\color{black}}%
+% }
+% \begin{frame}[c]{}
+% \begin{tikzpicture}[
+%    @O,
+%    every path/.append style={line cap=round},
+%    font=\sbfamily\large
+% ]
+%    \def\ShiftUp{0cm}
+%    \only<8->{\def\ShiftUp{2.25cm}}
+%    \coordinate[yshift=\ShiftUp-1.25mm] (c) at (current page.center);
+%    \node[scale=.75] (a) at ([xshift=-4.5cm]c) {\only<-5|handout:0>{\usebox\pinguA}\only<6->{\usebox\pinguAGray}};
+%    \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
+
+%    \node[scale=.75] (b) at ([xshift=4.5cm]c) {\only<-5|handout:0>{\usebox\pinguB}\only<6->{\usebox\pinguBGray}};
+%    \node[font=\sffamily] (bd) at(b.south|-ad.east) {\HighlightOn<6->Bob};
+
+%    \onslide<2->{
+%       {\HighlightOn<6->
+%       \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary] {} coordinate[pos=.5] (m);}
+
+%       \node[above right,yshift=-1.5mm,xshift=-2.5cm] (encrypt) at(a.north east) {%
+%          \HighlightOn<6->%
+%          \only<2|handout:0>{\phantom{encrypt(}Hallo}%
+%          \only<3->{encrypt(\textcolor{gray}{Hallo}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)}%
+%       };
+%    }
+%    \onslide<4->{
+%       \node[above] at (m.north) {\HighlightOn<6->Ohssv};% \faLongArrowRight\space
+%    }
+
+%    \onslide<5->{
+%       \node[above left,yshift=-1.5mm,xshift=.5cm] (decrypt) at(b.north east|-a.north east) {%
+%          \HighlightOn<6->%
+%          decrypt(\textcolor{gray}{Ohssv}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)%
+%       };
+%    }
+%    \onslide<7->{
+%       \node[yshift=-.66cm] at (m.south) {Symmetrisch};
+%    }
+
+%    \begin{onlyenv}<9->
+%    \coordinate[yshift=-\ShiftUp-1.25mm] (c2) at (current page.center);
+%    \node[scale=.75] (a) at ([xshift=-4.5cm]c2) {\usebox\pinguAGray};
+%    \node[below,font=\sffamily] (ad) at(a.south) {\HighlightOn<6->Alice};
+
+%    \node[scale=.75] (b) at ([xshift=4.5cm]c2) {\usebox\pinguBGray};
+%    \node[font=\sffamily] (bd) at(b.south|-ad.east) {\HighlightOn<6->Bob};
+
+%       {\HighlightOn<6->
+%       \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary] {} coordinate[pos=.5] (m);}
+
+%       \node[above right,yshift=-1.5mm,xshift=-2.5cm] (encrypt) at(a.north east) {%
+%          \HighlightOn<6->encrypt(\textcolor{gray}{Hallo}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}7}\kern.5\wd0)%
+%       };
+%       \node[above] at (m.north) {\HighlightOn<6->Ohssv};% \faLongArrowRight\space
+
+%       \node[above left,yshift=-1.5mm,xshift=.5cm] (decrypt) at(b.north east|-a.north east) {%
+%          \HighlightOn<6->%
+%          decrypt(\textcolor{gray}{Ohssv}, \setbox0=\hbox{\textcolor{gray!\MixinOnGray}{\faKey}}\kern.5\wd0\clap{\copy0}\clap{\only<6->{\color{@highlight}}4}\kern.5\wd0)%
+%       };
+%       \node[yshift=-.66cm] at (m.south) {Asymmetrisch};
+%    \end{onlyenv}
+
+% \end{tikzpicture}
+% \end{frame}
 
 
-\newsavebox\pinguShock
-\savebox\pinguShock{\tikz{\pingu[wings shock, eyes shock,heart=gray!30]}}
-\begin{frame}[c]{}
-\begin{tikzpicture}[@O]
-   \onslide<2->{\node at (current page.center) {\usebeamerfont{title}Faktorisierungsproblem};}
-   \onslide<3->{\node[above left=-1.25cm] at(current page.south east) {\rotatebox{30}{\usebox\pinguShock}};}
-\end{tikzpicture}
-\end{frame}
+% % TODO: viele variationen und andere Optionen wie das RSA Verfahren
+% % Mathematik interessiert uns erstmal gar nicht so
+% \begin{frame}[c]{}
+% % Alice wählt zwei zufällige unabhängige Primzahlen ungefähr der gleichen Größenordnung:
+% \begin{tikzpicture}[@O]
+% \begin{onlyenv}<2-5|handout:1>
+% \node[text width=.9\paperwidth] at(current page.center) {%
+% \begin{center}
+%    \onslide<2->{\(\mathbf{p} = 7\) \qquad \(\mathbf{q} = 3\)}\vspace*{1.5em}
+% \end{center}
+% \begin{center}
+%    \onslide<3->{\(\mathbf{N} = p \cdot q = 21\)}\\
+%    \onslide<3->{{\normalsize\textcolor{gray}{RSA-Modul}}}
+% \end{center}
+% \begin{center}
+%    \onslide<4->{\(\boldsymbol\Phi\mathbf{(N)} = (p - 1) \cdot (q - 1) = 12\)}\\
+%    \onslide<4->{{\normalsize\textcolor{gray}{Eulersche \(\Phi\)-Funktion}}}\vspace*{1.5em}
+% \end{center}
+% \begin{center}
+%    \onslide<5->{\(\mathbf{e} = 5\) \qquad \(\mathbf{d} = 17\)}\\
+%    \onslide<5->{{\normalsize\textcolor{gray}{\textbf{e}ncrypt und \textbf{d}ecrypt}}}
+%    % teilerfremd zu \(\varphi(N)\), und 1 < e < \(\varphi(N) - 1\)}\\
+% \end{center}
+% };
+% \end{onlyenv}
 
-% Überleitung Quantum Computing
-\def\q#1{\ensuremath{\raisebox{1.5pt}{$\boldsymbol|$}\text{\sbfamily#1}\raisebox{1.5pt}{$\boldsymbol\rangle$}}}
-\begin{frame}[c]{}
-   \begin{tikzpicture}[@O]
-      \def\MoveUp{0cm}
-      \only<3->{\def\MoveUp{.25\paperheight}}
-      \onslide<2->{\node at ([yshift=\MoveUp]current page.center) {\usebeamerfont{title}0\quad\textcolor{lightgray!80}{/}\quad 1};}
+% \begin{onlyenv}<6-|handout:2>
+%    \node[below left=5mm] at(current page.north east) {\(N = 21\), \(e = 5\), \(d = 17\)};
+% \node[text width=.9\paperwidth] at(current page.center) {%
+% \begin{center}
+%    \onslide<7->{\(\mathbf{m} = 4\)}\\
+%    \onslide<7->{{\normalsize\textcolor{gray}{Nachricht}}}\vspace*{1.5em}
+% \end{center}
+% \begin{center}
+%    \onslide<8->{\(\mathbf{c} = m^e \bmod N = 4^5 \bmod 21 = 16\)}\\
+%    \onslide<8->{{\normalsize\textcolor{gray}{Verschlüsselte Nachricht}}}\vspace*{1em}
+% \end{center}
+% \begin{center}
+%    \onslide<9->{\(\mathbf{m} = c^d \bmod N = 16^{17} \bmod 21 = 4\)}\\
+%    \onslide<9->{{\normalsize\textcolor{gray}{Entschlüsselte Nachricht}}}
+% \end{center}
+% };
+% \end{onlyenv}
+% % von e& N  auf D zu schließen ist *sehr schwer* das "Faktorisierungsproblem"
+% \end{tikzpicture}
+% % Berechnen des Moduls \(N = p \cdot q\) und Eulersche Phi-Funktion \(\varphi(N) = (p-1) \cdot (q-1)\)
+% % whle zu phi(N) teilerfremde Zahl e mit 1 < e < phi(N)
+% % berechne d mit e*d = 1 mod phi(N)
+% % \begin{tikzpicture}[overlay,remember picture]
+% %    \coordinate (c) at (current page.center);
+% %    \node[scale=.66] (a) at ([xshift=-5cm]c) {\usebox\pinguA};
+% %    \node[scale=.66] (b) at ([xshift=5cm]c) {\usebox\pinguB};
 
-      \onslide<3->{
-         \node[below right=2mm] at(current page.north west) {\sbfamily Bit};
-         \draw[lightgray] (current page.east)--(current page.west);
-      }
+% %    \draw[line cap=round, thick]  ([yshift=3cm,xshift=8mm]a.east) -- ++(0,-6cm);
+% %    \draw[line cap=round, thick]  ([yshift=3cm,xshift=-8mm]b.west) -- ++(0,-6cm);
 
-      % \raisebox{-3pt}{\clap{\(c_0 \cdot \q0 + c_1 \cdot \q1\)}}
-      \onslide<4->{
-         \node[below right=2mm] at(current page.west) {\sbfamily Qubit};
-         \node at ([yshift=-\MoveUp]current page.center) {\usebeamerfont{title}\q0\quad\textcolor{lightgray!80}{/}\only<5->{\quad\q{{\(\underset{\clap{\color{gray}\footnotesize Superposition}}{\Psi}\)}}\quad\textcolor{lightgray!80}{/}}\quad \q1};
-      }
-   \end{tikzpicture}
-\end{frame}
-
-% bisher sind Qubits aber noch nicht besser, weil wir bei der Messung immer nur einen der beiden Zustände (0/1) erhalten
-
-\begin{frame}[c]{}
-\begin{tikzpicture}[@O]
-   \onslide<2->{
-      \node[align=center,text width=.9\paperwidth] at(current page.center) {%
-\begin{align*}
-   \q{$\Psi$} &= a \cdot \q0 + b \cdot \q1\\[5mm]
-   \onslide<3->{\q{$\Psi$}} &\onslide<3->{\only<-3|handout:0>{= a \cdot \q{00} + b \cdot \q{11}}\only<4-|handout:1>{= a \cdot \q{10} + b \cdot \q{01}}}
-\end{align*}
-      };
-   }
-   \onslide<5->{
-      \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}Verschränkung};
-      \node[below=-2mm] at(x.south) {\color{gray}entanglement};
-   }
-\end{tikzpicture}
-\end{frame}
-% https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm
-
-% https://quantum-computing.ibm.com/composer/docs/iqx/first-circuit
-
-\def\Meter#1{\scope[black,line cap=round,line width=.35mm]
-\fill (#1.south) circle[radius=.5mm];
-\draw ([xshift=3mm]#1.south) arc(0:180:3mm);
-\draw (#1.south) -- ++(55:4mm);
-\endscope}
-\begin{frame}{}
-% we could use quantikz but for one circuit that should be potentially animated, i am just recreating a circuit based on the ibm style
-% \newsavebox\tryItOutBox
-% \setbox\tryItOutBox=\hbox{\fancyqr{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBCMA2qAEBlALhHcANCAI4QDOUCIA8gAoCiAcgIoCCWAshgEwB0ABgDcAHTABLMAGNUAVwAmMDCNJpxAIwCMfSVJWiwYkgCcYAcwwkA2jwC6BqaYtSrAFntiAFpasCP0gA8fP0IfTX9YCllTYNsMAFoAPgwXPwNI8mila3CE5JdwoRBiRXJHcQAHHHEAezBqEABfIA}}
-\colorlet{@col}{gray!15}%
-\Large\sbfamily
-\setbox0=\hbox{\begin{tikzpicture}[@col,text=black,k/.style={fill,rectangle,minimum size=8mm,rounded corners=2pt}]
-   \node (a) at (0,0)  {\small\llap{$q_0$}};
-   \node (b) at (0,-1) {\small\llap{$q_1$}};
-   \node (c) at (0,-2) {\small\llap{$c$}};
-   \draw[lightgray] ([yshift=.25mm]a.east) coordinate (as) -- ++(.35\paperwidth,0);
-   \draw[lightgray] ([yshift=.25mm]b.east) coordinate (bs) -- ++(.35\paperwidth,0);
-   \draw[lightgray,double,double distance=.66mm] ([yshift=.25mm]c.east) coordinate (cs) -- ++(.35\paperwidth,0);
-   \node[k] at([xshift=5mm]as) {H};
-   \node[fill,circle,minimum size=8mm,outer sep=-2mm] (p) at([xshift=2cm]bs) {};
-   \draw[black,line cap=round,line width=.65mm] (p.north) -- (p.south);
-   \draw[black,line cap=round,line width=.65mm] (p.east) -- (p.west);
-   \coordinate (pt) at([xshift=2cm]as);
-   \draw[line width=1.25mm] ([yshift=2mm]p.north) -- (pt) coordinate (cnot-t);
-   \fill (cnot-t) circle[radius=2mm];
-
-   \node[k,outer sep=-2mm] (s1) at([xshift=32.5mm]as) {};
-   \node[k,outer sep=-2mm] (s2) at([xshift=45mm]bs) {};
-   \Meter{s1}
-   \Meter{s2}
-   \coordinate (c1) at([xshift=32.5mm]cs);
-   \coordinate (c2) at([xshift=45mm]cs);
-   \draw[-Kite,black] ([yshift=-2mm]s1.south) -- (c1);
-   \draw[-Kite,black] ([yshift=-2mm]s2.south) -- (c2);
-\end{tikzpicture}}%
-\begin{tikzpicture}[@O]
-   \onslide<2->{\node (b) at (current page.center) {\usebox0};}
-   \onslide<3->{
-      \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}\href{https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm}{Shor-Algorithmus}};
-      \path (b) -- (x) node[pos=.5,gray!15] (c) at(b.south) {\Large\faCaretDown};
-   }
-   \onslide<2->{
-      \node[above right,T,scale=.7] at (current page.south west) {\mdseries\href{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBCMA2qAEBlALhHcANCAI4QDOUCIA8gAoCiAcgIoCCWAshgEwB0ABgDcAHTABLMAGNUAVwAmMDCNJpxAIwCMfSVJWiwYkgCcYAcwwkA2jwC6BqaYtSrAFntiAFpasCP0gA8fP0IfTX9YCllTYNsMAFoAPgwXPwNI8mila3CE5JdwoRBiRXJHcQAHHHEAezBqEABfIA}{\underline{\faLink\space Probiere es selbst!}}};
-   }
-\end{tikzpicture}
-\end{frame}
+% %    \node[below=5mm] at(current page.north) {\(p = 7\) \qquad \(g = 3\)};
+% % \end{tikzpicture}
+% \end{frame}
 
 
-\newsavebox\FinalPolarisationSlide
-{%
-\def\Sin#1{0.5*sin(deg(pi*#1))}
-\def\Cos#1{0.5*cos(deg(pi*#1))}
-\def\XShift{0}
-\def\DrawUp#1#2{(\XShift,#1,#2)}
-\def\DrawLeft#1#2{(\XShift+#1,0,#2)}
-% \def\DrawT#1#2{(\XShift,#2,#1)}
-\def\HelpLinesIf#1{
-   \foreach \i in {-.5,-.4,...,5} {
-      \pgfmathsetmacro\target{\Sin{\i}}
-      \ifdim\target pt#10pt
-         \draw[help] (\XShift,0,\i) -- \DrawT{\target}{\i};
-      \fi
-   }
-}
-\def\GridBack{
-   \scope[canvas is xz plane at y=0]
-      \draw[help,opacity=.65,step=.5] (-.5+\XShift-.001,-.75) grid (\XShift,5.25);
-   \endscope
-}
-\def\GridFront{
-   \scope[canvas is xz plane at y=0]
-      \draw[help,opacity=.65,step=.5] (0.001+\XShift,-.75) grid (.5+\XShift,5.25);
-   \endscope
-}
-\def\Pre#1{
-   \def\XShift{#1}
-   \HelpLinesIf<
-   \GridBack
-   \HelpLinesIf>
-}
-\newsavebox\Waves
-\begin{frame}[c]
-\hypertarget{@Polarisation}{}%
-\begin{lrbox}\Waves
-   \begin{tikzpicture}[z={(10:10mm)},x={(-65:6.5mm)},y=6.5mm,help/.style={gray!30,line cap=round},Arr/.style={{Kite[scale=.6]}-{Kite[scale=.6]}}]
-      \onslide<2->{\draw[help] (-.5,0,6) -- ++(1,0,0);
-      \draw[line cap=round,thick,Arr] (0,-.5,6)  -- ++(0,1,0);
-      \let\DrawT\DrawUp
-      \Pre0
-      \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot (0,{\Sin\x},\x);
-      \GridFront}
+% \newsavebox\pinguShock
+% \savebox\pinguShock{\tikz{\pingu[wings shock, eyes shock,heart=gray!30]}}
+% \begin{frame}[c]{}
+% \begin{tikzpicture}[@O]
+%    \onslide<2->{\node at (current page.center) {\usebeamerfont{title}Faktorisierungsproblem};}
+%    \onslide<3->{\node[above left=-1.25cm] at(current page.south east) {\rotatebox{30}{\usebox\pinguShock}};}
+% \end{tikzpicture}
+% \end{frame}
 
-      \onslide<3->{\draw[help] (3,-.5,6)  -- ++(0,1,0);
-      \draw[line cap=round,thick,Arr] (2.5,0,6)  -- ++(1,0,0);
-      \let\DrawT\DrawLeft
-      \Pre3
-      \GridFront
-      \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot ({\Sin\x+3},0,\x);}
+% % Überleitung Quantum Computing
+% \def\q#1{\ensuremath{\raisebox{1.5pt}{$\boldsymbol|$}\text{\sbfamily#1}\raisebox{1.5pt}{$\boldsymbol\rangle$}}}
+% \begin{frame}[c]{}
+%    \begin{tikzpicture}[@O]
+%       \def\MoveUp{0cm}
+%       \only<3->{\def\MoveUp{.25\paperheight}}
+%       \onslide<2->{\node at ([yshift=\MoveUp]current page.center) {\usebeamerfont{title}0\quad\textcolor{lightgray!80}{/}\quad 1};}
 
-      % \draw[line cap=round,thick,Arr] (-.5,0,6)  -- ++(1,0,0);
-      \onslide<4->{\scope[canvas is xy plane at z=6]
-         \draw[help] (-.5+6,0) -- ++(1,0);
-         \draw[help] (6,-.5) -- ++(0,1);
-         \draw[thick,{Kite[scale=.6]}-] (6.5,0) arc(0:360:.5);
-      \endscope
-      \let\DrawT\DrawUp
-      \def\XShift{6}
-      \GridBack
-      \foreach \i in {-.5,-.4,...,5} {
-         \draw[help] (\XShift,0,\i) -- ({\Sin\i+6},{\Cos\i},\i);
-      }
-      \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot ({\Sin\x+6},{\Cos\x},\x);
-      \GridFront}
-   \end{tikzpicture}%
-\end{lrbox}
-\begin{tikzpicture}[@O]
-   \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}Polarisation};
-   \node[scale=.9] at ([yshift=5mm]current page.center) {\usebox\Waves};
-\end{tikzpicture}
-\global\setbox\FinalPolarisationSlide=\hbox{\scalebox{.9}{\box\Waves}}
-\end{frame}
-}
+%       \onslide<3->{
+%          \node[below right=2mm] at(current page.north west) {\sbfamily Bit};
+%          \draw[lightgray] (current page.east)--(current page.west);
+%       }
 
+%       % \raisebox{-3pt}{\clap{\(c_0 \cdot \q0 + c_1 \cdot \q1\)}}
+%       \onslide<4->{
+%          \node[below right=2mm] at(current page.west) {\sbfamily Qubit};
+%          \node at ([yshift=-\MoveUp]current page.center) {\usebeamerfont{title}\q0\quad\textcolor{lightgray!80}{/}\only<5->{\quad\q{{\(\underset{\clap{\color{gray}\footnotesize Superposition}}{\Psi}\)}}\quad\textcolor{lightgray!80}{/}}\quad \q1};
+%       }
+%    \end{tikzpicture}
+% \end{frame}
 
-% one time pads etc? es gibt suuuper viele Verfahren
-% Binär <-> Polarisationen
-% hier mit licht, da ist es recht anschaulich, geht aber mit diversen Qubits wie electron spin, ...
-{
-\newsavebox\CodeA \newsavebox\CodeB \newsavebox\CodeC \newsavebox\CodeD
-\tikzset{Y/.style={very thick,Kite-Kite},N/.style={gray}}
-\savebox\CodeA{\tikz{
-   \draw[Y] (0,0) -- ++(2,0);
-   \draw[N] (1,-1) -- ++(0,2);
-}}
-\savebox\CodeB{\tikz{
-   \draw[N] (0,0) -- ++(2,0);
-   \draw[Y] (1,-1) -- ++(0,2);
-}}
-\savebox\CodeC{\tikz{
-   \draw[N] (0,0)++(45:1cm) -- ++(45:-2cm);
-   \draw[Y] (0,0)++(-45:1cm) -- ++(-45:-2cm);
-}}
-\savebox\CodeD{\tikz{
-   \draw[Y] (0,0)++(45:1cm) -- ++(45:-2cm);
-   \draw[N] (0,0)++(-45:1cm) -- ++(-45:-2cm);
-}}
+% % bisher sind Qubits aber noch nicht besser, weil wir bei der Messung immer nur einen der beiden Zustände (0/1) erhalten
 
-\begin{frame}[c]{}
-\begin{tikzpicture}[@O]
-   \coordinate(@c) at (current page.center);
-   \def\Shift{0cm}
-   \only<4->{\def\Shift{(.25\paperwidth)}}
-   \onslide<2->{
-      \node (a) at ([xshift=-\Shift-.1\paperwidth]current page.center) {\usebox\CodeA};
-      \node (b) at ([xshift=-\Shift+.1\paperwidth]current page.center) {\usebox\CodeB};
-   }
-   \onslide<3->{
-      \node[below=2mm] at (a.south) {\usebeamerfont{subtitle}0};
-      \node[below=2mm] at (b.south) {\usebeamerfont{subtitle}1};
-   }
+% \begin{frame}[c]{}
+% \begin{tikzpicture}[@O]
+%    \onslide<2->{
+%       \node[align=center,text width=.9\paperwidth] at(current page.center) {%
+% \begin{align*}
+%    \q{$\Psi$} &= a \cdot \q0 + b \cdot \q1\\[5mm]
+%    \onslide<3->{\q{$\Psi$}} &\onslide<3->{\only<-3|handout:0>{= a \cdot \q{00} + b \cdot \q{11}}\only<4-|handout:1>{= a \cdot \q{10} + b \cdot \q{01}}}
+% \end{align*}
+%       };
+%    }
+%    \onslide<5->{
+%       \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}Verschränkung};
+%       \node[below=-2mm] at(x.south) {\color{gray}entanglement};
+%    }
+% \end{tikzpicture}
+% \end{frame}
+% % https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm
 
-   \onslide<5->{
-      \node (c) at ([xshift=\Shift-.1\paperwidth]current page.center) {\usebox\CodeC};
-      \node (d) at ([xshift=\Shift+.1\paperwidth]current page.center) {\usebox\CodeD};
-      \node[below=2mm] at (c.south) {\usebeamerfont{subtitle}0};
-      \node[below=2mm] at (d.south) {\usebeamerfont{subtitle}1};
-   }
-\end{tikzpicture}
-\end{frame}
+% % https://quantum-computing.ibm.com/composer/docs/iqx/first-circuit
+
+% \def\Meter#1{\scope[black,line cap=round,line width=.35mm]
+% \fill (#1.south) circle[radius=.5mm];
+% \draw ([xshift=3mm]#1.south) arc(0:180:3mm);
+% \draw (#1.south) -- ++(55:4mm);
+% \endscope}
+% \begin{frame}{}
+% % we could use quantikz but for one circuit that should be potentially animated, i am just recreating a circuit based on the ibm style
+% % \newsavebox\tryItOutBox
+% % \setbox\tryItOutBox=\hbox{\fancyqr{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBCMA2qAEBlALhHcANCAI4QDOUCIA8gAoCiAcgIoCCWAshgEwB0ABgDcAHTABLMAGNUAVwAmMDCNJpxAIwCMfSVJWiwYkgCcYAcwwkA2jwC6BqaYtSrAFntiAFpasCP0gA8fP0IfTX9YCllTYNsMAFoAPgwXPwNI8mila3CE5JdwoRBiRXJHcQAHHHEAezBqEABfIA}}
+% \colorlet{@col}{gray!15}%
+% \Large\sbfamily
+% \setbox0=\hbox{\begin{tikzpicture}[@col,text=black,k/.style={fill,rectangle,minimum size=8mm,rounded corners=2pt}]
+%    \node (a) at (0,0)  {\small\llap{$q_0$}};
+%    \node (b) at (0,-1) {\small\llap{$q_1$}};
+%    \node (c) at (0,-2) {\small\llap{$c$}};
+%    \draw[lightgray] ([yshift=.25mm]a.east) coordinate (as) -- ++(.35\paperwidth,0);
+%    \draw[lightgray] ([yshift=.25mm]b.east) coordinate (bs) -- ++(.35\paperwidth,0);
+%    \draw[lightgray,double,double distance=.66mm] ([yshift=.25mm]c.east) coordinate (cs) -- ++(.35\paperwidth,0);
+%    \node[k] at([xshift=5mm]as) {H};
+%    \node[fill,circle,minimum size=8mm,outer sep=-2mm] (p) at([xshift=2cm]bs) {};
+%    \draw[black,line cap=round,line width=.65mm] (p.north) -- (p.south);
+%    \draw[black,line cap=round,line width=.65mm] (p.east) -- (p.west);
+%    \coordinate (pt) at([xshift=2cm]as);
+%    \draw[line width=1.25mm] ([yshift=2mm]p.north) -- (pt) coordinate (cnot-t);
+%    \fill (cnot-t) circle[radius=2mm];
+
+%    \node[k,outer sep=-2mm] (s1) at([xshift=32.5mm]as) {};
+%    \node[k,outer sep=-2mm] (s2) at([xshift=45mm]bs) {};
+%    \Meter{s1}
+%    \Meter{s2}
+%    \coordinate (c1) at([xshift=32.5mm]cs);
+%    \coordinate (c2) at([xshift=45mm]cs);
+%    \draw[-Kite,black] ([yshift=-2mm]s1.south) -- (c1);
+%    \draw[-Kite,black] ([yshift=-2mm]s2.south) -- (c2);
+% \end{tikzpicture}}%
+% \begin{tikzpicture}[@O]
+%    \onslide<2->{\node (b) at (current page.center) {\usebox0};}
+%    \onslide<3->{
+%       \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}\href{https://quantum-computing.ibm.com/composer/docs/iqx/guide/shors-algorithm}{Shor-Algorithmus}};
+%       \path (b) -- (x) node[pos=.5,gray!15] (c) at(b.south) {\Large\faCaretDown};
+%    }
+%    \onslide<2->{
+%       \node[above right,T,scale=.7] at (current page.south west) {\mdseries\href{https://quantum-computing.ibm.com/composer/files/new?initial=N4IgdghgtgpiBcIBCMA2qAEBlALhHcANCAI4QDOUCIA8gAoCiAcgIoCCWAshgEwB0ABgDcAHTABLMAGNUAVwAmMDCNJpxAIwCMfSVJWiwYkgCcYAcwwkA2jwC6BqaYtSrAFntiAFpasCP0gA8fP0IfTX9YCllTYNsMAFoAPgwXPwNI8mila3CE5JdwoRBiRXJHcQAHHHEAezBqEABfIA}{\underline{\faLink\space Probiere es selbst!}}};
+%    }
+% \end{tikzpicture}
+% \end{frame}
 
 
-% TODO: zwei Kanäle nötig: Quanten und herkömmlich
-% => üblich für Quanten dass wir sie mit "normalem" kombinieren
-\newsavebox\CodeSmall
-\setbox\CodeSmall=\hbox{%
-   \def\arraystretch{1.5}%
-   \begin{tabular}{*4{>{\sbfamily\LARGE}m{\wd\CodeA}<{\centering\arraybackslash}}}
-      \usebox\CodeA & \usebox\CodeB & \usebox\CodeC & \usebox\CodeD\\
-      \strut0 & 1 & 0 & 1
-   \end{tabular}%
-}
+% \newsavebox\FinalPolarisationSlide
+% {%
+% \def\Sin#1{0.5*sin(deg(pi*#1))}
+% \def\Cos#1{0.5*cos(deg(pi*#1))}
+% \def\XShift{0}
+% \def\DrawUp#1#2{(\XShift,#1,#2)}
+% \def\DrawLeft#1#2{(\XShift+#1,0,#2)}
+% % \def\DrawT#1#2{(\XShift,#2,#1)}
+% \def\HelpLinesIf#1{
+%    \foreach \i in {-.5,-.4,...,5} {
+%       \pgfmathsetmacro\target{\Sin{\i}}
+%       \ifdim\target pt#10pt
+%          \draw[help] (\XShift,0,\i) -- \DrawT{\target}{\i};
+%       \fi
+%    }
+% }
+% \def\GridBack{
+%    \scope[canvas is xz plane at y=0]
+%       \draw[help,opacity=.65,step=.5] (-.5+\XShift-.001,-.75) grid (\XShift,5.25);
+%    \endscope
+% }
+% \def\GridFront{
+%    \scope[canvas is xz plane at y=0]
+%       \draw[help,opacity=.65,step=.5] (0.001+\XShift,-.75) grid (.5+\XShift,5.25);
+%    \endscope
+% }
+% \def\Pre#1{
+%    \def\XShift{#1}
+%    \HelpLinesIf<
+%    \GridBack
+%    \HelpLinesIf>
+% }
+% \newsavebox\Waves
+% \begin{frame}[c]
+% \hypertarget{@Polarisation}{}%
+% \begin{lrbox}\Waves
+%    \begin{tikzpicture}[z={(10:10mm)},x={(-65:6.5mm)},y=6.5mm,help/.style={gray!30,line cap=round},Arr/.style={{Kite[scale=.6]}-{Kite[scale=.6]}}]
+%       \onslide<2->{\draw[help] (-.5,0,6) -- ++(1,0,0);
+%       \draw[line cap=round,thick,Arr] (0,-.5,6)  -- ++(0,1,0);
+%       \let\DrawT\DrawUp
+%       \Pre0
+%       \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot (0,{\Sin\x},\x);
+%       \GridFront}
 
-\newsavebox\CodeSmallOne
-\def\Opa#1{\tikz[opacity=.35]{\node[inner sep=0pt,outer sep=0pt] {#1};}}
-\setbox\CodeSmallOne=\hbox{%
-   \def\arraystretch{1.5}%
-   \begin{tabular}{*4{>{\sbfamily\LARGE}m{\wd\CodeA}<{\centering\arraybackslash}}}
-      \Opa{\usebox\CodeA} & \usebox\CodeB & \Opa{\usebox\CodeC} & \usebox\CodeD\\
-      \strut\color{lightgray}0 & 1 & \color{lightgray}0 & 1
-   \end{tabular}%
-}
-\newsavebox\Random
-\savebox\Random{\dice{3}\;\clap{\raisebox{3pt}{\rotatebox{-20}{\dice{6}}}}~~}
+%       \onslide<3->{\draw[help] (3,-.5,6)  -- ++(0,1,0);
+%       \draw[line cap=round,thick,Arr] (2.5,0,6)  -- ++(1,0,0);
+%       \let\DrawT\DrawLeft
+%       \Pre3
+%       \GridFront
+%       \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot ({\Sin\x+3},0,\x);}
 
-\newsavebox\SieveA \newsavebox\SieveB
-\savebox\SieveA{\begin{tikzpicture}
-   \fill[gray,rounded corners=4pt] (0,0) rectangle (1,1);
-   \draw[line cap=round,line width=3pt,btdl@color@background] (.5,.2) -- ++(0,.6);
-   \draw[line cap=round,line width=3pt,btdl@color@background] (.2,.5) -- ++(.6,0);
-\end{tikzpicture}}
-
-\savebox\SieveB{\begin{tikzpicture}
-   \fill[gray,rounded corners=4pt] (0,0) rectangle (1,1);
-   \draw[line cap=round,line width=3pt,btdl@color@background] (.5,.5)++(45:.3) -- ++(45:-.6);
-   \draw[line cap=round,line width=3pt,btdl@color@background] (.5,.5)++(-45:.3) -- ++(-45:-.6);
-\end{tikzpicture}}
-
-\newsavebox\SuperSlide
-% ohne eavesdrop: veröffentlihcen am ende ihre wahlen und vergleichen => nehmen nur die wo sie gleich gewählt haben.
-
-\newsavebox\FinalSuperSlide
-
-\begin{frame}{}
-\hypertarget{@SuperSlide}{}%
-\tikzset{@s/.style={}}%
-\only<6|handout:0>{\tikzset{@s/.style={transparency group, opacity=.3}}}%
-\begin{lrbox}\SuperSlide
-\begin{tikzpicture}
-   \coordinate (c) at (0,0);
-   \onslide<2->{
-      \node[scale=.75] (a) at ([xshift=-4.5cm]c) {\only<-5,7-|handout:1->{\usebox\pinguA}\only<6|handout:0>{\usebox\pinguAGray}};
-      \node[below] (ad) at(a.south) {\only<6|handout:0>{\color{lightgray}}Alice};
-
-      \node[scale=.75] (b) at ([xshift=4.5cm]c) {\only<2,6-|handout:1->{\usebox\pinguB}\only<3-5|handout:0>{\usebox\pinguBGray}};
-      \node (bd) at(b.south|-ad.east) {\only<3-5|handout:0>{\color{lightgray}}Bob};
-   }
-   \scope[@s]
-   \onslide<4->{
-      \node[cloud,cloud ignores aspect, draw,above right=5mm,xshift=-5mm] (dice) at (a.north) {\usebox\Random};
-      \node[above right,scale=.66] (a-sends) at (a.east) {\usebox\CodeB};
-      \node[below,scale=.66] (ab-sends) at (a.east-|a-sends.south) {\usebox\CodeD};
-   }
-   \endscope
-   \onslide<5->{
-      \scope[shift={([xshift=1.66cm]a.east)}]
-         \draw[thick,domain=0:3.5,samples=100,smooth] plot (\x,{0.5*sin(deg(2*pi*\x))});
-      \endscope
-   }
-   \begin{onlyenv}<6->
-      \node[above left] at (b.west) {\usebox\SieveA};
-      \tikzset{@ss/.style={}}
-      \node[below left] at (b.west) {\usebox\SieveB};
-      \node[cloud,cloud ignores aspect, draw] (dice2) at ([xshift=-3.5mm]b.north|-dice.east) {\usebox\Random};
-   \end{onlyenv}
-   \begin{uncoverenv}<7->
-      \draw[-Kite] ([yshift=-3mm]ad.south) to[edge node={node[above] {\(+~\times~+~+~\times~\)~\ldots}}] ([yshift=-3mm]bd.south|-ad.south);
-      \draw[Kite-] ([yshift=-5mm]ad.south) to[edge node={node[below] {\(+~+~\times~+~\times~\)~\ldots}}] ([yshift=-5mm]bd.south|-ad.south);
-   \end{uncoverenv}
-\end{tikzpicture}
-\end{lrbox}
-\begin{tikzpicture}[@O]
-   \node[yshift=-7.5mm] at (current page.center) {\usebox\SuperSlide};
-
-   \node[below left=3.5mm,scale=.4,@s] at(current page.north east) {\only<-4,6-|handout:0>{\usebox\CodeSmall}\only<5|handout:1>{\usebox\CodeSmallOne}};
-\end{tikzpicture}
-% TODO: darüber sprechen, wi eman abhören erkennen kann (verändert polarisation, ... )
-% Zudem viele andere möglichkeiten | verwerfen am ende mismathces
-\global\setbox\FinalSuperSlide=\box\SuperSlide
-\end{frame}
-}
-% https://www.qi.damtp.cam.ac.uk/files/PartIIQIC/QIC-6.pdf
+%       % \draw[line cap=round,thick,Arr] (-.5,0,6)  -- ++(1,0,0);
+%       \onslide<4->{\scope[canvas is xy plane at z=6]
+%          \draw[help] (-.5+6,0) -- ++(1,0);
+%          \draw[help] (6,-.5) -- ++(0,1);
+%          \draw[thick,{Kite[scale=.6]}-] (6.5,0) arc(0:360:.5);
+%       \endscope
+%       \let\DrawT\DrawUp
+%       \def\XShift{6}
+%       \GridBack
+%       \foreach \i in {-.5,-.4,...,5} {
+%          \draw[help] (\XShift,0,\i) -- ({\Sin\i+6},{\Cos\i},\i);
+%       }
+%       \draw[line cap=round,ultra thick, domain=-.5:5, samples=100, smooth] plot ({\Sin\x+6},{\Cos\x},\x);
+%       \GridFront}
+%    \end{tikzpicture}%
+% \end{lrbox}
+% \begin{tikzpicture}[@O]
+%    \node[above=8mm] (x) at(current page.south) {\usebeamerfont{subtitle}Polarisation};
+%    \node[scale=.9] at ([yshift=5mm]current page.center) {\usebox\Waves};
+% \end{tikzpicture}
+% \global\setbox\FinalPolarisationSlide=\hbox{\scalebox{.9}{\box\Waves}}
+% \end{frame}
+% }
 
 
-% first recap
-% box | link
-\def\PrintSlide#1#2{\tikz{% center on page scale
-   \draw[path image={\hyperlink{#2}{\scalebox{.4}{\usebox#1}}},rounded corners=1.25pt,draw=lightgray,fill=btdl@color@background] (0,0) rectangle ++(.4\paperwidth,.225\paperwidth);% hardcoded 16:9 aspect ratio
-}}
-{
-\newsavebox\RecapSlideA \savebox\RecapSlideA{\PrintSlide\FinalCryptIntroSlide{@FinalCrypt}}
-\newsavebox\RecapSlideB \savebox\RecapSlideB{\PrintSlide\FinalPolarisationSlide{@Polarisation}}
-\newsavebox\RecapSlideC \savebox\RecapSlideC{\PrintSlide\FinalSuperSlide{@SuperSlide}}
-\begin{frame}{}
-\begin{tikzpicture}[@O]
-   \node[left=2mm] at(current page.center) {\usebox\RecapSlideA};
-   \node[above right=2mm] at(current page.center) {\usebox\RecapSlideB};
-   \node[below right=2mm] at(current page.center) {\usebox\RecapSlideC};
-\end{tikzpicture}
-\end{frame}
-}
+% % one time pads etc? es gibt suuuper viele Verfahren
+% % Binär <-> Polarisationen
+% % hier mit licht, da ist es recht anschaulich, geht aber mit diversen Qubits wie electron spin, ...
+% {
+% \newsavebox\CodeA \newsavebox\CodeB \newsavebox\CodeC \newsavebox\CodeD
+% \tikzset{Y/.style={very thick,Kite-Kite},N/.style={gray}}
+% \savebox\CodeA{\tikz{
+%    \draw[Y] (0,0) -- ++(2,0);
+%    \draw[N] (1,-1) -- ++(0,2);
+% }}
+% \savebox\CodeB{\tikz{
+%    \draw[N] (0,0) -- ++(2,0);
+%    \draw[Y] (1,-1) -- ++(0,2);
+% }}
+% \savebox\CodeC{\tikz{
+%    \draw[N] (0,0)++(45:1cm) -- ++(45:-2cm);
+%    \draw[Y] (0,0)++(-45:1cm) -- ++(-45:-2cm);
+% }}
+% \savebox\CodeD{\tikz{
+%    \draw[Y] (0,0)++(45:1cm) -- ++(45:-2cm);
+%    \draw[N] (0,0)++(-45:1cm) -- ++(-45:-2cm);
+% }}
 
-\begin{frame}[c]{}
-   \def\inserttitle{\Off{Von}\nlq \Off{Physik,}\nlq Informatik\nlqq\Off{und dem ganzen Rest}}%
-   \titlepage
-\end{frame}
+% \begin{frame}[c]{}
+% \begin{tikzpicture}[@O]
+%    \coordinate(@c) at (current page.center);
+%    \def\Shift{0cm}
+%    \only<4->{\def\Shift{(.25\paperwidth)}}
+%    \onslide<2->{
+%       \node (a) at ([xshift=-\Shift-.1\paperwidth]current page.center) {\usebox\CodeA};
+%       \node (b) at ([xshift=-\Shift+.1\paperwidth]current page.center) {\usebox\CodeB};
+%    }
+%    \onslide<3->{
+%       \node[below=2mm] at (a.south) {\usebeamerfont{subtitle}0};
+%       \node[below=2mm] at (b.south) {\usebeamerfont{subtitle}1};
+%    }
 
-\begin{frame}
-   \setbox0=\hbox{\tikz{\draw[path image={\href{https://youtu.be/NqdZ9wbXt8k?t=119}{\includegraphics[width=.7\paperwidth]{data/micromouse-maze.jpg}}},rounded corners=1.25pt,draw=black,fill=btdl@color@background] (0,0) rectangle ++(.7\paperwidth,.5\paperwidth);}}
-   \begin{tikzpicture}[@O]
-      \node at (current page.center) {\usebox0};
-   \end{tikzpicture}
-   TODO: attribution % TODO :: \url{https://de.wikipedia.org/wiki/Micromouse\#/media/Datei:Micromouse_maze.jpg}
-   TODO: topic change?
-\end{frame}
+%    \onslide<5->{
+%       \node (c) at ([xshift=\Shift-.1\paperwidth]current page.center) {\usebox\CodeC};
+%       \node (d) at ([xshift=\Shift+.1\paperwidth]current page.center) {\usebox\CodeD};
+%       \node[below=2mm] at (c.south) {\usebeamerfont{subtitle}0};
+%       \node[below=2mm] at (d.south) {\usebeamerfont{subtitle}1};
+%    }
+% \end{tikzpicture}
+% \end{frame}
+
+
+% % TODO: zwei Kanäle nötig: Quanten und herkömmlich
+% % => üblich für Quanten dass wir sie mit "normalem" kombinieren
+% \newsavebox\CodeSmall
+% \setbox\CodeSmall=\hbox{%
+%    \def\arraystretch{1.5}%
+%    \begin{tabular}{*4{>{\sbfamily\LARGE}m{\wd\CodeA}<{\centering\arraybackslash}}}
+%       \usebox\CodeA & \usebox\CodeB & \usebox\CodeC & \usebox\CodeD\\
+%       \strut0 & 1 & 0 & 1
+%    \end{tabular}%
+% }
+
+% \newsavebox\CodeSmallOne
+% \def\Opa#1{\tikz[opacity=.35]{\node[inner sep=0pt,outer sep=0pt] {#1};}}
+% \setbox\CodeSmallOne=\hbox{%
+%    \def\arraystretch{1.5}%
+%    \begin{tabular}{*4{>{\sbfamily\LARGE}m{\wd\CodeA}<{\centering\arraybackslash}}}
+%       \Opa{\usebox\CodeA} & \usebox\CodeB & \Opa{\usebox\CodeC} & \usebox\CodeD\\
+%       \strut\color{lightgray}0 & 1 & \color{lightgray}0 & 1
+%    \end{tabular}%
+% }
+% \newsavebox\Random
+% \savebox\Random{\dice{3}\;\clap{\raisebox{3pt}{\rotatebox{-20}{\dice{6}}}}~~}
+
+% \newsavebox\SieveA \newsavebox\SieveB
+% \savebox\SieveA{\begin{tikzpicture}
+%    \fill[gray,rounded corners=4pt] (0,0) rectangle (1,1);
+%    \draw[line cap=round,line width=3pt,btdl@color@background] (.5,.2) -- ++(0,.6);
+%    \draw[line cap=round,line width=3pt,btdl@color@background] (.2,.5) -- ++(.6,0);
+% \end{tikzpicture}}
+
+% \savebox\SieveB{\begin{tikzpicture}
+%    \fill[gray,rounded corners=4pt] (0,0) rectangle (1,1);
+%    \draw[line cap=round,line width=3pt,btdl@color@background] (.5,.5)++(45:.3) -- ++(45:-.6);
+%    \draw[line cap=round,line width=3pt,btdl@color@background] (.5,.5)++(-45:.3) -- ++(-45:-.6);
+% \end{tikzpicture}}
+
+% \newsavebox\SuperSlide
+% % ohne eavesdrop: veröffentlihcen am ende ihre wahlen und vergleichen => nehmen nur die wo sie gleich gewählt haben.
+
+% \newsavebox\FinalSuperSlide
+
+% \begin{frame}{}
+% \hypertarget{@SuperSlide}{}%
+% \tikzset{@s/.style={}}%
+% \only<6|handout:0>{\tikzset{@s/.style={transparency group, opacity=.3}}}%
+% \begin{lrbox}\SuperSlide
+% \begin{tikzpicture}
+%    \coordinate (c) at (0,0);
+%    \onslide<2->{
+%       \node[scale=.75] (a) at ([xshift=-4.5cm]c) {\only<-5,7-|handout:1->{\usebox\pinguA}\only<6|handout:0>{\usebox\pinguAGray}};
+%       \node[below] (ad) at(a.south) {\only<6|handout:0>{\color{lightgray}}Alice};
+
+%       \node[scale=.75] (b) at ([xshift=4.5cm]c) {\only<2,6-|handout:1->{\usebox\pinguB}\only<3-5|handout:0>{\usebox\pinguBGray}};
+%       \node (bd) at(b.south|-ad.east) {\only<3-5|handout:0>{\color{lightgray}}Bob};
+%    }
+%    \scope[@s]
+%    \onslide<4->{
+%       \node[cloud,cloud ignores aspect, draw,above right=5mm,xshift=-5mm] (dice) at (a.north) {\usebox\Random};
+%       \node[above right,scale=.66] (a-sends) at (a.east) {\usebox\CodeB};
+%       \node[below,scale=.66] (ab-sends) at (a.east-|a-sends.south) {\usebox\CodeD};
+%    }
+%    \endscope
+%    \onslide<5->{
+%       \scope[shift={([xshift=1.66cm]a.east)}]
+%          \draw[thick,domain=0:3.5,samples=100,smooth] plot (\x,{0.5*sin(deg(2*pi*\x))});
+%       \endscope
+%    }
+%    \begin{onlyenv}<6->
+%       \node[above left] at (b.west) {\usebox\SieveA};
+%       \tikzset{@ss/.style={}}
+%       \node[below left] at (b.west) {\usebox\SieveB};
+%       \node[cloud,cloud ignores aspect, draw] (dice2) at ([xshift=-3.5mm]b.north|-dice.east) {\usebox\Random};
+%    \end{onlyenv}
+%    \begin{uncoverenv}<7->
+%       \draw[-Kite] ([yshift=-3mm]ad.south) to[edge node={node[above] {\(+~\times~+~+~\times~\)~\ldots}}] ([yshift=-3mm]bd.south|-ad.south);
+%       \draw[Kite-] ([yshift=-5mm]ad.south) to[edge node={node[below] {\(+~+~\times~+~\times~\)~\ldots}}] ([yshift=-5mm]bd.south|-ad.south);
+%    \end{uncoverenv}
+% \end{tikzpicture}
+% \end{lrbox}
+% \begin{tikzpicture}[@O]
+%    \node[yshift=-7.5mm] at (current page.center) {\usebox\SuperSlide};
+
+%    \node[below left=3.5mm,scale=.4,@s] at(current page.north east) {\only<-4,6-|handout:0>{\usebox\CodeSmall}\only<5|handout:1>{\usebox\CodeSmallOne}};
+% \end{tikzpicture}
+% % TODO: darüber sprechen, wi eman abhören erkennen kann (verändert polarisation, ... )
+% % Zudem viele andere möglichkeiten | verwerfen am ende mismathces
+% \global\setbox\FinalSuperSlide=\box\SuperSlide
+% \end{frame}
+% }
+% % https://www.qi.damtp.cam.ac.uk/files/PartIIQIC/QIC-6.pdf
+
+
+% % first recap
+% % box | link
+% \def\PrintSlide#1#2{\tikz{% center on page scale
+%    \draw[path image={\hyperlink{#2}{\scalebox{.4}{\usebox#1}}},rounded corners=1.25pt,draw=lightgray,fill=btdl@color@background] (0,0) rectangle ++(.4\paperwidth,.225\paperwidth);% hardcoded 16:9 aspect ratio
+% }}
+% {
+% \newsavebox\RecapSlideA \savebox\RecapSlideA{\PrintSlide\FinalCryptIntroSlide{@FinalCrypt}}
+% \newsavebox\RecapSlideB \savebox\RecapSlideB{\PrintSlide\FinalPolarisationSlide{@Polarisation}}
+% \newsavebox\RecapSlideC \savebox\RecapSlideC{\PrintSlide\FinalSuperSlide{@SuperSlide}}
+% \begin{frame}{}
+% \begin{tikzpicture}[@O]
+%    \node[left=2mm] at(current page.center) {\usebox\RecapSlideA};
+%    \node[above right=2mm] at(current page.center) {\usebox\RecapSlideB};
+%    \node[below right=2mm] at(current page.center) {\usebox\RecapSlideC};
+% \end{tikzpicture}
+% \end{frame}
+% }
+
+% \begin{frame}[c]{}
+%    \def\inserttitle{\Off{Von}\nlq \Off{Physik,}\nlq Informatik\nlqq\Off{und dem ganzen Rest}}%
+%    \titlepage
+% \end{frame}
+
 
 \end{document}
