@@ -1,0 +1,14 @@
+\begin{frame}[c]{}
+\begin{tikzpicture}[@O,every path/.append style={line cap=round}]
+   \coordinate (c) at (current page.center);
+
+   \onslide<2->{\node[scale=.75] (a) at ([xshift=-4.5cm]c) {\usebox\pinguA};
+   \node[below] (ad) at(a.south) {Alice};}
+
+   \onslide<3->{
+      \node[scale=.75] (b) at ([xshift=4.5cm]c) {\usebox\pinguB};
+      \node (bd) at(b.south|-ad.east) {Bob};
+      \draw[-Kite,gray, dashed] (a) -- (b) node[midway,above,T,text=btdl@color@primary,font=\sbfamily\large] {Hallo} coordinate[pos=.5] (m);
+   }
+\end{tikzpicture}%
+\end{frame}
