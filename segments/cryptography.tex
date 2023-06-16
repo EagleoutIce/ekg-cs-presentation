@@ -497,11 +497,13 @@
 \newsavebox\RecapSlideB \savebox\RecapSlideB{\PrintSlide\FinalPolarisationSlide{@Polarisation}}
 \newsavebox\RecapSlideC \savebox\RecapSlideC{\PrintSlide\FinalSuperSlide{@SuperSlide}}
 \begin{frame}{}
+\begin{uncoverenv}<2->
 \begin{tikzpicture}[@O]
    \node[left=2mm] at(current page.center) {\usebox\RecapSlideA};
    \node[above right=2mm] at(current page.center) {\usebox\RecapSlideB};
    \node[below right=2mm] at(current page.center) {\usebox\RecapSlideC};
 \end{tikzpicture}
+\end{uncoverenv}
 \end{frame}
 }
 
