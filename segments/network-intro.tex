@@ -1,9 +1,5 @@
-\input{data/network.tex}
-
 \input{data/world.tex}
 \newsavebox\World
-\newsavebox\Germany
-\savebox\Germany{\input{data/germany.tex}}
 \newsavebox\Home
 \savebox\Home{\colorlet{black}{darkgray}\begin{tikzpicture}[shift={(-2cm,2cm)}, router size/.style={scale=.2}, tiny router size/.style={scale=.1},link/.style={},gray]
    \draw[rounded corners=2pt] (-3.55,-.25) -| ++ (-2,1.5) -- ++(-.25,0) -- ++(1.25,.5) -- ++(1.25,-.5) -| (-3.55,-.25) -- cycle;

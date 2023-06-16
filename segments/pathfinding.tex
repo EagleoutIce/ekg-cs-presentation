@@ -1,3 +1,87 @@
+\newsavebox\Router \savebox\Router{\scalebox{.12}{\router{}}}
+\tikzset{dot/.style={minimum width=8mm,minimum height=3mm,rounded corners=3pt,rectangle}}
+% #4 label
+\def\PlaceAt#1#2#3#4{%
+   \node[outer sep=1pt,dot,#1] (#1) at([shift={(#2*\wd\Germany,#3*\ht\Germany+#3*\dp\Germany)}]germany.south west) {\only<-2|handout:1>{\smash{\raisebox{-4pt}{\clap{\usebox\Router}}}}};
+   % #4
+   \only<4-|handout:2>{\node[text=white] at (#1) {\tiny\sbfamily#4};}
+}
+\def\B#1{\only<5-|handout:2>{#1}}
+\tikzset{
+   X/.style n args=2{edge node={node [#2=-.5mm,sloped] {\tiny#1}}},
+   A/.style={X={#1}{above}},
+   B/.style={X={#1}{below}}
+}
+
+% TODO: frage von wo nach wo kommen wir wie einwerfen
 \begin{frame}
-   X
+\begin{tikzpicture}[@O,a/.style={},b/.style={},c/.style={},d/.style={},e/.style={},f/.style={},g/.style={},h/.style={},i/.style={},j/.style={}%
+]
+\begin{onlyenv}<-6|handout:1>
+   \only<-5>{\node[inner sep=0pt,outer sep=0pt] (germany) at (current page.center) {\usebox\Germany};}
+   \only<3-|handout:2>{\tikzset{dot/.style={minimum size=3mm,circle,fill=black,}}}
+\onslide<2->{
+   \PlaceAt{a}{.5}{.5}{e}
+   \PlaceAt{b}{.8}{.75}{i}
+   \PlaceAt{c}{.55}{.175}{b}
+   \PlaceAt{d}{.25}{.15}{a}
+   \PlaceAt{e}{.25}{.75}{h}
+   \PlaceAt{f}{.7}{.42}{d}
+   \PlaceAt{g}{.3}{.3}{c}
+   \PlaceAt{h}{.625}{.7}{g}
+   \PlaceAt{i}{.3}{.6}{f}
+   \PlaceAt{j}{.45}{.8}{j}
+
+   \graph[use existing nodes,edges={-}]{
+      a ->[B=\B8] b;
+      a ->[A=\B{7.5}] c;
+      a ->[bend left=20,B={\B{10}}] d;
+      a ->[A={\B{~~~~~~~~~~~7.5}}] e;
+      a ->[A={\B3}] f;
+      a ->[A={\B{5.5}}] g;
+      h ->[B={\B6}] i ->[A=\B5] j ->[B=\B3] h;
+      b ->[B={\B8}] f ->[B=\B6] c;
+      % d -> e would be 15.5 but we choose a #fastlane
+      d ->[bend left,A=\B{4}] e ->[A=\B{3}] j ->[A=\B6] b ->[A=\B2] h;
+   };
+}
+\end{onlyenv}
+\begin{onlyenv}<7-|handout:2>
+   \tikzset{dot/.style={minimum size=3mm,circle,fill=black,text=white,font=\tiny\sbfamily}}
+   \scope[shift={([xshift=-3cm,yshift=1cm]current page.center)},k/.style={font=\scriptsize,midway}]
+   \node[dot] (a) at (0,0) {a};
+   \node[dot] (b) at (0,-2) {b};
+   \node[dot] (c) at (2,1) {c};
+   \node[dot] (e) at (2,-1) {e};
+   \node[dot] (d) at (2,-3) {d};
+   \node[dot] (h) at (4,1) {h};
+   \node[dot] (g) at (6,-2) {g};
+   \node[dot] (i) at (4,-3) {i};
+   \node[dot] (j) at (4,-1) {j};
+   \node[dot] (f) at (6,0) {f};
+   \draw (a) -- (e) node[above,k] {10};
+   \draw (a) -- (h) node[above,sloped,k,pos=.75] {4};
+   \draw (b) -- (e) node[above,sloped,k] {7.5};
+   \draw (b) -- (d) node[below,k] {6};
+
+   \draw (d) -- (e) node[left,k] {3};
+   \draw (d) -- (i) node[above,k] {8};
+
+   \draw (e) -- (c) node[right,k] {5.5};
+   \draw (e) -- (h) node[below,sloped,k] {7.5};
+   \draw (e) -- (i) node[above,sloped,k] {8};
+
+   \draw (f) -- (j) node[above,sloped,k] {5};
+   \draw (f) -- (g) node[right,k] {6};
+
+   \draw (g) -- (i) node[below,sloped,k] {2};
+   \draw (g) -- (j) node[above,sloped,k] {3};
+
+   \draw (h) -- (j) node[right,k] {3};
+
+   \draw (i) -- (j) node[right,k] {6};
+
+   \endscope
+\end{onlyenv}
+\end{tikzpicture}
 \end{frame}
