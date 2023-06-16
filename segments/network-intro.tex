@@ -22,7 +22,7 @@
 \only<2->{%
    \savebox\World{%
       \tikz{%
-         \WORLD[hl/.style={fill=lightgray},WORLD map/state/.style={fill=lightgray!20},WORLD map/Germany/.style={fill=btdl@color@secondary!20},WORLD map/UnitedStatesOfAmerica/.style={hl},WORLD map/China/.style={hl}]%
+         \WORLD[hl/.style={fill=lightgray},WORLD map/state/.style={fill=lightgray!20},WORLD map/Germany/.style={hl},WORLD map/UnitedStatesOfAmerica/.style={hl},WORLD map/China/.style={hl}]%
          \onslide<3->{
             \colorlet{@col}{black}
             \only<4->{\colorlet{@col}{gray}}
@@ -71,7 +71,7 @@
             % Country:        US
             % https://www.whois.com/whois/142.251.65.75
             \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([yshift=-5mm,xshift=-.25mm]UnitedStatesOfAmerica.center) coordinate (@t);
-            \node[left=3.5mm] at(@t) {\url{www.google.com}};
+            \node[left=3.5mm] at(@t) {\llap{\url{www.google.com}}};
          }
          % traceroute -e -I gaj.sh.gov.cn
          % traceroute to gaj.sh.gov.cn (175.6.201.209), 30 hops max, 60 byte packets
@@ -107,7 +107,7 @@
             \fill[circle] (@c) circle[radius=.75mm];
             \node[right=3.5mm] at(@c) {\url{gaj.sh.gov.cn}};
          }
-         \onslide<6->{%
+         \only<6->{%
             \fill[circle] (@t) circle[radius=.75mm];
          }
       }%
@@ -138,7 +138,7 @@
          \fill [gray] (c\i) circle[radius=.5mm];
       }
    }
-   \onslide<7->{
+   \only<7->{
       \draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
    }
 
@@ -162,8 +162,8 @@
 
 \begin{frame}
 \colorlet{@hla}{gray!15}%
-\only<3->{\colorlet{@hla}{btdl@color@secondary!20}}
 \colorlet{@hlb}{gray!15}%
+\only<3->{\colorlet{@hla}{gray!30}\colorlet{@hlb}{gray!5}}
 \begin{uncoverenv}<2->
 % horrible tikz figure i used in a lecture recap, sloppily adapted to fit on this slide
 \begin{tikzpicture}[every node/.style={font={\footnotesize\sffamily}, scale=.65}, router size/.style={scale=0.2}, tiny router size/.style={scale=0.1},scale=0.65,link/.style={thick},every path/.append style={line cap=round, line join=round}, @O] % very thick,green!75
