@@ -1,4 +1,3 @@
-
 \input{data/network.tex}
 
 \input{data/world.tex}
@@ -150,3 +149,248 @@
 \end{tikzpicture}
 \end{frame}
 % und tatsächlich müssten wir eig erstmal wissen wo die server tatsächlich liegen.
+
+
+% nur kurz als einblick, machen wir aber alles nicht :P
+
+
+{
+% #4 will be ighlight for aplayer
+\colorlet{aplfill}{btdl@color@background}
+\def\DrawLayers#1#2#3#4{
+      \foreach[count=\y] \layer in {#2} {
+         % \ifnum\y=#4 \relax \colorlet{aplfill}{green!15} \fi
+         \draw[fill=aplfill,draw=black] ($(#1)+(0,0.5*\y)$) rectangle ++(#4,0.5) node[midway,centered,rectangle,minimum width=2cm,minimum height=0.5cm,inner sep=0pt,outer sep=0pt] (#3\layer) {\strut\layer};
+      }
+}
+
+\begin{frame}
+\colorlet{@hla}{gray!15}%
+\only<3->{\colorlet{@hla}{btdl@color@secondary!20}}
+\colorlet{@hlb}{gray!15}%
+\begin{uncoverenv}<2->
+% horrible tikz figure i used in a lecture recap, sloppily adapted to fit on this slide
+\begin{tikzpicture}[every node/.style={font={\footnotesize\sffamily}, scale=.65}, router size/.style={scale=0.2}, tiny router size/.style={scale=0.1},scale=0.65,link/.style={thick},every path/.append style={line cap=round, line join=round}, @O] % very thick,green!75
+
+   % split tags
+   \draw[densely dashed] ([xshift=-.2\paperwidth]current page.north) -- ([xshift=-.3\paperwidth]current page.south);
+   \draw[densely dashed] ([xshift=.25\paperwidth]current page.north) -- ([xshift=.15\paperwidth]current page.south);
+
+   % labels
+   \node[below=2mm,font=\large\sffamily] at (current page.north) {Network Core};
+   \path (current page.north west) -- ([xshift=-.2\paperwidth]current page.north) node[pos=.5,below=2mm,font=\large\sffamily] {Network Edge};
+   \path (current page.north east) -- ([xshift=.25\paperwidth]current page.north) node[pos=.5,below=2mm,font=\large\sffamily] {Network Edge};
+
+
+   % todo: fix nested tikzpic via router, i'm lazy right now [poor flo from 2019]
+   %% Regional ISP
+   \scope[shift={([xshift=-2cm,yshift=-2cm]current page.center)}]
+   \fill[@hla] (0,-0.85) circle (1.85);
+   \node[router size] (regisp1) at (0,0) {\router{}};
+   \node[router size] (regisp2) at ($(regisp1) + (-1,-1)$) {\router{}};
+   \node[router size] (regisp3) at ($(regisp1) + (1,-1)$) {\router{}};
+   \node[below] at($(regisp1) + (0,-1.5)$) {reg. ISP};
+   \draw[link] (regisp1) -- (regisp2) -- (regisp3) -- (regisp1); % connect regional isp
+
+   %% global ISP, seems to be somewhat 'crazy' :P
+   \coordinate (globcenter) at (3,3.5);
+   \fill[@hla] (globcenter) circle (2.125);
+   \node[router size] (globisp1) at (2,3) {\router{}};
+   \node[router size] (globisp2) at ($(globisp1) + (-0.25,0.8)$) {\router{}};
+   \node[router size] (globisp3) at ($(globisp1) + (1.75,1.15)$) {\router{}};
+   \node[router size] (globisp4) at ($(globisp1) + (2.25,0.15)$) {\router{}};
+   \node[above] at ([yshift=1cm]globcenter) {glob. ISP~~};
+   \draw[link] (globisp1) edge (globisp2) (globisp2) edge (globisp3) (globisp3) edge (globisp4) (globisp4) edge  (globisp1) (globisp1) edge (globisp3); % connect regional isp
+   % dotted 'world' connection:
+   \draw[densely dashed] (globisp4) -- ++(1.75,0);
+   % connect global and local ISP
+   \draw[link] (regisp1) -- (globisp1) (regisp3) -- (globisp4);
+
+   \foreach \i in {3}{% ,3,4,1
+         \relax \DrawLayers{globisp\i.north}{physical,link,network}{isp\i-}{2}
+         \draw[fill=btdl@color@background,draw=black,line join=bevel] ([yshift=2mm]globisp\i.north) -- (isp\i-physical.south west) -- (isp\i-physical.south east) -- cycle;
+   }
+
+   %% home network
+   % let's make a house
+   \fill[@hlb] (-5.5,-1.25) -| ++ (-2,1.5) -- ++(-0.25,0) -- ++(1.25,0.5) -- ++(1.25,-0.5) -| cycle;
+
+   \node[tiny router size] (homenet1) at (-6,-1) {\router{}};
+   \node[server,scale=0.75] (homepc1) at ($(homenet1)+(0,0.75)$) {};
+   \node[server,scale=0.75] (homepc2) at ($(homepc1)+(-0.85,0.125)$) {};
+
+   \node[rack switch,scale=0.5] (homeroute1) at ($(homenet1)+(-0.85,0)$) {};
+   % "wifi":
+   \node at([yshift=0.3cm,xshift=-0.075cm]homeroute1) {\faWifi};
+   \node[below=0.25cm] at ([xshift=-0.5cm]homenet1) {Heimnetzwerk};
+   % connect the home to the web :P
+   \draw[link] (homepc1) -- (homenet1) (homenet1) -- (homeroute1);
+
+
+   \coordinate (dslamcenter) at ([xshift=1.25cm,yshift=-0.25cm]homenet1);
+
+
+   \begin{scope}[scale=0.4]
+         \draw[densely dashed,fill=btdl@color@background] ([xshift=2.25cm,yshift=-0.25cm]dslamcenter) -| ++ (-3,2.5) -- ++(-0.25,0) -- ++(1.75,1) -- ++(1.75,-1) -| cycle;
+
+         \filldraw[left color=btdl@color@background,right color=gray,line join=round] (dslamcenter) -- ++(0.4,0) -- ++(0.5,0.25) -- ++(0.2,0) -- ++(0,1) -- ++(-0.2,0) -- ++(-0.5,0.25) -- ++(-0.4,0)--cycle;
+         \draw[fill=gray,line join=round] (dslamcenter)++(0,1.5) -- ++(0.25,0.5) -- ++(0.4,0) -- ++(0.5,-0.25) -- ++(0.2,0) -- ++(-0.25,-0.5) -- ++(-0.2,0) -- ++(-0.5,0.25) -- ++(-0.4,0);
+         \draw[fill=gray,line join=round] (dslamcenter)++(1.1,0.25) -- ++(0.25,0.5) -- ++(0,1) -- ++(-0.25,-0.5) -- cycle;
+         \draw[-{Kite[scale=.4]}] (dslamcenter)++(0.1,0.25)-- ++(0.2,0) -- ++(0.5,0.25) -- ++(0.2,0);
+         \draw[-{Kite[scale=.4]}] (dslamcenter)++(0.1,1.25)-- ++(0.2,0) -- ++(0.5,-0.25) -- ++(0.2,0);
+         \draw[-{Kite[scale=.4]}] (dslamcenter)++(0.1,0.75)-- ++(0.9,0);
+         % 1.25,3.25
+         \node[above] at([xshift=0.75cm,yshift=3.25cm]dslamcenter) {DSLAM};
+
+         \coordinate (dslamexit) at ([xshift=1.35cm,yshift=0.75cm]dslamcenter);
+
+         % \node[above=2cm] at ([xshift=0.75cm]dslamcenter) {DSLAM};
+         \draw[link] (dslamexit) -- ([xshift=-4.2cm]dslamexit-|regisp1);
+
+         \draw (dslamexit)++(0,0.75) -- ++(1.25,0) node[right] {Tel. Net.};
+   \end{scope}
+   \draw[] (homenet1) -- ++(1.25cm,0);
+
+
+   %% institution network, we will do it tiny for 'consistency reasons' :P
+
+   \coordinate (instinit) at ($(regisp1)+(9.75,-2.5)$);
+   \fill[@hlb] (instinit)++(2,-1.25) rectangle ++(-6,2);
+   \node[tiny router size] (instrout1) at (instinit) {\router{}};
+   \node[tiny router size] (instrout2) at ($(instrout1) + (-0.95,-0.5)$) {\router{}};
+   \node[tiny router size] (instrout3) at ($(instrout1) + (0.5,-0.5)$) {\router{}};
+   \draw[link] (instrout1) -- (instrout2) -- (instrout3) -- (instrout1); % connect regional isp
+
+   \node[server,scale=0.75] (instserv1) at ($(instrout3)+(1.25,0.5)$) {};
+   \node[server,scale=0.75] (instserv2) at ($(instserv1)+(-0.285,0)$) {};
+   % you will recive
+   \node[server,scale=0.75] (instserv3) at ($(instserv2)+(-0.285,0)$) {};
+
+   \draw[link] (instrout3) -| (instserv1) (instrout3) -| (instserv2) (instrout3) -| (instserv3);
+
+   \node[below=0.25cm] at ([xshift=-0.25cm]instrout3) {Institutsnetz};
+
+
+   % the cheap wifi i provide them (somehow i, well... done something wrong with the naming. only needed twice, nvmd):
+   \node[rack switch,scale=0.5] (instroute1) at ($(instrout1)+(-0.85,0)$) {};
+
+   \node[server,scale=0.75] (instpc1) at ($(instroute1)+(-0.75,0)$) {};
+
+   \foreach \i [remember=\i as \lasti (initially 1)] in {2,...,4} {
+         \node[server,scale=0.75] (instpc\i) at ($(instpc\lasti)+(-0.6,0)$) {};
+   }
+
+
+   \node[server,scale=0.5] (instpc5) at ($(instpc1)+(-0.125,-0.75)$) {};
+   \node[server,scale=0.5] (instpc6) at ($(instpc3)+(-0.125,-0.75)$) {};
+
+   \draw[link] (instpc5) -- (instrout2);
+
+   % "wifi":
+   \node at([yshift=0.3cm,xshift=-0.075cm]instroute1) {\faWifi};
+
+   % connect the instituion to the regional isp
+   \draw[link] (instroute1) -- (instrout1) |- (regisp3);
+
+   %% mobile world:
+   \coordinate (mobinit) at (-4,3);
+   \fill[@hlb] (mobinit)+(-1,1) circle (2.125);
+   \draw (mobinit)+(-1,2.5) node {Mobilnetzwerk};
+   \node[tiny router size] (mobilenet1) at (mobinit) {\router{}};
+
+   % well, i have no shortcut for a wifi-station or something similar, so let's create it on the spot:
+   \begin{scope}[every path/.style={very thick},scale=0.25]
+         \coordinate (BaseStart) at ($(mobilenet1)+(-3.25,1.5)$);
+         %trapezoid base
+         \draw[line join=round] (BaseStart) -- ++(1.5,0.75) -- ++(1.5,-0.75) -- ++(-1.5,-0.75) -- cycle;%
+         %draw tower:
+         \draw (BaseStart) -- ++(1.5,3.5) -- ++(1.5,-3.5) (BaseStart)++(1.5,-0.75) -- ++(0,4.25);
+         %draw lines:
+
+         \coordinate (BottomPoint) at ($(BaseStart)+(1.5,-0.75)$);
+         \coordinate (BottomLeftPoint) at ($(BaseStart)+(3,0)$); % weeeeell. it's bottom right, buuuut ... hehehehehehe
+         \coordinate (BottomRightPoint) at (BaseStart);
+         \coordinate (TopPoint) at ($(BaseStart)+(1.5,3.5)$);
+
+         \foreach \y in {1,...,4}{
+            \draw ($(BottomLeftPoint)!\y/6!(TopPoint)$) -- ($(BottomPoint)!\y/6!(TopPoint)$) -- ($(BottomRightPoint)!\y/6!(TopPoint)$);
+         }
+
+         % Top Dot:
+         \filldraw[gray,draw=black,semithick] (TopPoint) circle (0.25);
+
+         %\draw the Radio Waves
+         \foreach \r in {0.5,1,...,2.5}{
+            \draw[thin] (TopPoint) +(-35:\r cm) arc[radius=\r cm,delta angle=70,start angle=-35];
+            \draw[thin] (TopPoint) +(180-35:\r cm) arc[radius=\r cm,delta angle=70,start angle=180-35];
+         }
+   \end{scope}
+         % now, lets draw the rest :D
+
+
+   % mobilenet1
+   % \DrawLayers{mobilenet1.north}{physical,link,network}{mnet1-}{2}
+   % \draw[btdl@color@background,line join=bevel] (mobilenet1.north) -- (mnet1-physical.south west) -- (mnet1-physical.south east) -- cycle;
+
+
+   \node[server,scale=0.5] (mobserv1) at ($(TopPoint)+(-1.75,0.25)$) {};
+   \node[server,scale=0.5] (mobserv2) at ($(TopPoint)+(-1.75,-0.75)$) {};
+
+   \node  at ($(TopPoint)+(-0.75,-0.75)$) {\Large\faMobile};
+
+   \node at ($(TopPoint)+(-1,0)$) {\Large\faMobile};
+
+   % you will be the happy sender of the application-layer
+   \node (sender-phone) at ($(TopPoint)+(-0.25,0.75)$) {\Large\faMobile};
+
+   % \foreach \i in {3,2,1}{
+   %     \DrawLayers{instrout\i.north}{physical,link,network}{instroute\i-}{2}
+   %     \draw[btdl@color@background,line join=bevel] (instrout\i.north) -- (instroute\i-physical.south west) -- (instroute\i-physical.south east) -- cycle;
+   % }
+
+   \DrawLayers{mobserv1.north}{physical,link,network,transport,application}{source-}{-2}
+   \DrawLayers{instserv1.north}{physical,link,network,transport,application}{receive1-}{2}
+
+   \draw[link] (BottomLeftPoint) edge (mobilenet1);% (sender-phone) edge (TopPoint);
+
+   \draw[link] (mobilenet1) edge (globisp2);
+
+   \draw[fill=btdl@color@background,draw=black,line join=bevel] ([yshift=2mm]instserv1.north) -- (receive1-physical.south west) -- (receive1-physical.south east) -- cycle;
+
+   \draw[fill=btdl@color@background,draw=black,line join=bevel] ([yshift=2mm]mobserv1.north) -- (source-physical.south west) -- (source-physical.south east) -- cycle;
+   \node at ($(TopPoint)+(-0.25,-1.5)$) {\Large\faMobile};
+   \node at ($(TopPoint)+(-1.5,-1.35)$) {\Large\faMobile};
+
+   % \draw[very thick,green!75,Kite-Kite] (source-network.east) -- ++(0.55,0) -- (mnet1-network.north east) -- ++(4.25,0) -- ($(receive1-network.west)-(2,0)$) -- ++(2,0);
+
+   % routing table for sicker router 123-42 - weil ich ihn mag, lass mich
+
+   \node[below,align=center,scale=0.75,rectangle,draw,rounded corners] (routing-table) at ([xshift=2.5cm,yshift=-1.25cm]globisp4) {\begin{tabular}{lr}
+         \toprule
+            \scriptsize header val. & \scriptsize output link \\
+         \midrule
+            \(0100\) & 3 \\
+            \(0101\) & 2 \\
+            \(0111\) & 2 \\
+            \(1011\) & 1 \\
+            \(1111\) & 4 \\
+         \bottomrule
+   \end{tabular}};
+
+   \draw[densely dotted,-Kite] (globisp4) -- (routing-table);
+   \endscope
+   % DIE EPISCHE LEGENDE VON QUATSCHOPOTTEL! IT IS THE REAL ONE!
+
+   % \node[text width=5.25cm,scale=0.75] at ([xshift=4.75cm,yshift=1cm]globisp4.east) {%
+   %       \begin{description}[leftmargin=*,widest={\tikz[baseline=-0.6ex]{\node[scale=0.145]{\router{}};}},align=right,itemsep=0.45em]
+   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=0.145]{\router{}};}}] Router, verwaltet die Komm\-unikation (primär Core)
+   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=0.75,server]{};}}] Server/PC, Hosts (primär Edge)
+   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=1.5]{\faMobile};}}] Mobiles Endgerät, mobiler Host (primär Edge)
+   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=0.75,rack switch]{};}}] (Wireless-)Link (primär Edge)
+   %       \end{description}
+   % };
+
+\end{tikzpicture}
+\end{uncoverenv}
+\end{frame}
+}
