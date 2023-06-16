@@ -18,7 +18,13 @@
 \begin{tikzpicture}[@O,a/.style={},b/.style={},c/.style={},d/.style={},e/.style={},f/.style={},g/.style={},h/.style={},i/.style={},j/.style={}%
 ]
 \begin{onlyenv}<-6|handout:1>
-   \only<-5>{\node[inner sep=0pt,outer sep=0pt] (germany) at (current page.center) {\usebox\Germany};}
+   \only<-5>{
+      \node[inner sep=0pt,outer sep=0pt] (germany) at (current page.center) {\usebox\Germany};
+      \node[above right,T] at(current page.south west) {\fontsize{3.5pt}{3.5pt}\selectfont
+\href{https://commons.wikimedia.org/wiki/File:German_state_government_compositions.svg}{Deutschland basiert auf Grafik von \begin{CJK*}{UTF8}{gbsn}
+沁水湾
+\end{CJK*},}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
+   }
    \only<3-|handout:2>{\tikzset{dot/.style={minimum size=3mm,circle,fill=black,}}}
 \onslide<2->{
    \PlaceAt{a}{.5}{.5}{e}
