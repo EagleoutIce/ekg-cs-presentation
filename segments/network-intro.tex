@@ -1,0 +1,152 @@
+
+\input{data/network.tex}
+
+\input{data/world.tex}
+\newsavebox\World
+\newsavebox\Germany
+\savebox\Germany{\input{data/germany.tex}}
+\newsavebox\Home
+\savebox\Home{\colorlet{black}{darkgray}\begin{tikzpicture}[shift={(-2cm,2cm)}, router size/.style={scale=.2}, tiny router size/.style={scale=.1},link/.style={},gray]
+   \draw[rounded corners=2pt] (-3.55,-.25) -| ++ (-2,1.5) -- ++(-.25,0) -- ++(1.25,.5) -- ++(1.25,-.5) -| (-3.55,-.25) -- cycle;
+
+   % ignore for old reasons :P
+   \node[tiny router size] (homenet1) at (-4,0) {\router{}};
+   \node[server,scale=.75] (homepc1) at ($(homenet1)+(0,.75)$) {};
+   % \node[server,scale=.75] (homepc2) at ($(homepc1)+(-.85,.125)$) {};
+
+   \node[rack switch,scale=.5] (homeroute1) at ($(homenet1)+(-.85,0)$) {};
+   \node[above=2mm,xshift=-1.5mm,scale=.3,xscale=-1] at (homeroute1.north) {\usebox\pinguA};
+   % "wifi":
+   % \node at([yshift=.3cm,xshift=-.075cm]homeroute1) {\faWifi};
+   % \node[below=.25cm] at ([xshift=-.5cm]homenet1) {home network};
+   % connect the home to the web :P
+   \draw[link] (homepc1) -- (homenet1) -- (homeroute1);
+\end{tikzpicture}}
+\begin{frame}
+\only<1|handout:0>{\savebox\World{\tikz{\WORLD}}}
+\only<2->{%
+   \savebox\World{%
+      \tikz{%
+         \WORLD[hl/.style={fill=lightgray},WORLD map/state/.style={fill=lightgray!20},WORLD map/Germany/.style={hl},WORLD map/UnitedStatesOfAmerica/.style={hl},WORLD map/China/.style={hl}]%
+         \onslide<3->{
+            \colorlet{@col}{black}
+            \only<4->{\colorlet{@col}{gray}}
+            \draw[-Kite,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend right=25] ([xshift=1cm,yshift=-4mm]UnitedStatesOfAmerica.center);
+            \draw[-Kite,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend left=25] (China.center);
+         }
+         \only<6|handout:0>{
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) coordinate (@t); % -- (Netherlands.center);
+         }
+         % traceroute -e -I www.google.com
+         % traceroute to www.google.com (142.250.181.228), 30 hops max, 60 byte packets
+         %  1  _gateway (192.168.0.1)  0.938 ms  1.009 ms  1.191 ms
+         %  2  ip-081-210-178-001.um21.pools.vodafone-ip.de (81.210.178.1)  15.015 ms  24.059 ms  25.599 ms
+         %  3  ip-081-210-178-000.um21.pools.vodafone-ip.de (81.210.178.0)  25.673 ms de-fra01b-rc2-ae-36-0.aorta.net (84.116.197.181) <MPLS:L=960499,E=0,S=1,T=1>  33.986 ms  33.977 ms
+         %  4  de-bfe18a-rt01-lag-1.aorta.net (84.116.190.34)  29.920 ms  31.491 ms  33.834 ms
+         %  5  74.125.48.122 (74.125.48.122)  39.709 ms  41.292 ms  41.357 ms
+         %  6  142.251.65.75 (142.251.65.75)  41.344 ms * *
+         %  7  142.250.237.177 (142.250.237.177)  34.864 ms * *
+         %  8  * * *
+         %  9  * * *
+         % 10  * * *
+         % 11  * * fra16s56-in-f4.1e100.net (142.250.181.228)  20.571 ms
+
+         \only<7|handout:0> {
+            % address:        Liberty Global B.V.
+            % address:        Boeing Avenue 53
+            % address:        1119PE Schiphol-Rijk
+            % address:        Netherlands
+            % https://www.whois.com/whois/84.116.190.34
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center)  coordinate (@t);
+         }
+         \only<8|handout:0> {
+            % Newbury
+            % address:        Vodafone House, The Connection
+            % address:        RG14 2FN
+            % address:        Newbury
+            % address:        UNITED KINGDOM
+            % https://www.whois.com/whois/195.2.26.93
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) coordinate (@t);
+         }
+         \only<9-> {
+            % Address:        1600 Amphitheatre Parkway
+            % City:           Mountain View
+            % StateProv:      CA
+            % PostalCode:     94043
+            % Country:        US
+            % https://www.whois.com/whois/142.251.65.75
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([yshift=-5mm,xshift=-.25mm]UnitedStatesOfAmerica.center) coordinate (@t);
+            \node[left=3.5mm] at(@t) {\url{www.google.com}};
+         }
+         % traceroute -e -I gaj.sh.gov.cn
+         % traceroute to gaj.sh.gov.cn (175.6.201.209), 30 hops max, 60 byte packets
+         %  1  _gateway (192.168.0.1)  1.388 ms  1.466 ms  2.973 ms
+         %  2  ip-081-210-178-001.um21.pools.vodafone-ip.de (81.210.178.1)  13.688 ms  21.656 ms  23.198 ms
+         %  3  ip-081-210-178-000.um21.pools.vodafone-ip.de (81.210.178.0)  23.186 ms de-fra01b-rc2-ae-36-0.aorta.net (84.116.197.181) <MPLS:L=960499,E=0,S=1,T=1>  31.326 ms  31.224 ms
+         %  4  de-bfe18a-rt01-lag-1.aorta.net (84.116.190.34)  31.149 ms  31.140 ms  31.194 ms
+         %  5  ae8-100-tcr1.fnt.cw.net (195.2.26.93)  27.553 ms  29.138 ms  30.963 ms
+         %  6  ae34-pcr1.fnt.cw.net (195.2.31.38) <MPLS:L=90982,E=0,S=1,T=1>  111.836 ms *  111.540 ms
+         %  7  ae36-xcr1.ltw.cw.net (195.2.2.73) <MPLS:L=66670,E=0,S=1,T=1>  39.553 ms * *
+         %  8  * * *
+         %  9  * * *
+         % 10  * * *
+         % 11  * * *
+         % 12  * * *
+         % 13  * 202.97.65.90 (202.97.65.90)  312.495 ms *
+         % 14  202.97.24.94 (202.97.24.94)  327.133 ms  328.850 ms  328.962 ms
+         % 15  61.137.11.50 (61.137.11.50)  321.145 ms  322.674 ms *
+         % 16  175.6.255.82 (175.6.255.82)  330.275 ms  326.986 ms  328.462 ms
+         % 17  * * *
+         % 18  * * *
+         % 19  * * *
+         % 20  * * *
+         % 21  175.6.201.209 (175.6.201.209)  329.045 ms  332.555 ms  338.253 ms
+         \only<10->{
+            % https://www.whois.com/whois/84.116.190.34 Netherlands
+            % https://www.whois.com/whois/195.2.26.93 UK (multiple)
+            % https://www.whois.com/whois/202.97.65.90 China Telecom Beijing/Peking
+            % https://www.whois.com/whois/61.137.11.50 Chinanet hunan Hunan
+            % ...
+            % https://www.whois.com/whois/175.6.201.209 Chinanet Bejing
+            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([xshift=8.5mm,yshift=3mm]China.center) coordinate (@c) -- ([xshift=4.5mm,yshift=-4mm]China.center);
+            \fill[circle] (@c) circle[radius=.75mm];
+            \node[right=3.5mm] at(@c) {\url{gaj.sh.gov.cn}};
+         }
+         \onslide<6->{%
+            \fill[circle] (@t) circle[radius=.75mm];
+         }
+      }%
+   }%
+}%
+\begin{tikzpicture}[@O]
+   \node[below left,gray,opacity=.33] at (current page.north east) {\scriptsize\sbfamily Vereinfacht};
+   \node at (current page.center) {\resizebox{.8\paperwidth}!{\usebox\World}};
+   \node[above left,T] at (current page.south east) {\fontsize{3.5pt}{3.5pt}\selectfont\href{https://tex.stackexchange.com/a/430463}{Weltkarte basiert auf Code von Hendrik Seliger}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
+
+   \only<4->{
+      \node[above right=3mm] (germany) at (current page.south west) {\scalebox{.6}{\usebox\Germany}};
+   \onslide<5->{\fill ([xshift=2.15cm*.6,yshift=1.3cm*.6]germany.south west) circle[radius=.75mm] coordinate (home-on-map);}
+   \node[above right,T] at(current page.south west) {\fontsize{3.5pt}{3.5pt}\selectfont
+\href{https://commons.wikimedia.org/wiki/File:German_state_government_compositions.svg}{Deutschland basiert auf Grafik von \begin{CJK*}{UTF8}{gbsn}
+沁水湾
+\end{CJK*},}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
+   }
+   \only<5->{
+      \node[above=3mm,xscale=-1] (home) at (current page.south) {\usebox\Home};
+      % TODO: skipping verteiler
+      \draw[densely dashed] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south east);
+   }
+   \only<6->{
+      \fill ([xshift=1.8cm*.6,yshift=2.81cm*.6]germany.south west) circle[radius=.75mm] coordinate (frankfurt-on-map) node[right=1mm,align=left,scale=.5] {\textbf{Frankfurt}\\[-1mm]am Main};
+      \draw[rounded corners=1pt,densely dotted] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
+      \foreach \i in {1,2,3} {
+         \fill [gray] (c\i) circle[radius=.5mm];
+      }
+   }
+   \onslide<7->{
+      \draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
+   }
+
+\end{tikzpicture}
+\end{frame}
+% und tatsächlich müssten wir eig erstmal wissen wo die server tatsächlich liegen.

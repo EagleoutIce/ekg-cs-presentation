@@ -1,0 +1,72 @@
+\errorcontextlines99999
+\documentclass[aspectratio=169,usepdftitle=true]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{microtype}
+
+\usepackage{etoolbox}
+\usepackage{customdice}
+
+\makeatletter
+\appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}{lib/tikzpingus/tex/}{lib/fancyqr/}}
+
+\usepackage{lib/color-palettes/color-palettes}
+\usepackage{lib/fancyqr/fancyqr}
+\usepackage[cpalette,encoding,defaultfont,fakeminted]{lib/sopra-collection/sopra-listings/sopra-listings}
+
+\solLoadLanguage{R}
+\solsetmintedstyle{plain number}
+
+\usepackage{lib/beamer-themes/dividing-lines/beamerthemedividing-lines}
+\SetColorProfile{42, 42, 42}{249, 166, 2}{137,64,75}
+\definecolor{btdl@color@background}{rgb}{252, 252, 252}
+
+\usepackage[backend=bibtex8,style=numeric]{biblatex}
+\usepackage{csquotes}
+\usepackage{tabularx,array}
+\let\say\enquote
+% \addbibresource{references.bib}
+% \outro{\printBibCommand}
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,backgrounds,shapes.symbols,decorations.pathreplacing,3d}
+\usepackage{forest}
+\usepackage{lib/tikzpingus/tex/tikzpingus}
+\setbeamerfont{subtitle}{size=\fontsize{19}{19},series=\sbfamily}
+
+% too short of a presentation
+\sectionbannerfalse
+
+\usepackage{fontawesome}
+
+\tikzset{
+    path image shift/.style={},
+    path image/.style={path picture={\node at ([path image shift]path picture bounding box.center) {#1};}}
+}
+
+\def\PlaceFramenumberUpperLeft{}
+\def\TitlepageSlideAlign{c}
+\def\titlepage{%
+\begin{tikzpicture}[@O]
+   \node[align=left,font=\usebeamerfont{title}\usebeamercolor{title}] at (current page.center) {%
+      \MakeUppercase{\inserttitle}\endgraf
+   };
+   \node[below left] at(current page.north east) {\color{gray}\href{https://github.com/EagleoutIce/ekg-cs-presentation}{\faGithub}};
+\end{tikzpicture}
+}
+
+\tikzset{
+   T/.style={text=gray,font=\scriptsize\sffamily},
+   @O/.style={overlay,remember picture}
+}
+\errorcontextlines9999
+\lstset{add to literate=
+   {<-}{{{\!\(\leftarrow\)\!}}}2
+}
+
+% license infos
+\usepackage{CJKutf8}
+\def\MixinOnGray{28!btdl@color@background}

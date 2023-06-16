@@ -1,0 +1,19 @@
+
+\newsavebox\pinguA
+\newsavebox\pinguB
+\newsavebox\pinguE
+
+\def\PinguACode{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat=darkgray, eyes wink,heart,mask]}
+\def\PinguBCode{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=darkgray]}
+\savebox\pinguA{\tikz{\PinguACode}}
+\savebox\pinguB{\tikz{\PinguBCode}}
+
+\savebox\pinguE{\tikz{\pingu[body=btdl@color@primary,eyes angry, sunglasses, cloak=black!92!gray, cloak cap=!hide, devil horns=btdl@color@primary,tie=black!92!gray, eye patch right]}}
+
+
+\newsavebox\pinguAGray
+\newsavebox\pinguBGray
+
+
+\savebox\pinguAGray{\tikz{\pingu[body=btdl@color@primary, body type=legacy, right wing wave, conical hat=darkgray, eyes wink,heart,mask,:mix-all=\MixinOnGray]}}
+\savebox\pinguBGray{\tikz{\pingu[body=btdl@color@primary,eyes shiny,feet sit, wings grab, cup=darkgray,:mix-all=\MixinOnGray]}}
