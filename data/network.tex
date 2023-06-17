@@ -142,8 +142,7 @@ route/.style={draw, shape=single arrow, single arrow head extend=4mm,
     arc (0:-60:3cm and .75cm) -- +(0,1) arc (-60:0:3cm and .75cm) -- cycle;
   \draw [thick] (ll) arc (-180:0:3cm and .75cm)
     -- (ur) arc (0:-180:3cm and .75cm) -- cycle;
-  \draw [thick, shade, upper left=switch, lower left=switch,
-    upper right=switch, lower right=switch!10!white] (ul)
+  \draw [thick, fill=switch!50!white] (ul)
     arc (-180:180:3cm and .75cm);
   \node at (0,.75){\color{switch!10!black}\Huge #1};% The name of the router
   %  We will now draw the symbol of the course
