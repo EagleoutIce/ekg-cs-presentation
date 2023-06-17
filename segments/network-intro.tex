@@ -17,8 +17,8 @@
    % connect the home to the web :P
    \draw[link] (homepc1) -- (homenet1) -- (homeroute1);
 \end{tikzpicture}}
-\begin{frame}
-\only<1|handout:0>{\savebox\World{\tikz{\WORLD}}}
+\begin{frame}{}
+\hypertarget{@FinalWorldIntro}{}\only<1|handout:0>{\savebox\World{\tikz{\WORLD}}}%
 \only<2->{%
    \savebox\World{%
       \tikz{%
@@ -141,11 +141,26 @@
    \only<7->{
       \draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
    }
-
 \end{tikzpicture}
+\global\setbox\World=\box\World
 \end{frame}
 % und tatsächlich müssten wir eig erstmal wissen wo die server tatsächlich liegen.
-
+\newsavebox\FinalInfIntro
+\setbox\FinalInfIntro=\hbox{% we have to reconstruct the slide as it is more of an overlay based construction
+\begin{tikzpicture}
+ \node at (0,0) {\resizebox*{.8\paperwidth}{!}{\usebox\World}};
+ \node[above right,yshift=-1.75cm,scale=.6] (germany) at(current bounding box.south west) {\usebox\Germany};
+ \node[above] (home) at(current bounding box.south) {\usebox\Home};
+ \fill ([xshift=2.15cm*.6,yshift=1.3cm*.6]germany.south west) circle[radius=.75mm] coordinate (home-on-map);
+ \draw[densely dashed] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south west);
+\fill ([xshift=1.8cm*.6,yshift=2.81cm*.6]germany.south west) circle[radius=.75mm] coordinate (frankfurt-on-map) node[right=1mm,align=left,scale=.5] {\textbf{Frankfurt}\\[-1mm]am Main};
+\draw[rounded corners=1pt,densely dotted] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
+\foreach \i in {1,2,3} {
+\fill [gray] (c\i) circle[radius=.5mm];
+}
+\draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
+\end{tikzpicture}
+}
 
 % nur kurz als einblick, machen wir aber alles nicht :P
 

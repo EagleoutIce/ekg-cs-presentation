@@ -487,11 +487,6 @@
 % https://www.qi.damtp.cam.ac.uk/files/PartIIQIC/QIC-6.pdf
 
 
-% first recap
-% box | link
-\def\PrintSlide#1#2{\tikz{% center on page scale
-   \draw[path image={\hyperlink{#2}{\scalebox{.4}{\usebox#1}}},rounded corners=1.25pt,draw=lightgray,fill=btdl@color@background] (0,0) rectangle ++(.4\paperwidth,.225\paperwidth);% hardcoded 16:9 aspect ratio
-}}
 {
 \newsavebox\RecapSlideA \savebox\RecapSlideA{\PrintSlide\FinalCryptIntroSlide{@FinalCrypt}}
 \newsavebox\RecapSlideB \savebox\RecapSlideB{\PrintSlide\FinalPolarisationSlide{@Polarisation}}
@@ -506,4 +501,3 @@
 \end{uncoverenv}
 \end{frame}
 }
-

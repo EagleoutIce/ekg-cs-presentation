@@ -35,7 +35,13 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,backgrounds,shapes.symbols,decorations.pathreplacing,3d,graphs,shapes.multipart}
 \usepackage{forest}
-\usepackage{lib/tikzpingus/tex/tikzpingus}
+\usepackage[glows]{lib/tikzpingus/tex/tikzpingus}
+\newsavebox\OutPingu
+\setbox\OutPingu=\hbox{\tikz{\pingu[lightsaber right,right wing wave, glow,devil wings=btdl@color@primary!80!black,wool hat=darkgray,laptop left,eyes wink,blush,heart,body type=legacy,bow tie=pingu@blue]}}
+\PostPage{\begin{tikzpicture}[@O]
+   \node at(current page.center) {\usebox\OutPingu};
+\end{tikzpicture}}
+
 \setbeamerfont{subtitle}{size=\fontsize{19}{19},series=\sbfamily}
 
 % too short of a presentation
@@ -71,3 +77,9 @@
 % license infos
 \usepackage{CJKutf8}
 \def\MixinOnGray{28!btdl@color@background}
+
+% first recap
+% box | link
+\def\PrintSlide#1#2{\tikz{% center on page scale
+   \draw[path image={\hyperlink{#2}{\scalebox{.4}{\usebox#1}}},rounded corners=3.25pt,draw=lightgray,fill=btdl@color@background] (0,0) rectangle ++(.4\paperwidth,.225\paperwidth);% hardcoded 16:9 aspect ratio
+}}
