@@ -21,9 +21,11 @@
    \tikzset{#1/.style={#2}}
 }}}
 \tikzset{
-   current/.style={fill=btdl@color@background,draw=black,text=black},%
-   queue/.style={fill=gray},
-   visited/.style={fill=btdl@color@background,draw=gray,text=gray}
+   current/.style={fill=black,draw=black,text=white},%
+   unqueued/.style={fill=btdl@color@background,draw=gray,text=gray},
+   queue/.style={fill=btdl@color@background,draw=black,text=black},
+   startend/.style={unqueued,minimum size=5mm},
+   visited/.style={fill=gray,draw=white,text=white}
 }
 \begin{frame}
 \begin{tikzpicture}[@O,base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base}]
@@ -67,9 +69,9 @@
    \scope[shift={([xshift=-3cm,yshift=1cm]current page.center)},k/.style={font=\scriptsize,midway}]
    \only<8-|handout:3>{
       \tikzset{
-         base/.style={fill=lightgray},
-         b/.style={},
-         j/.style={},
+         base/.style={unqueued},
+         b/.style={startend},
+         j/.style={startend},
       }
    }
    \foreach[count=\i from 11] \n in {e,d,,a,c,h,,i,,,,j,,g}{
@@ -130,6 +132,11 @@
    \node[dot,i] (i) at (4,-3) {i};
    \node[dot,j] (j) at (4,-1) {j};
    \node[dot,f] (f) at (6,0) {f};
+   \only<8-|handout:3>{
+      \node[left,gray] at(b.west) {\faCaretRight};
+      \node[left,gray] at(j.west) {\faCaretRight};
+   }
+   \scope[every path/.append style={line cap=round,gray}]
    \draw (a) -- (e) node[above,sloped,k] {10};
    \draw (a) -- (h) node[above,sloped,k,pos=.75] {4};
    \draw (b) -- (e) node[above,sloped,k] {7.5};
@@ -151,6 +158,7 @@
    \draw (h) -- (j) node[right,k] {3};
 
    \draw (i) -- (j) node[right,k] {6};
+   \endscope
    \endscope
    \only<9-|handout:3>{
       \node[above=8mm] (@title) at(current page.south) {\usebeamerfont{subtitle}Breitensuche};
