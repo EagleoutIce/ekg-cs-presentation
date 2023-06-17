@@ -197,7 +197,7 @@
 }}
 \newsavebox\FinalDijkstra
 \begin{frame}{}
-\def\n{---}%
+\hypertarget{@Dijkstra}{}\def\n{---}%
 \tikzset{base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base},dot/.style={minimum size=3mm,circle,fill=black,text=white,font=\scriptsize\sbfamily\boldmath,outer sep=0pt}}%
 \begin{lrbox}\FinalDijkstra
 \begin{tikzpicture}
@@ -298,6 +298,7 @@
    \node[above=3mm] at(current page.south) {\usebeamerfont{subtitle}Dijkstra-Algorithmus};
 }
 \end{tikzpicture}
+\global\setbox\FinalDijkstra=\box\FinalDijkstra
 \end{frame}
 
 \def\PlaceAt#1#2#3#4{%
@@ -343,10 +344,12 @@
 % algorithms did blow up the pdflatex main memory size
 {\def\mark#1{{\sbfamily#1}}
 
+\newsavebox\FinalPseudo
 \begin{frame}{}
-\begin{tikzpicture}[@O]
-   \node[align=left,font=\scriptsize] at(current page.center) {%
-\mark{Eingabe:} Graph \(G = (V, E)\), Start- und Endknoten \(s, e \subseteq V\)\bigskip\\
+\hypertarget{@Pseudocode}{}%
+\begin{lrbox}{\FinalPseudo}%
+\begin{minipage}{.7\linewidth}
+\scriptsize\mark{Eingabe:} Graph \(G = (V, E)\), Start- und Endknoten \(s, e \subseteq V\)\bigskip\\
 Erzeuge Prioritätswarteschlange \(Q\)\smallskip\\
 \mark{Für alle} \(v \in V\) \mark{tue:}\\
 \null\qquad \(v.\text{Kosten} \gets \infty\)\\
@@ -355,7 +358,7 @@ Erzeuge Prioritätswarteschlange \(Q\)\smallskip\\
 \(s.\text{Kosten} \gets 0\)\smallskip\\
 
 \mark{Solange} \(Q\) nicht leer ist, \mark{tue:}\\
-\null\qquad \(u \gets \text{Wähle}~v\) mit minimalen \(v.\text{Kosten}\) aus \(Q\)\smallskip\\
+\null\qquad \(u \gets \text{Wähle}~v\) mit minimalen Kosten aus \(Q\)\smallskip\\
 \null\qquad \mark{Wenn} \(u\) das gesuchte \(e\) ist, \mark{dann:}\\
 \null\qquad\qquad \mark{Gib} Pfad von \(e\) über Vorgänger \mark{zurück}\smallskip\\
 \null\qquad Entferne \(u\) aus \(Q\)\smallskip\\
@@ -365,10 +368,16 @@ Erzeuge Prioritätswarteschlange \(Q\)\smallskip\\
 \null\qquad\qquad\qquad \(v.\text{Kosten} \gets a\)\\
 \null\qquad\qquad\qquad \(v.\text{Vorgänger} \gets u\)\smallskip\\
 \mark{Gib zurück}, dass kein Pfad gefunden wurde
+\end{minipage}
+\end{lrbox}%
+\begin{tikzpicture}[@O]
+   \node[align=left] at(current page.center) {%
+      \usebox\FinalPseudo
    };
    \node[above right,gray,scale=.5] at(current page.south west) {\tiny Dem hier gezeigten Pseudocode fehlen Optimierungen, die in der vorherigen Animation verwendet wurden.};
    % z.b., dass wir hier versuchen immer jeden Nachbar zu aktualisieren
 \end{tikzpicture}
+\global\setbox\FinalPseudo=\box\FinalPseudo
 \end{frame}
 
 \begin{frame}[c]{}
@@ -386,8 +395,21 @@ Erzeuge Prioritätswarteschlange \(Q\)\smallskip\\
 \end{frame}
 
 }
-\begin{frame}
-   TODO: Recap
-\end{frame}
 % O(Kantenanzahl + Knoteanzahl^2) = O(Knotenanzahl^2)
+}
+
+
+{
+\newsavebox\InfRecapSlideA \savebox\InfRecapSlideA{\PrintSlide\FinalInfIntro{@FinalWorldIntro}}
+\newsavebox\InfRecapSlideB \savebox\InfRecapSlideB{\PrintSlide\FinalDijkstra{@Dijkstra}}
+\newsavebox\InfRecapSlideC \savebox\InfRecapSlideC{\PrintSlide\FinalPseudo{@Pseudocode}}
+\begin{frame}{}
+\begin{uncoverenv}<2->
+\begin{tikzpicture}[@O]
+   \node[left=2mm] at(current page.center) {\usebox\InfRecapSlideA};
+   \node[above right=2mm] at(current page.center) {\usebox\InfRecapSlideB};
+   \node[below right=2mm] at(current page.center) {\usebox\InfRecapSlideC};
+\end{tikzpicture}
+\end{uncoverenv}
+\end{frame}
 }
