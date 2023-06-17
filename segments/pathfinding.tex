@@ -280,7 +280,7 @@
 \end{tikzpicture}
 \end{lrbox}
 \begin{tikzpicture}[@O]
-   \node[scale=.9] at ([yshift=-5mm]current page.center) {\usebox\FinalDijkstra};
+   \node[scale=.9] at ([yshift=-2mm]current page.center) {\usebox\FinalDijkstra};
 \only<5->{
    % TODO: access \csxdef{#1Count}{\x}
    \draw[lightgray] ([yshift=-1.25cm]current page.north west) node[above right] {\tiny\sbfamily Prioritätswarteschlange} -- ([yshift=-1.25cm]current page.north east);
@@ -295,7 +295,7 @@
    }
 }
 \only<35->{
-   \node[above] at(current page.south) {\usebeamerfont{subtitle}Dijkstra-Algorithmus};
+   \node[above=3mm] at(current page.south) {\usebeamerfont{subtitle}Dijkstra-Algorithmus};
 }
 \end{tikzpicture}
 \end{frame}
@@ -339,9 +339,53 @@
    };
 \end{tikzpicture}
 \end{frame}
-\begin{frame}
-   TODO: Pseudocode und analyse zum nachschlagen
+
+% algorithms did blow up the pdflatex main memory size
+{\def\mark#1{{\sbfamily#1}}
+
+\begin{frame}{}
+\begin{tikzpicture}[@O]
+   \node[align=left,font=\scriptsize] at(current page.center) {%
+\mark{Eingabe:} Graph \(G = (V, E)\), Start- und Endknoten \(s, e \subseteq V\)\bigskip\\
+Erzeuge Prioritätswarteschlange \(Q\)\smallskip\\
+\mark{Für alle} \(v \in V\) \mark{tue:}\\
+\null\qquad \(v.\text{Kosten} \gets \infty\)\\
+\null\qquad \(v.\text{Vorgänger} \gets \text{?}\)\\
+\null\qquad Füge \(v\) zu \(Q\) hinzu\smallskip\\
+\(s.\text{Kosten} \gets 0\)\smallskip\\
+
+\mark{Solange} \(Q\) nicht leer ist, \mark{tue:}\\
+\null\qquad \(u \gets \text{Wähle}~v\) mit minimalen \(v.\text{Kosten}\) aus \(Q\)\smallskip\\
+\null\qquad \mark{Wenn} \(u\) das gesuchte \(e\) ist, \mark{dann:}\\
+\null\qquad\qquad \mark{Gib} Pfad von \(e\) über Vorgänger \mark{zurück}\smallskip\\
+\null\qquad Entferne \(u\) aus \(Q\)\smallskip\\
+\null\qquad \mark{Für alle} Nachbarn \(v\) von \(u\) \mark{tue:}\\
+\null\qquad\qquad \(a \gets u.\text{Kosten} + \text{Kosten der Kante } \{u, v\}\)\\
+\null\qquad\qquad \mark{Wenn} \(a < v.\text{Kosten}\), \mark{dann:}\\
+\null\qquad\qquad\qquad \(v.\text{Kosten} \gets a\)\\
+\null\qquad\qquad\qquad \(v.\text{Vorgänger} \gets u\)\smallskip\\
+\mark{Gib zurück}, dass kein Pfad gefunden wurde
+   };
+   \node[above right,gray,scale=.5] at(current page.south west) {\tiny Dem hier gezeigten Pseudocode fehlen Optimierungen, die in der vorherigen Animation verwendet wurden.};
+   % z.b., dass wir hier versuchen immer jeden Nachbar zu aktualisieren
+\end{tikzpicture}
 \end{frame}
+
+\begin{frame}[c]{}
+\begin{tikzpicture}[@O]
+   \node[align=left,text width=.7\linewidth] at(current page.center) {%
+      \begin{itemize}
+         \itemsep16pt
+         \item<2-> Korrektheitsbeweise
+         \item<3-> Laufzeitanalysen
+         \item<4-> Optimierungen und alternative Ansätze
+         \item<5-> Implementierung
+      \end{itemize}
+   };
+\end{tikzpicture}
+\end{frame}
+
+}
 \begin{frame}
    TODO: Recap
 \end{frame}
