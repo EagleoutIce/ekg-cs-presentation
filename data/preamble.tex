@@ -11,10 +11,11 @@
 \usepackage{booktabs}
 
 \makeatletter
-\appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}{lib/tikzpingus/tex/}{lib/fancyqr/}}
+\appto\input@path{{lib/color-palettes/}{lib/sopra-collection/sopra-listings}{lib/tikzpingus/tex/}{lib/fancyqr/}{data/}}
 
 \usepackage{lib/color-palettes/color-palettes}
 \usepackage{lib/fancyqr/fancyqr}
+\usepackage{data/beamer-latex-pdfpc-notes}
 \usepackage[cpalette,encoding,defaultfont,fakeminted]{lib/sopra-collection/sopra-listings/sopra-listings}
 
 \solLoadLanguage{R}
@@ -51,7 +52,8 @@
 
 \tikzset{
     path image shift/.style={},
-    path image/.style={path picture={\node at ([path image shift]path picture bounding box.center) {#1};}}
+    path image/.style={path picture={\node at ([path image shift]path picture bounding box.center) {#1};}},
+    every path/.append style={line cap=round, line join=round}
 }
 
 \def\PlaceFramenumberUpperLeft{}
