@@ -2,7 +2,7 @@
 \newsavebox\World
 \newsavebox\Home
 \savebox\Home{\colorlet{black}{darkgray}\begin{tikzpicture}[shift={(-2cm,2cm)}, router size/.style={scale=.2}, tiny router size/.style={scale=.1},link/.style={},gray]
-   \draw[rounded corners=2pt] (-3.55,-.25) -| ++ (-2,1.5) -- ++(-.25,0) -- ++(1.25,.5) -- ++(1.25,-.5) -| (-3.55,-.25) -- cycle;
+   \draw[rounded corners=2pt,U] (-3.55,-.25) -| ++ (-2,1.5) -- ++(-.25,0) -- ++(1.25,.5) -- ++(1.25,-.5) -| (-3.55,-.25) -- cycle;
 
    % ignore for old reasons :P
    \node[tiny router size] (homenet1) at (-4,0) {\router{}};
@@ -26,11 +26,11 @@
          \onslide<3->{
             \colorlet{@col}{black}
             \only<4->{\colorlet{@col}{gray}}
-            \draw[-Kite,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend right=25] ([xshift=1cm,yshift=-4mm]UnitedStatesOfAmerica.center);
-            \draw[-Kite,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend left=25] (China.center);
+            \draw[-Kite,U,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend right=25] ([xshift=1cm,yshift=-4mm]UnitedStatesOfAmerica.center);
+            \draw[-Kite,U,@col] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) to[bend left=25] (China.center);
          }
          \only<6|handout:0>{
-            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) coordinate (@t); % -- (Netherlands.center);
+            \draw[thick,U] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) coordinate (@t); % -- (Netherlands.center);
          }
          % traceroute -e -I www.google.com
          % traceroute to www.google.com (142.250.181.228), 30 hops max, 60 byte packets
@@ -52,7 +52,7 @@
             % address:        1119PE Schiphol-Rijk
             % address:        Netherlands
             % https://www.whois.com/whois/84.116.190.34
-            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center)  coordinate (@t);
+            \draw[thick,U] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center)  coordinate (@t);
          }
          \only<8|handout:0> {
             % Newbury
@@ -61,7 +61,7 @@
             % address:        Newbury
             % address:        UNITED KINGDOM
             % https://www.whois.com/whois/195.2.26.93
-            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) coordinate (@t);
+            \draw[thick,U] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) coordinate (@t);
          }
          \only<9-> {
             % Address:        1600 Amphitheatre Parkway
@@ -70,7 +70,7 @@
             % PostalCode:     94043
             % Country:        US
             % https://www.whois.com/whois/142.251.65.75
-            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([yshift=-5mm,xshift=-.25mm]UnitedStatesOfAmerica.center) coordinate (@t);
+            \draw[thick,U] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([yshift=-5mm,xshift=-.25mm]UnitedStatesOfAmerica.center) coordinate (@t);
             \node[left=3.5mm] at(@t) {\llap{\url{www.google.com}}};
          }
          % traceroute -e -I gaj.sh.gov.cn
@@ -103,7 +103,7 @@
             % https://www.whois.com/whois/61.137.11.50 Chinanet hunan Hunan
             % ...
             % https://www.whois.com/whois/175.6.201.209 Chinanet Bejing
-            \draw[thick] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([xshift=8.5mm,yshift=3mm]China.center) coordinate (@c) -- ([xshift=4.5mm,yshift=-4mm]China.center);
+            \draw[thick,U] ([xshift=-.25pt,yshift=-3.25pt]Germany.center) -- ++(-1mm,1mm) -- (Netherlands.center) -- (UnitedKingdom.center) -- ([xshift=8.5mm,yshift=3mm]China.center) coordinate (@c) -- ([xshift=4.5mm,yshift=-4mm]China.center);
             \fill[circle] (@c) circle[radius=.75mm];
             \node[right=3.5mm] at(@c) {\href{http://gaj.sh.gov.cn}{gaj.sh.gov.cn}};
          }
@@ -129,17 +129,17 @@
    \only<5->{
       \node[above=3mm,xscale=-1] (home) at (current page.south) {\usebox\Home};
       % TODO: skipping verteiler
-      \draw[densely dashed] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south east);
+      \draw[densely dashed,U] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south east);
    }
    \only<6->{
       \fill ([xshift=1.8cm*.6,yshift=2.81cm*.6]germany.south west) circle[radius=.75mm] coordinate (frankfurt-on-map) node[right=1mm,align=left,scale=.5] {\textbf{Frankfurt}\\[-1mm]am Main};
-      \draw[rounded corners=1pt,densely dotted] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
+      \draw[rounded corners=1pt,densely dotted,U] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
       \foreach \i in {1,2,3} {
          \fill [gray] (c\i) circle[radius=.5mm];
       }
    }
    \only<7->{
-      \draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
+      \draw[-Kite,densely dashed,U] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
    }
 \end{tikzpicture}
 \global\setbox\World=\box\World
@@ -152,13 +152,13 @@
  \node[above right,yshift=-1.75cm,scale=.6] (germany) at(current bounding box.south west) {\usebox\Germany};
  \node[above] (home) at(current bounding box.south) {\usebox\Home};
  \fill ([xshift=2.15cm*.6,yshift=1.3cm*.6]germany.south west) circle[radius=.75mm] coordinate (home-on-map);
- \draw[densely dashed] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south west);
+ \draw[densely dashed,U] (home-on-map) -- ([xshift=3mm,yshift=4.25mm]home.south west);
 \fill ([xshift=1.8cm*.6,yshift=2.81cm*.6]germany.south west) circle[radius=.75mm] coordinate (frankfurt-on-map) node[right=1mm,align=left,scale=.5] {\textbf{Frankfurt}\\[-1mm]am Main};
-\draw[rounded corners=1pt,densely dotted] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
+\draw[rounded corners=1pt,densely dotted,U] (home-on-map) -- ++(5mm,3mm) coordinate (c1) -- ++(-6mm,2mm) coordinate (c2) -- ++(-2mm,3mm)  coordinate (c3) -- (frankfurt-on-map);
 \foreach \i in {1,2,3} {
 \fill [gray] (c\i) circle[radius=.5mm];
 }
-\draw[-Kite,densely dashed] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
+\draw[-Kite,densely dashed,U] (frankfurt-on-map) to[out=110,in=-70] ++(-.65cm,1cm);
 \end{tikzpicture}
 }
 
@@ -171,7 +171,7 @@
 \def\DrawLayers#1#2#3#4{
       \foreach[count=\y] \layer in {#2} {
          % \ifnum\y=#4 \relax \colorlet{aplfill}{green!15} \fi
-         \draw[fill=aplfill,draw=black] ($(#1)+(0,0.5*\y)$) rectangle ++(#4,0.5) node[midway,centered,rectangle,minimum width=2cm,minimum height=0.5cm,inner sep=0pt,outer sep=0pt] (#3\layer) {\strut\layer};
+         \draw[fill=aplfill,draw=black,U] ($(#1)+(0,0.5*\y)$) rectangle ++(#4,0.5) node[midway,centered,rectangle,minimum width=2cm,minimum height=0.5cm,inner sep=0pt,outer sep=0pt] (#3\layer) {\strut\layer};
       }
 }
 
@@ -180,11 +180,11 @@
 \colorlet{@hlb}{gray!15}%
 \only<2->{\colorlet{@hla}{gray!30}\colorlet{@hlb}{gray!5}}
 % horrible tikz figure i used in a lecture recap, sloppily adapted to fit on this slide
-\begin{tikzpicture}[every node/.style={font={\footnotesize\sffamily}, scale=.65}, router size/.style={scale=0.2}, tiny router size/.style={scale=0.1},scale=0.65,link/.style={thick},every path/.append style={line cap=round, line join=round}, @O] % very thick,green!75
+\begin{tikzpicture}[every node/.style={font={\footnotesize\sffamily}, scale=.65}, router size/.style={scale=0.2}, tiny router size/.style={scale=0.1},scale=0.65,link/.style={thick,U},every path/.append style={line cap=round, line join=round}, @O] % very thick,green!75
 
    % split tags
-   \draw[densely dashed] ([xshift=-.2\paperwidth]current page.north) -- ([xshift=-.3\paperwidth]current page.south);
-   \draw[densely dashed] ([xshift=.25\paperwidth]current page.north) -- ([xshift=.15\paperwidth]current page.south);
+   \draw[densely dashed,U] ([xshift=-.2\paperwidth]current page.north) -- ([xshift=-.3\paperwidth]current page.south);
+   \draw[densely dashed,U] ([xshift=.25\paperwidth]current page.north) -- ([xshift=.15\paperwidth]current page.south);
 
    % labels
    \node[below=2mm,font=\large\sffamily] at (current page.north) {Network Core};
@@ -200,7 +200,7 @@
    \node[router size] (regisp2) at ($(regisp1) + (-1,-1)$) {\router{}};
    \node[router size] (regisp3) at ($(regisp1) + (1,-1)$) {\router{}};
    \node[below] at($(regisp1) + (0,-1.5)$) {reg. ISP};
-   \draw[link] (regisp1) -- (regisp2) -- (regisp3) -- (regisp1); % connect regional isp
+   \draw[link,U] (regisp1) -- (regisp2) -- (regisp3) -- (regisp1); % connect regional isp
 
    %% global ISP, seems to be somewhat 'crazy' :P
    \coordinate (globcenter) at (3,3.5);
@@ -210,15 +210,15 @@
    \node[router size] (globisp3) at ($(globisp1) + (1.75,1.15)$) {\router{}};
    \node[router size] (globisp4) at ($(globisp1) + (2.25,0.15)$) {\router{}};
    \node[above] at ([yshift=1cm]globcenter) {glob. ISP~~};
-   \draw[link] (globisp1) edge (globisp2) (globisp2) edge (globisp3) (globisp3) edge (globisp4) (globisp4) edge  (globisp1) (globisp1) edge (globisp3); % connect regional isp
+   \draw[link,U] (globisp1) edge (globisp2) (globisp2) edge (globisp3) (globisp3) edge (globisp4) (globisp4) edge  (globisp1) (globisp1) edge (globisp3); % connect regional isp
    % dotted 'world' connection:
-   \draw[densely dashed] (globisp4) -- ++(1.75,0);
+   \draw[densely dashed,U] (globisp4) -- ++(1.75,0);
    % connect global and local ISP
-   \draw[link] (regisp1) -- (globisp1) (regisp3) -- (globisp4);
+   \draw[link,U] (regisp1) -- (globisp1) (regisp3) -- (globisp4);
 
    \foreach \i in {3}{% ,3,4,1
          \relax \DrawLayers{globisp\i.north}{physical,link,network}{isp\i-}{2}
-         \draw[fill=btdl@color@background,draw=black,line join=bevel] ([yshift=2mm]globisp\i.north) -- (isp\i-physical.south west) -- (isp\i-physical.south east) -- cycle;
+         \draw[fill=btdl@color@background,draw=black,U,line join=bevel] ([yshift=2mm]globisp\i.north) -- (isp\i-physical.south west) -- (isp\i-physical.south east) -- cycle;
    }
 
    %% home network
@@ -234,32 +234,32 @@
    \node at([yshift=0.3cm,xshift=-0.075cm]homeroute1) {\faWifi};
    \node[below=0.25cm] at ([xshift=-0.5cm]homenet1) {Heimnetzwerk};
    % connect the home to the web :P
-   \draw[link] (homepc1) -- (homenet1) (homenet1) -- (homeroute1);
+   \draw[link,U] (homepc1) -- (homenet1) (homenet1) -- (homeroute1);
 
 
    \coordinate (dslamcenter) at ([xshift=1.25cm,yshift=-0.25cm]homenet1);
 
 
    \begin{scope}[scale=0.4]
-         \draw[densely dashed,fill=btdl@color@background] ([xshift=2.25cm,yshift=-0.25cm]dslamcenter) -| ++ (-3,2.5) -- ++(-0.25,0) -- ++(1.75,1) -- ++(1.75,-1) -| cycle;
+         \draw[densely dashed,fill=btdl@color@background,U] ([xshift=2.25cm,yshift=-0.25cm]dslamcenter) -| ++ (-3,2.5) -- ++(-0.25,0) -- ++(1.75,1) -- ++(1.75,-1) -| cycle;
 
-         \filldraw[left color=btdl@color@background,right color=gray,line join=round] (dslamcenter) -- ++(0.4,0) -- ++(0.5,0.25) -- ++(0.2,0) -- ++(0,1) -- ++(-0.2,0) -- ++(-0.5,0.25) -- ++(-0.4,0)--cycle;
-         \draw[fill=gray,line join=round] (dslamcenter)++(0,1.5) -- ++(0.25,0.5) -- ++(0.4,0) -- ++(0.5,-0.25) -- ++(0.2,0) -- ++(-0.25,-0.5) -- ++(-0.2,0) -- ++(-0.5,0.25) -- ++(-0.4,0);
-         \draw[fill=gray,line join=round] (dslamcenter)++(1.1,0.25) -- ++(0.25,0.5) -- ++(0,1) -- ++(-0.25,-0.5) -- cycle;
-         \draw[-{Kite[scale=.4]}] (dslamcenter)++(0.1,0.25)-- ++(0.2,0) -- ++(0.5,0.25) -- ++(0.2,0);
-         \draw[-{Kite[scale=.4]}] (dslamcenter)++(0.1,1.25)-- ++(0.2,0) -- ++(0.5,-0.25) -- ++(0.2,0);
-         \draw[-{Kite[scale=.4]}] (dslamcenter)++(0.1,0.75)-- ++(0.9,0);
+         \filldraw[left color=btdl@color@background,right color=gray,U] (dslamcenter) -- ++(0.4,0) -- ++(0.5,0.25) -- ++(0.2,0) -- ++(0,1) -- ++(-0.2,0) -- ++(-0.5,0.25) -- ++(-0.4,0)--cycle;
+         \draw[fill=gray,U] (dslamcenter)++(0,1.5) -- ++(0.25,0.5) -- ++(0.4,0) -- ++(0.5,-0.25) -- ++(0.2,0) -- ++(-0.25,-0.5) -- ++(-0.2,0) -- ++(-0.5,0.25) -- ++(-0.4,0);
+         \draw[fill=gray,U] (dslamcenter)++(1.1,0.25) -- ++(0.25,0.5) -- ++(0,1) -- ++(-0.25,-0.5) -- cycle;
+         \draw[-{Kite[scale=.4]},U] (dslamcenter)++(0.1,0.25)-- ++(0.2,0) -- ++(0.5,0.25) -- ++(0.2,0);
+         \draw[-{Kite[scale=.4]},U] (dslamcenter)++(0.1,1.25)-- ++(0.2,0) -- ++(0.5,-0.25) -- ++(0.2,0);
+         \draw[-{Kite[scale=.4]},U] (dslamcenter)++(0.1,0.75)-- ++(0.9,0);
          % 1.25,3.25
          \node[above] at([xshift=0.75cm,yshift=3.25cm]dslamcenter) {DSLAM};
 
          \coordinate (dslamexit) at ([xshift=1.35cm,yshift=0.75cm]dslamcenter);
 
          % \node[above=2cm] at ([xshift=0.75cm]dslamcenter) {DSLAM};
-         \draw[link] (dslamexit) -- ([xshift=-4.2cm]dslamexit-|regisp1);
+         \draw[link,U] (dslamexit) -- ([xshift=-4.2cm]dslamexit-|regisp1);
 
-         \draw (dslamexit)++(0,0.75) -- ++(1.25,0) node[right] {Tel. Net.};
+         \draw[U] (dslamexit)++(0,0.75) -- ++(1.25,0) node[right] {Tel. Net.};
    \end{scope}
-   \draw[] (homenet1) -- ++(1.25cm,0);
+   \draw[U] (homenet1) -- ++(1.25cm,0);
 
 
    %% institution network, we will do it tiny for 'consistency reasons' :P
@@ -269,14 +269,14 @@
    \node[tiny router size] (instrout1) at (instinit) {\router{}};
    \node[tiny router size] (instrout2) at ($(instrout1) + (-0.95,-0.5)$) {\router{}};
    \node[tiny router size] (instrout3) at ($(instrout1) + (0.5,-0.5)$) {\router{}};
-   \draw[link] (instrout1) -- (instrout2) -- (instrout3) -- (instrout1); % connect regional isp
+   \draw[link,U] (instrout1) -- (instrout2) -- (instrout3) -- (instrout1); % connect regional isp
 
    \node[server,scale=0.75] (instserv1) at ($(instrout3)+(1.25,0.5)$) {};
    \node[server,scale=0.75] (instserv2) at ($(instserv1)+(-0.285,0)$) {};
    % you will recive
    \node[server,scale=0.75] (instserv3) at ($(instserv2)+(-0.285,0)$) {};
 
-   \draw[link] (instrout3) -| (instserv1) (instrout3) -| (instserv2) (instrout3) -| (instserv3);
+   \draw[link,U] (instrout3) -| (instserv1) (instrout3) -| (instserv2) (instrout3) -| (instserv3);
 
    \node[below=0.25cm] at ([xshift=-0.25cm]instrout3) {Institutsnetz};
 
@@ -294,13 +294,13 @@
    \node[server,scale=0.5] (instpc5) at ($(instpc1)+(-0.125,-0.75)$) {};
    \node[server,scale=0.5] (instpc6) at ($(instpc3)+(-0.125,-0.75)$) {};
 
-   \draw[link] (instpc5) -- (instrout2);
+   \draw[link,U] (instpc5) -- (instrout2);
 
    % "wifi":
    \node at([yshift=0.3cm,xshift=-0.075cm]instroute1) {\faWifi};
 
    % connect the instituion to the regional isp
-   \draw[link] (instroute1) -- (instrout1) |- (regisp3);
+   \draw[link,U] (instroute1) -- (instrout1) |- (regisp3);
 
    %% mobile world:
    \coordinate (mobinit) at (-4,3);
@@ -309,7 +309,7 @@
    \node[tiny router size] (mobilenet1) at (mobinit) {\router{}};
 
    % well, i have no shortcut for a wifi-station or something similar, so let's create it on the spot:
-   \begin{scope}[every path/.style={very thick},scale=0.25]
+   \begin{scope}[every path/.style={very thick,U},scale=0.25]
          \coordinate (BaseStart) at ($(mobilenet1)+(-3.25,1.5)$);
          %trapezoid base
          \draw[line join=round] (BaseStart) -- ++(1.5,0.75) -- ++(1.5,-0.75) -- ++(-1.5,-0.75) -- cycle;%
@@ -361,13 +361,13 @@
    \DrawLayers{mobserv1.north}{physical,link,network,transport,application}{source-}{-2}
    \DrawLayers{instserv1.north}{physical,link,network,transport,application}{receive1-}{2}
 
-   \draw[link] (BottomLeftPoint) edge (mobilenet1);% (sender-phone) edge (TopPoint);
+   \draw[link,U] (BottomLeftPoint) edge (mobilenet1);% (sender-phone) edge (TopPoint);
 
-   \draw[link] (mobilenet1) edge (globisp2);
+   \draw[link,U] (mobilenet1) edge (globisp2);
 
-   \draw[fill=btdl@color@background,draw=black,line join=bevel] ([yshift=2mm]instserv1.north) -- (receive1-physical.south west) -- (receive1-physical.south east) -- cycle;
+   \draw[fill=btdl@color@background,draw=black,U,line join=bevel] ([yshift=2mm]instserv1.north) -- (receive1-physical.south west) -- (receive1-physical.south east) -- cycle;
 
-   \draw[fill=btdl@color@background,draw=black,line join=bevel] ([yshift=2mm]mobserv1.north) -- (source-physical.south west) -- (source-physical.south east) -- cycle;
+   \draw[fill=btdl@color@background,draw=black,U,line join=bevel] ([yshift=2mm]mobserv1.north) -- (source-physical.south west) -- (source-physical.south east) -- cycle;
    \node at ($(TopPoint)+(-0.25,-1.5)$) {\Large\faMobile};
    \node at ($(TopPoint)+(-1.5,-1.35)$) {\Large\faMobile};
 
@@ -387,7 +387,7 @@
          \bottomrule
    \end{tabular}};
 
-   \draw[densely dotted,-Kite] (globisp4) -- (routing-table);
+   \draw[densely dotted,-Kite,U] (globisp4) -- (routing-table);
    \endscope
    % DIE EPISCHE LEGENDE VON QUATSCHOPOTTEL! IT IS THE REAL ONE!
 
