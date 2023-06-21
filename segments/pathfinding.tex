@@ -74,7 +74,7 @@
          j/.style={startend},
       }
    }
-   \foreach[count=\i from 11] \n in {e,d,,a,c,h,i,,,,,j,,g}{
+   \foreach[count=\i from 11] \n in {e,d,,c,a,h,i,,,,,j,,g}{
       \ifx!\n!\else
          \On<\i-|handout:3>{\n}{queue}
       \fi
@@ -82,8 +82,8 @@
    \On<10-12|handout:3>{b}{current}\On<13-|handout:3>{b}{visited}
    \On<13-17|handout:3>{e}{current}\On<18-|handout:3>{e}{visited}
    \On<18|handout:3>{d}{current}\On<19-|handout:3>{d}{visited}
-   \On<19|handout:3>{a}{current}\On<20-|handout:3>{a}{visited}
-   \On<20|handout:3>{c}{current}\On<21-|handout:3>{c}{visited}
+   \On<19|handout:3>{c}{current}\On<20-|handout:3>{c}{visited}
+   \On<20|handout:3>{a}{current}\On<21-|handout:3>{a}{visited}
    \On<21-22|handout:3>{h}{current}\On<23-|handout:3>{h}{visited}
    \On<23-24|handout:3>{i}{current}\On<25-|handout:3>{i}{visited}
    \On<25-|handout:3>{j}{current}
@@ -100,10 +100,10 @@
       \node[dot,d,right] (q3) at (q2.east) {d};
    }
    \only<14-|handout:3>{
-      \node[dot,a,right] (q4) at (q3.east) {a};
+      \node[dot,c,right] (q4) at (q3.east) {c};
    }
    \only<15-|handout:3>{
-      \node[dot,c,right] (q5) at (q4.east) {c};
+      \node[dot,a,right] (q5) at (q4.east) {a};
    }
    \only<16-|handout:3>{
       \node[dot,h,right] (q6) at (q5.east) {h};
@@ -122,9 +122,9 @@
    }
    \endscope
 
-   \node[dot,a] (a) at (0,0) {a};
+   \node[dot,a] (a) at (2,1) {a};
    \node[dot,b] (b) at (0,-2) {b};
-   \node[dot,c] (c) at (2,1) {c};
+   \node[dot,c] (c) at (0,0) {c};
    \node[dot,e] (e) at (2,-1) {e};
    \node[dot,d] (d) at (2,-3) {d};
    \node[dot,h] (h) at (4,1) {h};
@@ -137,7 +137,7 @@
       \node[left,gray] at(j.west) {\faCaretRight};
    }
    \scope[every path/.append style={line cap=round,gray}]
-   \draw (a) -- (e) node[above,sloped,k] {10};
+   \draw (a) -- (e) node[right,k] {10};
    \draw (a) -- (h) node[above,sloped,k,pos=.8] {4};
    \draw (b) -- (e) node[above,sloped,k] {7.5};
    \draw (b) -- (d) node[below,k] {6};
@@ -145,7 +145,7 @@
    \draw (d) -- (e) node[left,k] {3};
    \draw (d) -- (i) node[above,k] {8};
 
-   \draw (e) -- (c) node[right,k] {5.5};
+   \draw (e) -- (c) node[above,sloped,k] {5.5};
    \draw (e) -- (h) node[below,sloped,k] {7.5};
    \draw (e) -- (i) node[above,sloped,k] {8};
 
@@ -213,7 +213,7 @@
    }
 }}
 % means more like "looked at for update
-\foreach[count=\i from 6] \n in {e,e,e,d,d,d,,e,i,i,,a,c,h,i,,,j,g,,a,j,,,j,f}{
+\foreach[count=\i from 6] \n in {e,e,e,d,d,d,,e,i,i,,c,a,h,i,,,j,g,,a,j,,,j,f}{
    \ifx!\n!\else
       \On<\i>{\n}{queue}
    \fi
@@ -229,9 +229,9 @@
 \On<32->{j}{current}% \On<33->{g}{visited}
 \scope[@scale]
 % "Lauflängenkompression" could have been helpful xD
-\node[dot,a] (a) at (0,0)  {\Node{a}{3-16/\infty,17-/17.5}{3-16/\n,17-/e}};
+\node[dot,a] (a) at (2,1)  {\Node{a}{3-17/\infty,18-/17.5}{3-17/\n,18-/e}};
 \node[dot,b] (b) at (0,-2) {\Node{b}{3-4/\infty,5-/0}{3-/\n}};
-\node[dot,c] (c) at (2,1)  {\Node{c}{3-17/\infty,18-/13}{3-17/\n,18-/e}};
+\node[dot,c] (c) at (0,0)  {\Node{c}{3-16/\infty,17-/13}{3-16/\n,17-/e}};
 \node[dot,e] (e) at (2,-1) {\Node{e}{3-6/\infty,7-/7.5}{3-7/\n,8-/b}};
 \node[dot,d] (d) at (2,-3) {\Node{d}{3-9/\infty,10-/6}{3-10/\n,11-/b}};
 \node[dot,h] (h) at (4,1)  {\Node{h}{3-18/\infty,19-/15}{3-18/\n,19-/e}};
@@ -246,7 +246,7 @@
 \endscope
 \pgfonlayer{background}
 \scope[every path/.append style={line cap=round,gray}]
-\draw (a) -- (e) node[above,sloped,k] {10};
+\draw (a) -- (e) node[right,k] {10};
 \draw (a.-10) -- (h.200) node[above,sloped,k,pos=.8] {4};
 \draw (b) -- (e) node[above,sloped,k] {7.5};
 \draw (b) -- (d) node[below,k] {6};
@@ -254,7 +254,7 @@
 \draw (d) -- (e) node[left,k] {3};
 \draw (d) -- (i) node[above,k] {8};
 
-\draw (e) -- (c) node[right,k] {5.5};
+\draw (e) -- (c) node[above,sloped,k] {5.5};
 \draw (e) -- (h) node[below,sloped,k] {7.5};
 \draw (e) -- (i) node[above,sloped,k] {8};
 
