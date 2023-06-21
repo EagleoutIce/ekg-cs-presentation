@@ -74,14 +74,14 @@
          j/.style={startend},
       }
    }
-   \foreach[count=\i from 11] \n in {e,d,,a,c,h,,i,,,,j,,g}{
+   \foreach[count=\i from 11] \n in {e,d,,a,c,h,i,,,,,j,,g}{
       \ifx!\n!\else
          \On<\i-|handout:3>{\n}{queue}
       \fi
    }
    \On<10-12|handout:3>{b}{current}\On<13-|handout:3>{b}{visited}
-   \On<13-16|handout:3>{e}{current}\On<17-|handout:3>{e}{visited}
-   \On<17-18|handout:3>{d}{current}\On<19-|handout:3>{d}{visited}
+   \On<13-17|handout:3>{e}{current}\On<18-|handout:3>{e}{visited}
+   \On<18|handout:3>{d}{current}\On<19-|handout:3>{d}{visited}
    \On<19|handout:3>{a}{current}\On<20-|handout:3>{a}{visited}
    \On<20|handout:3>{c}{current}\On<21-|handout:3>{c}{visited}
    \On<21-22|handout:3>{h}{current}\On<23-|handout:3>{h}{visited}
@@ -108,7 +108,7 @@
    \only<16-|handout:3>{
       \node[dot,h,right] (q6) at (q5.east) {h};
    }
-   \only<18-|handout:3>{
+   \only<17-|handout:3>{
       \node[dot,i,right] (q7) at (q6.east) {i};
    }
    \only<22-|handout:3>{
@@ -213,7 +213,7 @@
    }
 }}
 % means more like "looked at for update
-\foreach[count=\i from 6] \n in {e,e,e,d,d,d,,e,i,i,,a,c,h,i,,,j,g,,a,j,,j,f}{
+\foreach[count=\i from 6] \n in {e,e,e,d,d,d,,e,i,i,,a,c,h,i,,,j,g,,a,j,,,j,f}{
    \ifx!\n!\else
       \On<\i>{\n}{queue}
    \fi
@@ -225,8 +225,8 @@
 \On<22-24>{i}{current}\On<25->{i}{visited}
 \On<25-27>{h}{current}\On<28->{h}{visited}
 \On<28>{a}{current}\On<29->{a}{visited}
-\On<29-30>{g}{current}\On<31->{g}{visited}
-\On<31->{j}{current}% \On<32->{g}{visited}
+\On<29-31>{g}{current}\On<32->{g}{visited}
+\On<32->{j}{current}% \On<33->{g}{visited}
 \scope[@scale]
 % "Lauflängenkompression" could have been helpful xD
 \node[dot,a] (a) at (0,0)  {\Node{a}{3-16/\infty,17-/17.5}{3-16/\n,17-/e}};
@@ -238,7 +238,7 @@
 \node[dot,g] (g) at (6,-2) {\Node{g}{3-23/\infty,24-/16}{3-23/\n,24-/i}};
 \node[dot,i] (i) at (4,-3) {\Node{i}{3-14/\infty,15-/14}{3-14/\n,15-/d}};
 \node[dot,j] (j) at (4,-1) {\Node{j}{3-22/\infty,23-26/20,27-/18}{3-22/\n,23-26/i,27-/h}};
-\node[dot,f] (f) at (6,0)  {\Node{f}{3-29/\infty,30-/22}{3-29/\n,30-/g}};
+\node[dot,f] (f) at (6,0)  {\Node{f}{3-30/\infty,31-/22}{3-30/\n,31-/g}};
 \only<2->{\foreach \n in {a, ..., j} {
    % get the additional split | text split did not work
    \draw[\n] ([yshift=0mm]\n.center) -- (\n.south);
@@ -267,9 +267,9 @@
 \draw (h) -- (j) node[right,k] {3};
 
 \draw (i) -- (j) node[right,k] {6};
-\only<32->{ \draw[-Circle,thick,black] (j) -- (h); }
-\only<33->{ \draw[-Circle,thick,black] (h) -- (e); }
-\only<34->{ \draw[-Circle,thick,black] (e) -- (b); }
+\only<33->{ \draw[-Circle,thick,black] (j) -- (h); }
+\only<34->{ \draw[-Circle,thick,black] (h) -- (e); }
+\only<35->{ \draw[-Circle,thick,black] (e) -- (b); }
 \endscope
 \endpgfonlayer
 \endscope
@@ -294,7 +294,7 @@
       };
    }
 }
-\only<35->{
+\only<36->{
    \node[above=3mm] at(current page.south) {\usebeamerfont{subtitle}Dijkstra-Algorithmus};
 }
 \end{tikzpicture}
