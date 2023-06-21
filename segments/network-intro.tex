@@ -181,19 +181,22 @@
 \begin{frame}
 \colorlet{@hla}{gray!15}%
 \colorlet{@hlb}{gray!15}%
-\only<2->{\colorlet{@hla}{gray!30}\colorlet{@hlb}{gray!5}}
+\tikzset{@hlopa/.style={opacity=1}}%
+\only<2->{\colorlet{@hla}{gray!30}\colorlet{@hlb}{gray!5}\tikzset{@hlopa/.style={opacity=.20}}}
 % horrible tikz figure i used in a lecture recap, sloppily adapted to fit on this slide
 \begin{tikzpicture}[every node/.style={font={\footnotesize\sffamily}, scale=.65}, router size/.style={scale=0.2}, tiny router size/.style={scale=0.1},scale=0.65,link/.style={thick,U},every path/.append style={line cap=round, line join=round}, @O] % very thick,green!75
 
    % split tags
+   \scope[@hlopa]
    \draw[densely dashed,U] ([xshift=-.2\paperwidth]current page.north) -- ([xshift=-.3\paperwidth]current page.south);
    \draw[densely dashed,U] ([xshift=.25\paperwidth]current page.north) -- ([xshift=.15\paperwidth]current page.south);
 
    % labels
-   \node[below=2mm,font=\large\sffamily] at (current page.north) {Network Core};
    \path (current page.north west) -- ([xshift=-.2\paperwidth]current page.north) node[pos=.5,below=2mm,font=\large\sffamily] {Network Edge};
    \path (current page.north east) -- ([xshift=.25\paperwidth]current page.north) node[pos=.5,below=2mm,font=\large\sffamily] {Network Edge};
+   \endscope
 
+   \node[below=2mm,font=\large\sffamily] at (current page.north) {Network Core};
 
    % todo: fix nested tikzpic via router, i'm lazy right now [poor flo from 2019]
    %% Regional ISP
@@ -215,7 +218,7 @@
    \node[above] at ([yshift=1cm]globcenter) {glob. ISP~~};
    \draw[link,U] (globisp1) edge (globisp2) (globisp2) edge (globisp3) (globisp3) edge (globisp4) (globisp4) edge  (globisp1) (globisp1) edge (globisp3); % connect regional isp
    % dotted 'world' connection:
-   \draw[densely dashed,U] (globisp4) -- ++(1.75,0);
+   \draw[densely dashed,U,@hlopa] (globisp4) -- ++(1.75,0);
    % connect global and local ISP
    \draw[link,U] (regisp1) -- (globisp1) (regisp3) -- (globisp4);
 
@@ -224,6 +227,7 @@
          \draw[fill=btdl@color@background,draw=black,U,line join=bevel] ([yshift=2mm]globisp\i.north) -- (isp\i-physical.south west) -- (isp\i-physical.south east) -- cycle;
    }
 
+\scope[@hlopa]
    %% home network
    % let's make a house
    \fill[@hlb] (-5.5,-1.25) -| ++ (-2,1.5) -- ++(-0.25,0) -- ++(1.25,0.5) -- ++(1.25,-0.5) -| cycle;
@@ -392,17 +396,7 @@
 
    \draw[densely dotted,-Kite,U] (globisp4) -- (routing-table);
    \endscope
-   % DIE EPISCHE LEGENDE VON QUATSCHOPOTTEL! IT IS THE REAL ONE!
-
-   % \node[text width=5.25cm,scale=0.75] at ([xshift=4.75cm,yshift=1cm]globisp4.east) {%
-   %       \begin{description}[leftmargin=*,widest={\tikz[baseline=-0.6ex]{\node[scale=0.145]{\router{}};}},align=right,itemsep=0.45em]
-   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=0.145]{\router{}};}}] Router, verwaltet die Komm\-unikation (primär Core)
-   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=0.75,server]{};}}] Server/PC, Hosts (primär Edge)
-   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=1.5]{\faMobile};}}] Mobiles Endgerät, mobiler Host (primär Edge)
-   %          \item[{\tikz[baseline=-0.6ex]{\node[scale=0.75,rack switch]{};}}] (Wireless-)Link (primär Edge)
-   %       \end{description}
-   % };
-
+\endscope
 \end{tikzpicture}
 \end{frame}
 }
