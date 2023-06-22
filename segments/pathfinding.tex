@@ -37,7 +37,7 @@
 沁水湾
 \end{CJK*},}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
    }
-   \only<3-|handout:2>{\tikzset{dot/.style={minimum size=3mm,circle,fill=black,}}}
+   \only<3-|handout:2>{\tikzset{dot/.style={minimum size=7mm,circle,fill=black,}}}
 \onslide<2->{
    \PlaceAt{a}{.5}{.5}{e}
    \PlaceAt{b}{.8}{.75}{i}
@@ -65,7 +65,7 @@
 }
 \end{onlyenv}
 \begin{onlyenv}<7-|handout:2-3>
-   \tikzset{dot/.style={minimum size=3mm,circle,fill=black,text=white,font=\scriptsize\sbfamily}}
+   \tikzset{dot/.style={minimum size=7mm,circle,fill=black,text=white,font=\scriptsize\sbfamily}}
    \scope[shift={([xshift=-3cm,yshift=1.25cm]current page.center)},k/.style={font=\scriptsize,midway}]
    \only<8-|handout:3>{
       \tikzset{
@@ -138,7 +138,7 @@
    }
    \scope[every path/.append style={line cap=round,gray}]
    \draw (a) -- (e) node[right,k] {10};
-   \draw (a) -- (h) node[above,sloped,k,pos=.8] {4};
+   \draw (a) -- (h) node[above,sloped,k] {4};
    \draw (b) -- (e) node[above,sloped,k] {7.5};
    \draw (b) -- (d) node[below,k] {6};
 
@@ -166,6 +166,9 @@
    }
 \end{onlyenv}
 \end{tikzpicture}
+\note[itemize]{
+   \item Gaanz viele Router mit super viel Informationen (Städte,~\ldots)
+}(2)
 \end{frame}
 % Optionen:
 %    - Alle Routen | Aber: Schleifen
@@ -198,7 +201,7 @@
 \newsavebox\FinalDijkstra
 \begin{frame}{}
 \hypertarget{@Dijkstra}{}\def\n{---}%
-\tikzset{base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base},dot/.style={minimum size=3mm,circle,fill=black,text=white,font=\scriptsize\sbfamily\boldmath,outer sep=0pt}}%
+\tikzset{base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base},dot/.style={minimum size=7mm,circle,fill=black,text=white,font=\scriptsize\sbfamily\boldmath,outer sep=0pt}}%
 \begin{lrbox}\FinalDijkstra
 \begin{tikzpicture}
 \scope[k/.style={font=\scriptsize,midway},@scale/.style={}]
@@ -247,7 +250,7 @@
 \pgfonlayer{background}
 \scope[every path/.append style={line cap=round,gray}]
 \draw (a) -- (e) node[right,k] {10};
-\draw (a.-10) -- (h.200) node[above,sloped,k,pos=.8] {4};
+\draw (a) -- (h) node[above,sloped,k] {4};
 \draw (b) -- (e) node[above,sloped,k] {7.5};
 \draw (b) -- (d) node[below,k] {6};
 
@@ -307,14 +310,14 @@
 }
 \def\B#1{#1}%
 \begin{frame}
-\tikzset{base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base},dot/.style={minimum size=3mm,circle,fill=black,text=white,font=\scriptsize\sbfamily\boldmath,outer sep=0pt}}%
+\tikzset{base/.style={},a/.style={base},b/.style={base},c/.style={base},d/.style={base},e/.style={base},f/.style={base},g/.style={base},h/.style={base},i/.style={base},j/.style={base},dot/.style={minimum size=7mm,circle,fill=black,text=white,font=\scriptsize\sbfamily\boldmath,outer sep=0pt}}%
 \begin{tikzpicture}[@O]
       \node[inner sep=0pt,outer sep=0pt] (germany) at (current page.center) {\usebox\Germany};
       \node[above right,T] at(current page.south west) {\fontsize{3.5pt}{3.5pt}\selectfont
    \href{https://commons.wikimedia.org/wiki/File:German_state_government_compositions.svg}{Deutschland basiert auf Grafik von \begin{CJK*}{UTF8}{gbsn}
    沁水湾
    \end{CJK*},}~~\href{https://creativecommons.org/licenses/by-sa/4.0/deed.en}{\ccbysa}};
-   \tikzset{dot/.style={minimum size=3mm,circle,fill=black,}}
+   \tikzset{dot/.style={minimum size=5mm,circle,fill=black,}}
    \PlaceAt{a}{.5}{.5}{e}
    \PlaceAt{b}{.8}{.75}{i}
    \PlaceAt{c}{.55}{.175}{b}
