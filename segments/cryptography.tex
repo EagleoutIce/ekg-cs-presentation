@@ -134,7 +134,7 @@
    }
    \onslide<5->{
       \tikzset{@/.style={}}
-      \only<6->{\tikzset{@/.style={color=gray}}
+      \only<6->{\tikzset{@/.style={color=gray}}}
       \node[above right,xshift=5mm,@] (a-base) at(a.east) {\(g^{\mathit{a}} \bmod p\)};
    }
    \onslide<6->{
@@ -154,17 +154,19 @@
    \onslide<10->{
       \node[right] at(ca) {\(5^3 \bmod 11 = \textbf{4}\)};
    }
-   \onslide<10->{
+   \onslide<11->{
       \node[left] at(cb) {\(2^2 \bmod 11 = \textbf{4}\)};
    }
-   \onslide<11->{
+   \endscope
+
+   \onslide<12->{
       \node[above=8mm] at(current page.south) {\usebeamerfont{subtitle}Diffie-Hellman Schlüsselaustausch};
    }
-   \endscope
 \end{tikzpicture}
-\note{itemize}{
-   \item (g^a mod p)^b mod p = (g^a)^b mod p = g^(a*b) mod p = g^(b * a) mod p = (g^b mod p)^a mod p
-}
+\note[itemize]{
+   \item {(g^a mod p)^b mod p = (g^a)^b mod p = g^(a*b) mod p = g^(b * a) mod p = (g^b mod p)^a mod p}
+   \item {Estimate: 2048 bit primes sind 10^9 mal schwerer zu knacken als 1024 bit primes}
+}(4)
 \end{frame}
 
 % TODO: viele variationen und andere Optionen wie das RSA Verfahren
