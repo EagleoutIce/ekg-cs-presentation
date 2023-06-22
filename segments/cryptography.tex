@@ -148,14 +148,14 @@
       \node[below left] (tb) at (b-base.south east) {\(7^{\mathit{2}} \bmod 11 = \textbf{5}\)};
    }
    \onslide<9->{
-      \draw[-Kite] (ta.east) to[edge node={node[above,sloped,pos=.2] {\(g^a \bmod p = 2\)}}] ([yshift=-1.25cm]ta-|tb.west) coordinate (ca);
-      \draw[-Kite] (tb.west) to[edge node={node[above,sloped,pos=.2] {\(g^b \bmod p = 5\)}}] ([yshift=-1.25cm]tb-|ta.east) coordinate (cb);
+      \draw[-Kite,gray] ([xshift=3mm]ta.east) to[edge node={node[above,sloped,scale=.75,pos=.2] {\(g^a \bmod p = 2\)}}] ([yshift=-1.25cm]ta-|tb.west) coordinate (ca);
+      \draw[-Kite,gray] ([xshift=-3mm]tb.west) to[edge node={node[above,sloped,scale=.75,pos=.2] {\(g^b \bmod p = 5\)}}] ([yshift=-1.25cm]tb-|ta.east) coordinate (cb);
    }
    \onslide<10->{
-      \node[right] at(ca) {\(5^3 \bmod 11 = \textbf{4}\)};
+      \node[right=3mm] at(ca) {\(5^3 \bmod 11 = \textbf{4}\)};
    }
    \onslide<11->{
-      \node[left] at(cb) {\(2^2 \bmod 11 = \textbf{4}\)};
+      \node[left=3mm] at(cb) {\(2^2 \bmod 11 = \textbf{4}\)};
    }
    \endscope
 
