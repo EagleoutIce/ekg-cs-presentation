@@ -85,3 +85,9 @@
 \def\PrintSlide#1#2{\tikz{% center on page scale
    \draw[path image={\hyperlink{#2}{\scalebox{.4}{\usebox#1}}},rounded corners=3.25pt,draw=lightgray,fill=btdl@color@background] (0,0) rectangle ++(.4\paperwidth,.225\paperwidth);% hardcoded 16:9 aspect ratio
 }}
+
+\newsavebox\Random
+\savebox\Random{\dice{3}\;\clap{\raisebox{3pt}{\rotatebox{-20}{\dice{6}}}}~~}
+\newsavebox\LightRandom
+\colorlet{@lightrandom}{gray!22}
+\savebox\LightRandom{\setdicefaceoutlinecol{@lightrandom}\dice[btdl@color@background,@lightrandom]{3}\;\clap{\raisebox{3pt}{\rotatebox{-20}{\dice[btdl@color@background,@lightrandom]{6}}}}~~}
