@@ -216,7 +216,7 @@
    }
 }}
 % means more like "looked at for update
-\foreach[count=\i from 6] \n in {e,e,e,d,d,d,,e,i,i,,c,a,h,i,,,j,g,,a,j,,,j,f}{
+\foreach[count=\i from 6] \n in {e,e,e,d,d,d,,e,i,i,,c,a,h,i,,j,g,,,a,j,,,j,f}{
    \ifx!\n!\else
       \On<\i>{\n}{queue}
    \fi
@@ -227,8 +227,8 @@
 \On<21>{c}{current}\On<22->{c}{visited}
 \On<22-24>{i}{current}\On<25->{i}{visited}
 \On<25-27>{h}{current}\On<28->{h}{visited}
-\On<28>{a}{current}\On<29->{a}{visited}
-\On<29-31>{g}{current}\On<32->{g}{visited}
+\On<28-30>{g}{current}\On<31->{g}{visited}
+\On<31>{a}{current}\On<32->{a}{visited}
 \On<32->{j}{current}% \On<33->{g}{visited}
 \scope[@scale]
 % "Lauflängenkompression" could have been helpful xD
@@ -241,7 +241,7 @@
 \node[dot,g] (g) at (6,-2) {\Node{g}{3-23/\infty,24-/16}{3-23/\n,24-/i}};
 \node[dot,i] (i) at (4,-3) {\Node{i}{3-14/\infty,15-/14}{3-14/\n,15-/d}};
 \node[dot,j] (j) at (4,-1) {\Node{j}{3-22/\infty,23-26/20,27-/18}{3-22/\n,23-26/i,27-/h}};
-\node[dot,f] (f) at (6,0)  {\Node{f}{3-30/\infty,31-/22}{3-30/\n,31-/g}};
+\node[dot,f] (f) at (6,0)  {\Node{f}{3-29/\infty,30-/22}{3-29/\n,30-/g}};
 \only<2->{\foreach \n in {a, ..., j} {
    % get the additional split | text split did not work
    \draw[\n] ([yshift=0mm]\n.center) -- (\n.south);
@@ -288,7 +288,7 @@
    % TODO: access \csxdef{#1Count}{\x}
    \draw[lightgray] ([yshift=-1.25cm]current page.north west) node[above right] {\tiny\sbfamily Prioritätswarteschlange} -- ([yshift=-1.25cm]current page.north east);
    \foreach[count=\i from 1] \l in {a, ..., j} {
-      \node[dot,rectangle split,draw, rectangle split parts=2,rectangle split horizontal,below=4mm,rounded corners=2pt,scale=.85,rectangle split part align=center,\l]
+      \node[dot,rectangle split,draw, rectangle split parts=2,rectangle split horizontal,below=4mm,rounded corners=2pt,scale=.85,rectangle split part align=center,\l,minimum size=3mm]
          at ([xshift=1.25cm*(\i-9/2)+2mm]current page.north)
       {%
          \makebox[1em][c]{\strut\raisebox{-1pt}{\l}\strut}%
