@@ -172,7 +172,8 @@
 
 % TODO: viele variationen und andere Optionen wie das RSA Verfahren
 % rsa backup
-\AtEndDocument{%
+% \AtEndDocument{%\
+\iffalse
 % Mathematik interessiert uns erstmal gar nicht so
 \begin{frame}[c]{}
 % Alice wählt zwei zufällige unabhängige Primzahlen ungefähr der gleichen Größenordnung:
@@ -196,6 +197,10 @@
    % teilerfremd zu \(\varphi(N)\), und 1 < e < \(\varphi(N) - 1\)}\\
 \end{center}
 };
+\note[itemize]{
+   \item 2 < e < phi(n) gcd(e, phi(n)) = 1
+   \item d * e equiv 1 mod phi(n)
+}(2)
 \end{onlyenv}
 
 \begin{onlyenv}<6-|handout:2>
@@ -231,7 +236,8 @@
 %    \node[below=5mm] at(current page.north) {\(p = 7\) \qquad \(g = 3\)};
 % \end{tikzpicture}
 \end{frame}
-}
+\fi
+% }
 
 
 \newsavebox\pinguShock
