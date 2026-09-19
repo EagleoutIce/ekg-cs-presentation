@@ -15,6 +15,7 @@
 \DeclareBoolOption[false]{showannot}
 \ProcessKeyvalOptions*
 \ifPDFPC@disable
+\RequirePackage{letltxmacro}
 \LetLtxMacro\PDFPC@orig@note\note
 \def\note{\@ifnextchar[{\PDFPC@note}{\PDFPC@note[]}}
 \def\PDFPC@note[#1]{\@ifnextchar<{\PDFPC@@note@overlay{#1}}{\PDFPC@@note@overlay{#1}<1->}}

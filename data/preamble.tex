@@ -58,10 +58,13 @@
 
 \def\PlaceFramenumberUpperLeft{}
 \def\TitlepageSlideAlign{c}
+\ExplSyntaxOn
+\cs_new_eq:NN \btdl@uppercase \text_uppercase:n
+\ExplSyntaxOff
 \def\titlepage{%
 \begin{tikzpicture}[@O]
    \node[align=left,font=\usebeamerfont{title}\usebeamercolor{title}] at (current page.center) {%
-      \MakeUppercase{\inserttitle}\endgraf
+      \btdl@uppercase{\inserttitle}\endgraf
    };
    \node[below left] at(current page.north east) {\color{gray}\href{https://github.com/EagleoutIce/ekg-cs-presentation}{\faGithub}};
 \end{tikzpicture}

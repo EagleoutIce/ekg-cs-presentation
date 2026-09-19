@@ -12,7 +12,6 @@ jobs:
     - name: Checkout git repository
       uses: actions/checkout@v3
       with:
-        lfs: true
         submodules: true
     - name: Setup Python environment for sltx
       uses: actions/setup-python@v2
